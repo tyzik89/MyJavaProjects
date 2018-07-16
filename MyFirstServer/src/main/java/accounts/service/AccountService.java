@@ -1,16 +1,20 @@
-package accounts;
+package accounts.service;
+
+import accounts.entities.UserProfile;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Хранение пользователей и их сессий в картах
+ */
 public class AccountService {
-
     private final Map<String, UserProfile> loginToProfile;
     private final Map<String, UserProfile> sessionIdToProfile;
 
     public AccountService() {
-        loginToProfile = new HashMap<>();
-        sessionIdToProfile = new HashMap<>();
+        this.loginToProfile = new HashMap<>();
+        this.sessionIdToProfile = new HashMap<>();
     }
 
     public void addNewUser(UserProfile userProfile) {
@@ -21,15 +25,15 @@ public class AccountService {
         return loginToProfile.get(login);
     }
 
-    public UserProfile getUserBySessionId(String sessionId) {
-        return sessionIdToProfile.get(sessionId);
-    }
-
     public void addSession(String sessionId, UserProfile userProfile) {
         sessionIdToProfile.put(sessionId, userProfile);
     }
 
     public void deleteSession(String sessionId) {
         sessionIdToProfile.remove(sessionId);
+    }
+
+    public UserProfile getUserBySessionId(String sessionId) {
+        return sessionIdToProfile.get(sessionId);
     }
 }
