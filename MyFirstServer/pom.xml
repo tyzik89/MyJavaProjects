@@ -59,6 +59,13 @@
             <version>${org.eclipse.jetty.version}</version>
         </dependency>
 
+        <!--Дополнение Jetti для работы с веб-сокетами-->
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-server</artifactId>
+            <version>${org.eclipse.jetty.version}</version>
+        </dependency>
+
         <!--Шаблонизатор-->
         <dependency>
             <groupId>org.freemarker</groupId>

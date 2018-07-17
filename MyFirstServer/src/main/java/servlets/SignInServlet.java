@@ -19,7 +19,6 @@ public class SignInServlet extends HttpServlet {
         this.accountService = accountService;
     }
 
-    //Authentication user (Sign in)
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
@@ -36,26 +35,8 @@ public class SignInServlet extends HttpServlet {
             return;
         }
         accountService.addSession(req.getSession().getId(), userProfile);
-        Gson gson = new Gson();
-        String json = gson.toJson(userProfile);
         resp.setContentType("text/html;charset=utf-8");
-        resp.getWriter().println(json);
         resp.setStatus(HttpServletResponse.SC_OK);
-    }
-
-    //Sign out
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String sessionId = req.getSession().getId();
-        UserProfile userProfile = accountService.getUserBySessionId(sessionId);
-        if (userProfile == null) {
-            resp.setContentType("text/html;charset=utf-8");
-            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        } else {
-            accountService.deleteSession(sessionId);
-            resp.setContentType("text/html;charset=utf-8");
-            resp.getWriter().println("Goodbye!");
-            resp.setStatus(HttpServletResponse.SC_OK);
-        }
+        resp.sendRedirect(req.getContextPath() + "/profile");
     }
 }

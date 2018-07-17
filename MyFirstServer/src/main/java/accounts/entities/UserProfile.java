@@ -12,6 +12,9 @@ public class UserProfile {
 
     private boolean isAdmin;
 
+    public UserProfile() {
+    }
+
     public UserProfile(String login, String password, String email, String firstName, String lastName) {
         this.login = login;
         this.password = password;
