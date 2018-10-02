@@ -11,7 +11,6 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <org.eclipse.jetty.version>9.3.0.M0</org.eclipse.jetty.version>
     </properties>
 
     <build>
@@ -56,14 +55,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
-            <version>${org.eclipse.jetty.version}</version>
-        </dependency>
-
-        <!--Дополнение Jetti для работы с веб-сокетами-->
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-server</artifactId>
-            <version>${org.eclipse.jetty.version}</version>
+            <version>9.3.0.M0</version>
         </dependency>
 
         <!--Шаблонизатор-->
