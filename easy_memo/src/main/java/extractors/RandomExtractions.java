@@ -1,10 +1,19 @@
 package extractors;
 
-import java.util.ArrayList;
+import
+
+
+        java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+
+
+
+
+0pp[
+        ]
 public class RandomExtractions {
     private static Random random = new Random();
     private Map<String, String> dictionary;

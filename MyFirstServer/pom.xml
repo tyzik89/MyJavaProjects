@@ -72,6 +72,13 @@
             <version>2.3.1</version>
         </dependency>
 
+        <!--База данных H2-->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.197</version>
+        </dependency>
+
     </dependencies>
 
 </project>
