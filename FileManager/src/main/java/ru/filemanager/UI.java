@@ -1,29 +1,28 @@
 package ru.filemanager;
 
-import ru.filemanager.dialogs.CreateNewFolderJDialog;
-import ru.filemanager.dialogs.DeleteJDialog;
-import ru.filemanager.dialogs.RenameJDialog;
+import ru.filemanager.events.ExitListener;
+import ru.filemanager.events.catalog.*;
+import ru.filemanager.events.image.ImageClearListener;
+import ru.filemanager.events.image.ImageLoadListener;
+import ru.filemanager.events.image.ImageRunListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class UI extends JFrame {
-
+    //Вкладки
     private JTabbedPane jTabbedPane = new JTabbedPane();
 
-    //Изображения
-    private JButton loadImageButton = new JButton("Загрузить изображение");
-    private JButton clearButton = new JButton("Очистить");
-    //private JButton exitButton = new JButton("Выход");
-    private JButton runButton = new JButton("Обработать");
-    private JPanel buttonsImagesPanel = new JPanel();
-    //private ImagePanel imagePanel  = new ImagePanel("C:\\ideaProject\\lesson\\src\\ru\\image\\1.jpeg");
+    //*******************************Изображения*********************************************
+    private JButton imageLoadButton = new JButton("Загрузить изображение");
+    private JButton imageClearButton = new JButton("Очистить");
+    private JButton imageRunButton = new JButton("Обработать");
+    private JButton imageExitButton = new JButton("Выход");
+    private JPanel imageButtonsPanel = new JPanel();
     private JPanel imagesPanel = new JPanel();
     private JLabel imageLabelLeft = new JLabel();
     private JPanel imagePanelLeft = new JPanel();
@@ -31,21 +30,24 @@ public class UI extends JFrame {
     private JPanel imagePanelRight = new JPanel();
     private File selectedFile;
     private BufferedImage image;
+    //
 
-    //Проводник
+    //*******************************Проводник*********************************************
     private JPanel catalogPanel = new JPanel();
-    private JList filesList = new JList();
-    private JScrollPane filesScroll = new JScrollPane(filesList);
-    private JPanel buttonsPanel = new JPanel();
+    private JList catalogFilesList = new JList();
+    private JScrollPane catalogFilesScroll = new JScrollPane(catalogFilesList);
+    private JPanel catalogButtonsPanel = new JPanel();
     //Buttons
-    private JButton addFolderButton = new JButton("Создать папку");
-    private JButton backButton = new JButton("Назад");
-    private JButton deleteButton = new JButton("Удалить");
-    private JButton renameButton = new JButton("Переименовать");
-    private JButton zipButton = new JButton("ZIP");
-    private JButton exitButton = new JButton("Выход");
+    private JButton catalogAddFolderButton = new JButton("Создать папку");
+    private JButton catalogBackButton = new JButton("Назад");
+    private JButton catalogDeleteButton = new JButton("Удалить");
+    private JButton catalogRenameButton = new JButton("Переименовать");
+    private JButton catalogZipButton = new JButton("ZIP");
+    private JButton catalogExitButton = new JButton("Выход");
     //Сохранение текущей позиции в каталогах
-    private ArrayList<String> dirsCache = new ArrayList<String>();
+    private ArrayList<String> catalogDirsCache = new ArrayList<String>();
+    //Получаем корневые разделы дисков
+    public static final File[] ROOT_DISCS = File.listRoots();
 
     public UI() {
         super("Программа");
@@ -57,48 +59,104 @@ public class UI extends JFrame {
         catalogPanel.setLayout(new BorderLayout(5, 5));
         catalogPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         //Создание макета для панели кнопок
-        buttonsPanel.setLayout(new GridLayout(2, 4, 5, 5));
+        catalogButtonsPanel.setLayout(new GridLayout(2, 4, 5, 5));
 
         JDialog createNewDirDialog = new JDialog(UI.this, "Создание папки", true);
         JPanel createNewDirPanel = new JPanel();
         createNewDirDialog.add(createNewDirPanel);
 
-        final File[] discs = File.listRoots();
         //Задание минимального размера скролла
-        filesScroll.setPreferredSize(new Dimension(400, 500));
-        filesList.setListData(discs);
+        catalogFilesScroll.setPreferredSize(new Dimension(400, 500));
+        catalogFilesList.setListData(ROOT_DISCS);
         //В открывшемся списке каталогов можно выбирать несколько строк
-        filesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        catalogFilesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
 
         imagePanelLeft.setLayout(new BorderLayout(5 ,5));
         imagePanelRight.setLayout(new BorderLayout(5, 5));
-        buttonsImagesPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-        buttonsImagesPanel.setLayout(new GridLayout(4, 1, 5 , 5));
+        imageButtonsPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        imageButtonsPanel.setLayout(new GridLayout(1, 4, 5 , 5));
         imagePanelLeft.add(imageLabelLeft, BorderLayout.WEST);
         imagePanelRight.add(imageLabelRight, BorderLayout.WEST);
-        buttonsImagesPanel.add(loadImageButton);
-        buttonsImagesPanel.add(runButton);
-        buttonsImagesPanel.add(clearButton);
-        buttonsImagesPanel.add(exitButton);
-        imagesPanel.setLayout(new GridLayout(1, 3, 5, 5));
-        imagesPanel.add(imagePanelLeft);
-        imagesPanel.add(buttonsImagesPanel);
-        imagesPanel.add(imagePanelRight);
+        imageButtonsPanel.add(imageLoadButton);
+        imageButtonsPanel.add(imageRunButton);
+        imageButtonsPanel.add(imageClearButton);
+        imageButtonsPanel.add(imageExitButton);
+        //imagesPanel.setLayout(new GridLayout(2, 2, 5, 5));
+
+        imagesPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        /*Эти поля определяют стратегию изменения размеров компонента, отвечая за выделение пространства для столбцов (weightx) и строк (weighty).
+        Если записать в них нулевые значения все добавленные компоненты соберутся в центре контейнера и будут выровнены по центру (как по вертикали, так и по горизонтали).
+        Чтобы размеры компонента изменялись по горизонтали или вертикали, в поля weightx и weightx нужно записать значения от 0.0 до 1.0.
+        Если в столбце несколько компонентов, то его ширина будет определяться компонентом с максимальным значением weightx. Аналогичное утверждение верно и для строк.
+        Заметим, что дополнительное пространство добавляется к строкам и столбцам снизу и справа, соответственно.*/
+        c.weighty = 1.0;
+        c.weightx = 1.0;
+        c.anchor = GridBagConstraints.NORTHWEST;
+        imagesPanel.add(imagePanelLeft, c);
+
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 1;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.weighty = 1.0;
+        c.weightx = 1.0;
+        c.anchor = GridBagConstraints.NORTHWEST;
+        imagesPanel.add(imagePanelRight, c);
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        /*Поля gridwidth и gridheight определяют количество ячеек, занимаемых добавляемым компонентом.
+        Если компонент полностью помещается в одну ячейку, вы можете задать в этих полях значение единицы.
+        Если же компонент должен занимать, например, две смежные ячейки в одной строке,
+        то для gridwidth нужно задать значение, равное двум, а для gridheight - значение, равное единице. */
+        c.gridwidth = 2;
+        c.gridheight = 1;
+        c.weighty = 0.0;
+        c.weightx = 0.0;
+        c.anchor = GridBagConstraints.PAGE_END;
+        imagesPanel.add(imageButtonsPanel, c);
 
 
-        buttonsPanel.add(backButton);
-        buttonsPanel.add(addFolderButton);
-        buttonsPanel.add(renameButton);
-        buttonsPanel.add(deleteButton);
-        buttonsPanel.add(zipButton);
-        buttonsPanel.add(exitButton);
+        catalogButtonsPanel.add(catalogBackButton);
+        catalogButtonsPanel.add(catalogAddFolderButton);
+        catalogButtonsPanel.add(catalogRenameButton);
+        catalogButtonsPanel.add(catalogDeleteButton);
+        catalogButtonsPanel.add(catalogZipButton);
+        catalogButtonsPanel.add(catalogExitButton);
         catalogPanel.setLayout(new BorderLayout());
-        catalogPanel.add(filesScroll, BorderLayout.CENTER);
-        catalogPanel.add(buttonsPanel, BorderLayout.SOUTH);
+        catalogPanel.add(catalogFilesScroll, BorderLayout.CENTER);
+        catalogPanel.add(catalogButtonsPanel, BorderLayout.SOUTH);
 
         jTabbedPane.addTab("Проводник", catalogPanel);
         jTabbedPane.addTab("Изображения", imagesPanel);
+
+        /*ПРОВОДНИК*/
+        catalogFilesList.addMouseListener(new CatalogFilesListListener(UI.this));
+        catalogBackButton.addActionListener(new CatalogBackListener(UI.this));
+        catalogAddFolderButton.addActionListener(new CatalogAddFolderListener(UI.this));
+        catalogDeleteButton.addActionListener(new CatalogDeleteListener(UI.this));
+        catalogRenameButton.addActionListener(new CatalogRenameListener(UI.this));
+        catalogZipButton.addActionListener(new CatalogZipListener(UI.this));
+
+        /*ИЗОБРАЖЕНИЯ*/
+        imageRunButton.addActionListener(new ImageRunListener(UI.this));
+        imageLoadButton.addActionListener(new ImageLoadListener(UI.this));
+        imageClearButton.addActionListener(new ImageClearListener(UI.this));
+
+        /*ВЫХОД*/
+        catalogExitButton.addActionListener(new ExitListener());
+        imageExitButton.addActionListener(new ExitListener());
+
         //Получаем панель контента и добавляем в неё все созданные ренее элементы
         getContentPane().add(jTabbedPane);
         setSize(600, 600);
@@ -107,255 +165,55 @@ public class UI extends JFrame {
         setLocationRelativeTo(null);
         //Отображение всех элементов
         setVisible(true);
-
-        //Добавление листенеров на элементы
-        //Добавление слушателя на список
-        filesList.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    DefaultListModel model = new DefaultListModel();
-                    String selectedObject = filesList.getSelectedValue().toString();
-                    //Для склейки полного пути используем функцию toFullPath
-                    String fullPath = toFullPath(dirsCache);
-                    File selectedFile;
-                    //Проверка, находимся ли мы в начале пути
-                    if (dirsCache.size() > 1) {
-                        selectedFile = new File(fullPath, selectedObject);
-                    } else {
-                        selectedFile = new File(fullPath + selectedObject);
-                    }
-
-                    if (selectedFile.isDirectory()) {
-                        //Если директория, то закидываем в массив всё что в каталоге, в который мы зашли
-                        String[] rootStr = selectedFile.list();
-                        for (String s : rootStr) {
-                            File checkObject = new File(selectedFile.getPath(), s);
-                            if (!checkObject.isHidden()) {
-                                if (checkObject.isDirectory()) {
-                                    model.addElement(s);
-                                } else {
-                                    model.addElement("Файл - " + s);
-                                }
-                            }
-                        }
-                        dirsCache.add(selectedObject);
-                        //На лист добавляем модель с отобранными элементами
-                        filesList.setModel(model);
-                    }
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) { }
-
-            @Override
-            public void mouseReleased(MouseEvent e) { }
-
-            @Override
-            public void mouseEntered(MouseEvent e) { }
-
-            @Override
-            public void mouseExited(MouseEvent e) { }
-        });
-
-        //Слушатель на кнопку назад
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (dirsCache.size() > 1) {
-                    dirsCache.remove(dirsCache.size() - 1);
-                    //Получаем путь до текущей папки
-                    String backDir = toFullPath(dirsCache);
-                    //Получаем список объектов до текущего каталога
-                    String[] rootStr = new File(backDir).list();
-                    //Создаём модель
-                    DefaultListModel backRootModel = new DefaultListModel();
-
-                    for (String s : rootStr) {
-                        File checkFile = new File(backDir, s);
-                        if (!checkFile.isHidden()) {
-                            if (checkFile.isDirectory()) {
-                                backRootModel.addElement(s);
-                            } else {
-                                backRootModel.addElement("Файл - " + s);
-                            }
-                        }
-                    }
-                    filesList.setModel(backRootModel);
-                } else {
-                    dirsCache.removeAll(dirsCache);
-                    filesList.setListData(discs);
-                }
-            }
-        });
-
-        //Слушатель на кнопку добавить папку
-        addFolderButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!dirsCache.isEmpty()) {
-                    String currentPath;
-                    File newFolder;
-                    CreateNewFolderJDialog newFolderJDialog = new CreateNewFolderJDialog(UI.this);
-
-                    if(newFolderJDialog.isReady()) {
-                        currentPath = toFullPath(dirsCache);
-                        newFolder = new File(currentPath, newFolderJDialog.getNewFolderName());
-                        if (!newFolder.exists())
-                            newFolder.mkdir();
-
-                        File updateDir = new File(currentPath);
-                        String updateMass[] = updateDir.list();
-                        DefaultListModel updateModel = new DefaultListModel();
-                        for (String mass : updateMass) {
-                            File check = new File(updateDir.getPath(), mass);
-                            if (!check.isHidden()) {
-                                if (check.isDirectory())
-                                    updateModel.addElement(mass);
-                                else
-                                    updateModel.addElement("Файл - " + mass);
-                            }
-                        }
-                        filesList.setModel(updateModel);
-                    }
-                }
-            }
-        });
-
-        //Слушатель на кнопку удалить
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedObject = filesList.getSelectedValue().toString();
-                String currentPath = toFullPath(dirsCache);
-                if(!selectedObject.isEmpty()) {
-                    DeleteJDialog deleteJDialog = new DeleteJDialog(UI.this);
-                    if(deleteJDialog.isOk()) {
-
-                        deleteDir(new File(currentPath, selectedObject));
-
-                        File updateDir = new File(currentPath);
-                        String updateMass[] = updateDir.list();
-                        DefaultListModel updateModel = new DefaultListModel();
-                        for (String mass : updateMass) {
-                            File check = new File(updateDir.getPath(), mass);
-                            if (!check.isHidden()) {
-                                if (check.isDirectory())
-                                    updateModel.addElement(mass);
-                                else
-                                    updateModel.addElement("Файл - " + mass);
-                            }
-                        }
-                        filesList.setModel(updateModel);
-                    }
-                }
-            }
-        });
-
-        //Слушатель на кнопку переименовать
-        renameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!dirsCache.isEmpty() & filesList.getSelectedValue() != null) {
-                    String currentPath = toFullPath(dirsCache);
-                    String selectedObject = filesList.getSelectedValue().toString();
-
-                    RenameJDialog renameJDialog = new RenameJDialog(UI.this);
-
-                    File renameFile = new File(currentPath, selectedObject);
-                    renameFile.renameTo(new File(currentPath, renameJDialog.getNewName()));
-
-                    File updateDir = new File(currentPath);
-                    String updateMass[] = updateDir.list();
-                    DefaultListModel updateModel = new DefaultListModel();
-                    for (String mass : updateMass) {
-                        File check = new File(updateDir.getPath(), mass);
-                        if (!check.isHidden()) {
-                            if (check.isDirectory())
-                                updateModel.addElement(mass);
-                            else
-                                updateModel.addElement("Файл - " + mass);
-                        }
-                    }
-                    filesList.setModel(updateModel);
-                }
-            }
-        });
-
-        //Слушатель на кнопку выход
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-
-        zipButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        /*ИЗОБРАЖЕНИЯ*/
-        runButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (image != null) {
-                    //АЛГОРИТМ
-                    imageLabelRight.setIcon(new ImageIcon(image));
-                }
-            }
-        });
-
-        loadImageButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser jFileChooser = new JFileChooser();
-                jFileChooser.setDialogTitle("Выберите изображение: ");
-                jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                int result = jFileChooser.showOpenDialog(UI.this);
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    selectedFile = new File(jFileChooser.getSelectedFile().getAbsolutePath());
-                }
-                try {
-                    image = ImageIO.read(selectedFile);
-                    /*Image dimg = image.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH);
-                    imageLabel.setIcon(new ImageIcon(dimg));*/
-                    imageLabelLeft.setIcon(new ImageIcon(image));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-
-        clearButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                imageLabelLeft.setIcon(new ImageIcon(""));
-                imageLabelRight.setIcon(new ImageIcon(""));
-            }
-        });
     }
 
-    //Вспомогательный метод склейки пути из кусочков, хрянищихся в массиве
-    private String toFullPath(ArrayList<String> edges) {
-        StringBuilder part = new StringBuilder("");
-        for (String edge : edges) {
-            part.append(edge);
-        }
-        return part.toString();
+
+    /*ГЕТТЕРЫ и СЕТТЕРЫ*/
+    public JList getCatalogFilesList() {
+        return catalogFilesList;
     }
 
-    //Вспомогательный рекурсивный метод для удаления директорий(и поддерикторий, если они есть)
-    private void deleteDir(File file) {
-        File[] objects = file.listFiles();
-        if (objects != null) {
-            for (File f : objects) {
-                deleteDir(f);
-            }
-        }
-        file.delete();
+    public void setCatalogFilesList(JList catalogFilesList) {
+        this.catalogFilesList = catalogFilesList;
+    }
+
+    public ArrayList<String> getCatalogDirsCache() {
+        return catalogDirsCache;
+    }
+
+    public void setCatalogDirsCache(ArrayList<String> catalogDirsCache) {
+        this.catalogDirsCache = catalogDirsCache;
+    }
+
+    public JLabel getImageLabelRight() {
+        return imageLabelRight;
+    }
+
+    public void setImageLabelRight(JLabel imageLabelRight) {
+        this.imageLabelRight = imageLabelRight;
+    }
+
+    public JLabel getImageLabelLeft() {
+        return imageLabelLeft;
+    }
+
+    public void setImageLabelLeft(JLabel imageLabelLeft) {
+        this.imageLabelLeft = imageLabelLeft;
+    }
+
+    public File getSelectedFile() {
+        return selectedFile;
+    }
+
+    public void setSelectedFile(File selectedFile) {
+        this.selectedFile = selectedFile;
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public void setImage(BufferedImage image) {
+        this.image = image;
     }
 }
