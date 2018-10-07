@@ -8,7 +8,6 @@ import ru.filemanager.events.image.ImageRunListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.*;
@@ -30,6 +29,11 @@ public class UI extends JFrame {
     private JPanel imagePanelRight = new JPanel();
     private File selectedFile;
     private BufferedImage image;
+    private JRadioButton greyButton = new JRadioButton("Серый", true);
+    private JRadioButton waveButton_1 = new JRadioButton("Волны_1", false);
+    private JRadioButton waveButton_2 = new JRadioButton("Волны_2", false);
+    private JRadioButton maxwellButton = new JRadioButton("Треугольник Максвелла", false);
+    ButtonGroup groupRadioButtons = new ButtonGroup();
     //
 
     //*******************************Проводник*********************************************
@@ -75,7 +79,7 @@ public class UI extends JFrame {
         imagePanelLeft.setLayout(new BorderLayout(5 ,5));
         imagePanelRight.setLayout(new BorderLayout(5, 5));
         imageButtonsPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-        imageButtonsPanel.setLayout(new GridLayout(1, 4, 5 , 5));
+        imageButtonsPanel.setLayout(new GridLayout(3, 2, 5 , 5));
         imagePanelLeft.add(imageLabelLeft, BorderLayout.WEST);
         imagePanelRight.add(imageLabelRight, BorderLayout.WEST);
         imageButtonsPanel.add(imageLoadButton);
@@ -83,6 +87,19 @@ public class UI extends JFrame {
         imageButtonsPanel.add(imageClearButton);
         imageButtonsPanel.add(imageExitButton);
         //imagesPanel.setLayout(new GridLayout(2, 2, 5, 5));
+        greyButton.setActionCommand("grey");
+        waveButton_1.setActionCommand("wave_1");
+        waveButton_2.setActionCommand("wave_2");
+        maxwellButton.setActionCommand("maxwell");
+        groupRadioButtons.add(greyButton);
+        groupRadioButtons.add(waveButton_1);
+        groupRadioButtons.add(waveButton_2);
+        groupRadioButtons.add(maxwellButton);
+        imageButtonsPanel.add(greyButton);
+        imageButtonsPanel.add(waveButton_1);
+        imageButtonsPanel.add(waveButton_2);
+        imageButtonsPanel.add(maxwellButton);
+
 
         imagesPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -169,6 +186,11 @@ public class UI extends JFrame {
 
 
     /*ГЕТТЕРЫ и СЕТТЕРЫ*/
+
+    public ButtonGroup getGroupRadioButtons() {
+        return groupRadioButtons;
+    }
+
     public JList getCatalogFilesList() {
         return catalogFilesList;
     }
