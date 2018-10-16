@@ -1,4 +1,4 @@
-package com.work.vladimirs.DOM_2;
+package com.work.vladimirs.DOM.DOM_2;
 
 public abstract class Human {
     private String name;

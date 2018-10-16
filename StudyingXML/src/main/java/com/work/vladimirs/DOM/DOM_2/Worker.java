@@ -1,4 +1,4 @@
-package com.work.vladimirs.DOM_2;
+package com.work.vladimirs.DOM.DOM_2;
 
 public class Worker extends Human{
     private String position;

@@ -1,4 +1,4 @@
-package com.work.vladimirs.DOM_2;
+package com.work.vladimirs.DOM.DOM_2;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
