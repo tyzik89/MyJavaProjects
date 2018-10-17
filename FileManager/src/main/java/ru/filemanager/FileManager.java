@@ -1,6 +1,7 @@
 package ru.filemanager;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class FileManager {
@@ -10,7 +11,11 @@ public class FileManager {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new UI();
+                try {
+                    new UI();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

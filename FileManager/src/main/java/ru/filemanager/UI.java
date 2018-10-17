@@ -6,10 +6,12 @@ import ru.filemanager.events.image.ImageClearListener;
 import ru.filemanager.events.image.ImageLoadListener;
 import ru.filemanager.events.image.ImageRunListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class UI extends JFrame {
@@ -28,11 +30,12 @@ public class UI extends JFrame {
     private JLabel imageLabelRight = new JLabel();
     private JPanel imagePanelRight = new JPanel();
     private File selectedFile;
-    private BufferedImage image;
+    private BufferedImage image = ImageIO.read(new File("src/main/resources/default.jpg"));
     private JRadioButton greyButton = new JRadioButton("Серый", true);
     private JRadioButton waveButton_1 = new JRadioButton("Волны_1", false);
     private JRadioButton waveButton_2 = new JRadioButton("Волны_2", false);
     private JRadioButton maxwellButton = new JRadioButton("Треугольник Максвелла", false);
+    private JRadioButton korrelationButton = new JRadioButton("Корреляция", false);
     ButtonGroup groupRadioButtons = new ButtonGroup();
     //
 
@@ -53,7 +56,7 @@ public class UI extends JFrame {
     //Получаем корневые разделы дисков
     public static final File[] ROOT_DISCS = File.listRoots();
 
-    public UI() {
+    public UI() throws IOException {
         super("Программа");
         //Остановка приложения при закрытии приложения
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,14 +94,17 @@ public class UI extends JFrame {
         waveButton_1.setActionCommand("wave_1");
         waveButton_2.setActionCommand("wave_2");
         maxwellButton.setActionCommand("maxwell");
+        korrelationButton.setActionCommand("korrelation");
         groupRadioButtons.add(greyButton);
         groupRadioButtons.add(waveButton_1);
         groupRadioButtons.add(waveButton_2);
         groupRadioButtons.add(maxwellButton);
+        groupRadioButtons.add(korrelationButton);
         imageButtonsPanel.add(greyButton);
         imageButtonsPanel.add(waveButton_1);
         imageButtonsPanel.add(waveButton_2);
         imageButtonsPanel.add(maxwellButton);
+        imageButtonsPanel.add(korrelationButton);
 
 
         imagesPanel.setLayout(new GridBagLayout());

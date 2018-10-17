@@ -2,11 +2,14 @@ package ru.filemanager.events.image;
 
 import ru.filemanager.UI;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class ImageRunListener implements ActionListener {
     private UI ui;
@@ -18,21 +21,45 @@ public class ImageRunListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean isLoad = false;
         if (ui.getImage() != null) {
+            isLoad = true;
             newImage = new BufferedImage(ui.getImage().getWidth(), ui.getImage().getHeight(), BufferedImage.TYPE_INT_RGB);
-            String radioCase = ui.getGroupRadioButtons().getSelection().getActionCommand();
-            if (radioCase.equals("grey"))
-                greyAlhoritm();
-            else if (radioCase.equals("wave_1"))
-                waveAlhoritm_1();
-            else if (radioCase.equals("wave_2"))
-                waveAlhoritm_2();
-            else if (radioCase.equals("maxwell"))
-                maxwellAlhoritm();
+        }
+        String radioCase = ui.getGroupRadioButtons().getSelection().getActionCommand();
+        if (radioCase.equals("grey") && isLoad) {
+            ui.getImageLabelLeft().setIcon(new ImageIcon(ui.getImage()));
+            greyAlhoritm();
+            ui.getImageLabelRight().setIcon(new ImageIcon(newImage));
+        } else if (radioCase.equals("wave_1") && isLoad) {
+            ui.getImageLabelLeft().setIcon(new ImageIcon(ui.getImage()));
+            waveAlhoritm_1();
+            ui.getImageLabelRight().setIcon(new ImageIcon(newImage));
+        } else if (radioCase.equals("wave_2") && isLoad) {
+            ui.getImageLabelLeft().setIcon(new ImageIcon(ui.getImage()));
+            waveAlhoritm_2();
+            ui.getImageLabelRight().setIcon(new ImageIcon(newImage));
+        } else if (radioCase.equals("maxwell")) {
+            ui.getImageLabelLeft().setIcon(new ImageIcon(""));
+            ui.getImageLabelRight().setIcon(new ImageIcon(""));
+            maxwellAlhoritm();
+            ui.getImageLabelRight().setIcon(new ImageIcon(newImage));
+        } else if (radioCase.equals("korrelation")) {
+            try {
+                ui.setImage(ImageIO.read(new File("src/main/resources/faces.jpg")));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            ui.getImageLabelLeft().setIcon(new ImageIcon(ui.getImage()));
+            korrelationAlhoritm();
             ui.getImageLabelRight().setIcon(new ImageIcon(newImage));
         }
+
     }
 
+    /**
+     * Градации серого
+     */
     private void greyAlhoritm() {
         for (int y = 0; y < ui.getImage().getHeight(); y++) {
             for (int x = 0; x < ui.getImage().getWidth(); x++) {
@@ -59,11 +86,14 @@ public class ImageRunListener implements ActionListener {
         }
     }
 
+    /**
+     * Теорема Котельникова
+     */
     private void waveAlhoritm_2() {
         double u = 0.1, v = 0, a = 0.005;
         for (int y = 0; y < ui.getImage().getHeight(); y++) {
             for (int x = 0; x < ui.getImage().getWidth(); x++) {
-                //u = a * x;
+                u = a * x;
                 int br = (int)(128 + 50 * Math.cos(u * x + v * y));
                 Color color = new Color(br, br, br);
                 newImage.setRGB(x, y, color.getRGB());
@@ -71,6 +101,9 @@ public class ImageRunListener implements ActionListener {
         }
     }
 
+    /**
+     * Построение треугольника Максвелла
+     */
     private void maxwellAlhoritm() {
         newImage = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
         for (int g = 0; g < 256; g++) {
@@ -80,5 +113,16 @@ public class ImageRunListener implements ActionListener {
                 newImage.setRGB(r, g, color.getRGB());
             }
         }
+    }
+
+    /**
+     * Алгоритм распознавания избражения
+     */
+    private void korrelationAlhoritm() {
+        /*% h = f(260:475,725:940);
+            h = f(500:700,725:940);*/
+        BufferedImage faces = new BufferedImage(ui.getImage().getWidth(), ui.getImage().getHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage face = faces.getSubimage(774, 504, 200, 200);
+        newImage = new BufferedImage(face.getWidth(), face.getHeight(), BufferedImage.TYPE_INT_RGB);
     }
 }
