@@ -51,8 +51,7 @@ public class ImageRunListener implements ActionListener {
                 e1.printStackTrace();
             }
             ui.getImageLabelLeft().setIcon(new ImageIcon(ui.getImage()));
-            korrelationAlhoritm();
-            ui.getImageLabelRight().setIcon(new ImageIcon(newImage));
+            ui.getImageLabelRight().setIcon(new ImageIcon(korrelationAlhoritm()));
         }
 
     }
@@ -118,11 +117,31 @@ public class ImageRunListener implements ActionListener {
     /**
      * Алгоритм распознавания избражения
      */
-    private void korrelationAlhoritm() {
+    private BufferedImage korrelationAlhoritm() {
         /*% h = f(260:475,725:940);
             h = f(500:700,725:940);*/
-        BufferedImage faces = new BufferedImage(ui.getImage().getWidth(), ui.getImage().getHeight(), BufferedImage.TYPE_INT_RGB);
-        BufferedImage face = faces.getSubimage(774, 504, 200, 200);
-        newImage = new BufferedImage(face.getWidth(), face.getHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage faces = ui.getImage();
+        BufferedImage facesKorrelation = new BufferedImage(faces.getWidth(), faces.getHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage face = faces.getSubimage(750, 500, 150, 150);
+        //Алгоритм
+        int HG = face.getHeight();
+        int WG = face.getWidth();
+        int HF = faces.getHeight();
+        int WF = faces.getWidth();
+
+        for (int y = HG / 2; y < HF - (HG / 2) ; y++) {
+            for (int x = WG / 2; x < WF - (WG / 2) ; x++) {
+                double sum = 0;
+                for (int j = 0; j < HG; j++) {
+                    for (int i = 0; i < WG; i++) {
+                        int pixelG = face.getRGB(j, i);
+                        int pixelF = faces.getRGB(y - (HG / 2) + j, x - (WG / 2) + i);
+                        sum += pixelG * pixelF;
+                    }
+                }
+                facesKorrelation.setRGB(y, x, (int)sum);
+            }
+        }
+        return facesKorrelation;
     }
 }
