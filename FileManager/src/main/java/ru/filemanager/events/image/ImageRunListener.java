@@ -47,11 +47,13 @@ public class ImageRunListener implements ActionListener {
         } else if (radioCase.equals("korrelation")) {
             try {
                 ui.setImage(ImageIO.read(new File("src/main/resources/faces.jpg")));
+                ui.getImageLabelLeft().setIcon(new ImageIcon(ui.getImage()));
+                newImage = new BufferedImage(ui.getImage().getWidth(), ui.getImage().getHeight(), BufferedImage.TYPE_INT_RGB);
+                korrelationAlhoritm();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-            ui.getImageLabelLeft().setIcon(new ImageIcon(ui.getImage()));
-            ui.getImageLabelRight().setIcon(new ImageIcon(korrelationAlhoritm()));
+            ui.getImageLabelRight().setIcon(new ImageIcon(newImage));
         }
 
     }
@@ -117,11 +119,10 @@ public class ImageRunListener implements ActionListener {
     /**
      * Алгоритм распознавания избражения
      */
-    private BufferedImage korrelationAlhoritm() {
+    private void korrelationAlhoritm() {
         /*% h = f(260:475,725:940);
             h = f(500:700,725:940);*/
         BufferedImage faces = ui.getImage();
-        BufferedImage facesKorrelation = new BufferedImage(faces.getWidth(), faces.getHeight(), BufferedImage.TYPE_INT_RGB);
         BufferedImage face = faces.getSubimage(750, 500, 150, 150);
         //Алгоритм
         int HG = face.getHeight();
@@ -131,17 +132,16 @@ public class ImageRunListener implements ActionListener {
 
         for (int y = HG / 2; y < HF - (HG / 2) ; y++) {
             for (int x = WG / 2; x < WF - (WG / 2) ; x++) {
-                double sum = 0;
+                int sum = 0;
                 for (int j = 0; j < HG; j++) {
                     for (int i = 0; i < WG; i++) {
-                        int pixelG = face.getRGB(j, i);
-                        int pixelF = faces.getRGB(y - (HG / 2) + j, x - (WG / 2) + i);
+                        int pixelG = face.getRGB(i, j);
+                        int pixelF = faces.getRGB(x - (WG / 2) + i, y - (HG / 2) + j);
                         sum += pixelG * pixelF;
                     }
                 }
-                facesKorrelation.setRGB(y, x, (int)sum);
+                newImage.setRGB(x, y, (int)sum);
             }
         }
-        return facesKorrelation;
     }
 }

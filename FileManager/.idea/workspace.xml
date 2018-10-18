@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="75ff3cdd-4ea5-407c-b67b-6acee642533f" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/filemanager/events/image/ImageRunListener.java" afterPath="$PROJECT_DIR$/src/main/java/ru/filemanager/events/image/ImageRunListener.java" />
-      <change beforePath="$PROJECT_DIR$/../StudyingXML/target/classes/com/work/vladimirs/validate_xmlschema/MainValidation.class" afterPath="$PROJECT_DIR$/../StudyingXML/target/classes/com/work/vladimirs/validate_xmlschema/MainValidation.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,12 +19,11 @@
       <file leaf-file-name="UI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/filemanager/UI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
+            <state relative-caret-position="453">
               <caret line="239" column="25" lean-forward="false" selection-start-line="239" selection-start-column="25" selection-end-line="239" selection-end-column="25" />
               <folding>
                 <element signature="e#10255#10256#0" expanded="true" />
                 <element signature="e#10283#10284#0" expanded="true" />
-                <marker date="1539864018678" expanded="true" signature="5154:9116" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -43,8 +42,8 @@
       <file leaf-file-name="ImageRunListener.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/filemanager/events/image/ImageRunListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="131" column="0" lean-forward="false" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+            <state relative-caret-position="110">
+              <caret line="120" column="7" lean-forward="true" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#445#446#0" expanded="true" />
@@ -66,6 +65,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>dis</find>
+      <find>get</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -184,7 +184,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -238,9 +241,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -399,6 +399,7 @@
       <workItem from="1538938849825" duration="5741000" />
       <workItem from="1539809813425" duration="4662000" />
       <workItem from="1539864163984" duration="3785000" />
+      <workItem from="1539888907429" duration="4011000" />
     </task>
     <task id="LOCAL-00001" summary="Исправление обработки изображений. Упорядоченность">
       <created>1538863797291</created>
@@ -418,10 +419,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34820000" />
+    <option name="totallyTimeSpent" value="38831000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -433,18 +434,18 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969153" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18845502" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18836565" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1732224" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17544988" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34295416" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.300554" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -468,15 +469,59 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="46" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="(ui.getImage()" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>(int)sum</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>greyColor.getRGB()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ru/filemanager/UI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4063">
+          <caret line="239" column="25" lean-forward="false" selection-start-line="239" selection-start-column="25" selection-end-line="239" selection-end-column="25" />
+          <folding>
+            <element signature="e#10255#10256#0" expanded="true" />
+            <element signature="e#10283#10284#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ru/filemanager/FileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ru/filemanager/events/image/ImageRunListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2176">
+          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#445#446#0" expanded="true" />
+            <element signature="e#473#474#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/filemanager/UI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -484,7 +529,6 @@
           <folding>
             <element signature="e#10255#10256#0" expanded="true" />
             <element signature="e#10283#10284#0" expanded="true" />
-            <marker date="1539864018678" expanded="true" signature="5154:9116" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -501,7 +545,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -524,7 +567,6 @@
           <folding>
             <element signature="e#10255#10256#0" expanded="true" />
             <element signature="e#10283#10284#0" expanded="true" />
-            <marker date="1539864018678" expanded="true" signature="5154:9116" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -548,7 +590,6 @@
           <folding>
             <element signature="e#10255#10256#0" expanded="true" />
             <element signature="e#10283#10284#0" expanded="true" />
-            <marker date="1539864018678" expanded="true" signature="5154:9116" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -560,7 +601,6 @@
           <folding>
             <element signature="e#10255#10256#0" expanded="true" />
             <element signature="e#10283#10284#0" expanded="true" />
-            <marker date="1539864018678" expanded="true" signature="5154:9116" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -572,7 +612,6 @@
           <folding>
             <element signature="e#10255#10256#0" expanded="true" />
             <element signature="e#10283#10284#0" expanded="true" />
-            <marker date="1539864018678" expanded="true" signature="5154:9116" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -591,7 +630,6 @@
           <folding>
             <element signature="e#10255#10256#0" expanded="true" />
             <element signature="e#10283#10284#0" expanded="true" />
-            <marker date="1539864018678" expanded="true" signature="5154:9116" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -603,7 +641,6 @@
           <folding>
             <element signature="e#10255#10256#0" expanded="true" />
             <element signature="e#10283#10284#0" expanded="true" />
-            <marker date="1539864018678" expanded="true" signature="5154:9116" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -661,13 +698,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="881" column="15" lean-forward="false" selection-start-line="881" selection-start-column="15" selection-end-line="881" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/awt/Color.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="412" column="11" lean-forward="false" selection-start-line="412" selection-start-column="11" selection-end-line="412" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -792,21 +822,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/default.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/faces.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/javax/swing/JFileChooser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="653" column="15" lean-forward="false" selection-start-line="653" selection-start-column="15" selection-end-line="653" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -825,18 +844,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ru/filemanager/UI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="239" column="25" lean-forward="false" selection-start-line="239" selection-start-column="25" selection-end-line="239" selection-end-column="25" />
-          <folding>
-            <element signature="e#10255#10256#0" expanded="true" />
-            <element signature="e#10283#10284#0" expanded="true" />
-            <marker date="1539864018678" expanded="true" signature="5154:9116" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/filemanager/FileManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -849,25 +856,61 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="28" column="33" lean-forward="false" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ru/filemanager/UI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="239" column="25" lean-forward="false" selection-start-line="239" selection-start-column="25" selection-end-line="239" selection-end-column="25" />
+          <folding>
+            <element signature="e#10255#10256#0" expanded="true" />
+            <element signature="e#10283#10284#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/faces.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/default.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/awt/Color.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="601" column="15" lean-forward="false" selection-start-line="601" selection-start-column="15" selection-end-line="601" selection-end-column="15" />
+          <folding>
+            <element signature="e#18395#18396#0" expanded="false" />
+            <element signature="e#18423#18424#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/awt/image/BufferedImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3026">
-          <caret line="915" column="15" lean-forward="false" selection-start-line="915" selection-start-column="15" selection-end-line="915" selection-end-column="15" />
-          <folding>
-            <element signature="e#37710#37711#0" expanded="true" />
-            <element signature="e#37786#37787#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="9">
+          <caret line="545" column="15" lean-forward="true" selection-start-line="545" selection-start-column="15" selection-end-line="545" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/awt/image/ComponentColorModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="896" column="0" lean-forward="false" selection-start-line="896" selection-start-column="0" selection-end-line="896" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/filemanager/events/image/ImageRunListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="131" column="0" lean-forward="false" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+        <state relative-caret-position="110">
+          <caret line="120" column="7" lean-forward="true" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#445#446#0" expanded="true" />
