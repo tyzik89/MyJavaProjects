@@ -64,8 +64,8 @@ public class ImageRunListener implements ActionListener {
             BufferedImage faces = null;
             BufferedImage face = null;
             try {
-                faces = (ImageIO.read(new File("src/main/resources/faces.png")));
-                face = (ImageIO.read(new File("src/main/resources/face.png")));
+                faces = (ImageIO.read(new File("src/main/resources/faces.jpg")));
+                face = (ImageIO.read(new File("src/main/resources/face.jpg")));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
