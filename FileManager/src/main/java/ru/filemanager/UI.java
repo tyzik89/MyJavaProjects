@@ -35,7 +35,7 @@ public class UI extends JFrame {
     private JRadioButton waveButton_1 = new JRadioButton("Волны_1", false);
     private JRadioButton waveButton_2 = new JRadioButton("Волны_2", false);
     private JRadioButton maxwellButton = new JRadioButton("Треугольник Максвелла", false);
-    private JRadioButton korrelationButton = new JRadioButton("Корреляция", false);
+    private JRadioButton correlationButton = new JRadioButton("Корреляция", false);
     ButtonGroup groupRadioButtons = new ButtonGroup();
     //
 
@@ -94,17 +94,17 @@ public class UI extends JFrame {
         waveButton_1.setActionCommand("wave_1");
         waveButton_2.setActionCommand("wave_2");
         maxwellButton.setActionCommand("maxwell");
-        korrelationButton.setActionCommand("korrelation");
+        correlationButton.setActionCommand("correlation");
         groupRadioButtons.add(greyButton);
         groupRadioButtons.add(waveButton_1);
         groupRadioButtons.add(waveButton_2);
         groupRadioButtons.add(maxwellButton);
-        groupRadioButtons.add(korrelationButton);
+        groupRadioButtons.add(correlationButton);
         imageButtonsPanel.add(greyButton);
         imageButtonsPanel.add(waveButton_1);
         imageButtonsPanel.add(waveButton_2);
         imageButtonsPanel.add(maxwellButton);
-        imageButtonsPanel.add(korrelationButton);
+        imageButtonsPanel.add(correlationButton);
 
 
         imagesPanel.setLayout(new GridBagLayout());
