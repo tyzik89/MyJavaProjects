@@ -73,6 +73,11 @@ public class ImageRunListener implements ActionListener {
             newImage = Algorithms.correlation(faces, face);
             setRightImg(newImage);
             return;
+        } else if (radioCase.equals("borders")) {
+            setLeftImg(originalImage);
+            newImage = Algorithms.bordersAlgorithm(originalImage);
+            setRightImg(newImage);
+            return;
         }
     }
 }
