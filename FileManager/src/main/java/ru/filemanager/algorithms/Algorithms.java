@@ -128,6 +128,10 @@ public class Algorithms {
         double brightnessPixelG;
         double brightnessPixelF;
 
+        //Выделение границ у изорбражений - однозначное определение позиции изображения
+        //faces = bordersAlgorithm(faces);
+        //face = bordersAlgorithm(face);
+
         for (int y = HG / 2; y < HF - (HG / 2) ; y++) {
             for (int x = WG / 2; x < WF - (WG / 2); x++) {
                 sum = 0;
@@ -138,7 +142,14 @@ public class Algorithms {
                         //Яркость каждого пикселя
                         brightnessPixelG = (pixelColorG.getRed() + pixelColorG.getBlue() + pixelColorG.getGreen()) / 3;
                         brightnessPixelF = (pixelColorF.getRed() + pixelColorF.getBlue() + pixelColorF.getGreen()) / 3;
-                        sum += brightnessPixelG * brightnessPixelF;
+
+                        //Вариант повышения точности поиска - путём понижения яркости каждого пикселя
+                        //brightnessPixelF -= 128;
+                        //brightnessPixelG -= 128;
+
+                        brightnessPixelF = brightnessPixelF < 0 ? 0 : brightnessPixelF;
+                        brightnessPixelG = brightnessPixelG < 0 ? 0 : brightnessPixelG;
+                        sum += (brightnessPixelG) * (brightnessPixelF);
                     }
                 }
                 if (max < sum)
@@ -150,9 +161,11 @@ public class Algorithms {
         for (int j = HG / 2; j < HF - (HG / 2); j++) {
             for (int i = WG / 2; i < WF - (WG / 2); i++) {
                 double val = mass[i][j];
+                
                 //Нормируем каждый пиксель
                 val = val / max * 255;
-                Color color = new Color((int)val, (int)val, (int)val);
+                Color color = (val > 254)? new Color(255, 0, 0) : new Color((int)val, (int)val, (int)val);
+                //Color color = new Color((int)val, (int)val, (int)val);
                 tempImg.setRGB(i, j, color.getRGB());
             }
         }
