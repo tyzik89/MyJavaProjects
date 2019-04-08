@@ -2,7 +2,7 @@ package com.work.vladimirs;
 
 import java.util.*;
 
-public class Main {
+public class SpanishLatinDictionary {
 
     public static void main(String[] args) {
         SortedMap<String, TreeSet<String>> latinDictionary = new TreeMap<String, TreeSet<String>>();
