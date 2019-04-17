@@ -1,6 +1,5 @@
 package com.work.vladimirs.rotate_array;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class RotateArray {
@@ -27,9 +26,16 @@ public class RotateArray {
             }
         }
 
+        //Создаём результирующий с заданрой размерностью
+        int[][] result = new int[cols][rows];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[j][rows - i - 1] = array[i][j];
+            }
+        }
 
         //Вывод массива
-        for (int[] ints : array) {
+        for (int[] ints : result) {
             for (int anInt : ints) {
                 System.out.print(anInt + " ");
             }
