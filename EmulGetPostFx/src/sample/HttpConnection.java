@@ -55,7 +55,10 @@ public class HttpConnection {
             connection.setDoOutput(doOutPut);
             connection.setDoInput(doInput);
 
+            //application/x-www-form-urlencoded
+            connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Content-Length", "" + Integer.toString(params.getBytes().length));
+            connection.setRequestProperty("Content-Language", "en-US");
             OutputStream os = connection.getOutputStream();
 
             data = params.getBytes("UTF-8");

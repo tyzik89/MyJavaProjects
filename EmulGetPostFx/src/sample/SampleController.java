@@ -39,7 +39,7 @@ public class SampleController {
         ObservableList<String> methods = FXCollections.observableArrayList("POST", "GET");
         type.setItems(methods);
         type.setValue("POST");
-
+        params.setText("{\"id\":99,\"creationDate\":\"2019-04-26T20:26:07.836\"}");
         url.setText("http://httpbin.org/post");
     }
 
