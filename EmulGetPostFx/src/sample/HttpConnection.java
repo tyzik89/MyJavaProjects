@@ -1,9 +1,6 @@
 package sample;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -21,8 +18,35 @@ public class HttpConnection {
     }
 
     public String doRequest () {
+        return method.equals("POST") ? postMethod() : getMethod();
+    }
+
+    private String getMethod() {
+        BufferedReader in = null;
+        StringBuffer response = new StringBuffer();
+        try {
+            URL url = new URL(serverUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod(method);
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                if (in != null)
+                    in.close();
+            } catch (Exception ex) {}
+        }
+        return response.toString();
+    }
+
+    private String postMethod() {
         byte[] data = null;
         InputStream is = null;
+
         try {
             URL url = new URL(serverUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

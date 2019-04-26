@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -43,9 +45,11 @@ public class SampleController {
 
     @FXML
     public void runMethod() {
+        process.setProgress(0.0);
         HttpConnection connection = new HttpConnection(type.getValue(), url.getText(), params.getText());
         String str = connection.doRequest();
         responce.setText(str);
+        process.setProgress(1.0);
     }
 
     @FXML
