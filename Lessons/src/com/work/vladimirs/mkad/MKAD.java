@@ -5,6 +5,8 @@ import java.util.stream.IntStream;
 
 public class MKAD {
 
+    private static int MKAD_LENGTH = 109;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int v = scanner.nextInt();
@@ -33,19 +35,11 @@ public class MKAD {
                 result = 109 - k - 1;
             }
         }
-
-
         return result;
+    }
 
-        /*if (v > 0) {
-            return s - (s / 109) * 109;
-        } else if (v < 0){
-            int temp = 109 - (s - (s / 109) * 109);
-            return  temp >= 109 ? 109 : temp + 1;
-        } else {
-            return 0;
-        }*/
-
-
+    protected static int evaluateDistanceold (int v, int t) {
+        int result = (v * t) % MKAD_LENGTH;
+        return result >= 0 ? result : (MKAD_LENGTH + result);
     }
 }
