@@ -16,7 +16,7 @@ public class MKAD {
         System.out.println(evaluateDistance(v, t));
     }
 
-    protected static int evaluateDistance (int v, int t) {
+    protected static int evaluateDistanceOld (int v, int t) {
         //Путь, пройденный Васей
         int s = Math.abs(v * t);
 
@@ -38,7 +38,7 @@ public class MKAD {
         return result;
     }
 
-    protected static int evaluateDistanceold (int v, int t) {
+    protected static int evaluateDistance (int v, int t) {
         int result = (v * t) % MKAD_LENGTH;
         return result >= 0 ? result : (MKAD_LENGTH + result);
     }
