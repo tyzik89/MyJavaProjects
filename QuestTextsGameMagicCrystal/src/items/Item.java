@@ -23,4 +23,9 @@ public abstract class Item {
     public Moveable getMoveable() {
         return moveable;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
