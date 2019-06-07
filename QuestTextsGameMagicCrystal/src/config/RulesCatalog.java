@@ -12,7 +12,7 @@ public class RulesCatalog {
     private List<Combo> combos;
 
     public RulesCatalog() {
-        this.combos = new ArrayList<Combo>();
+        this.combos = new ArrayList<>();
     }
 
     public void addCombo(Combo combo) {

@@ -41,8 +41,16 @@ public class Location {
         return locationInventory;
     }
 
+    public void fillInventory(Item item){
+        locationInventory.addItem(item);
+    }
+
     public Map<Direction, Location> getDirections() {
         return directions;
+    }
+
+    public void addDirection(Direction direction, Location location) {
+        directions.put(direction, location);
     }
 
     public String showDirections() {

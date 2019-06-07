@@ -5,7 +5,6 @@ import items.*;
 import locations.Direction;
 import locations.Location;
 import locations.Locations;
-import menus.Menu;
 import players.Player;
 
 import java.util.HashMap;
@@ -29,45 +28,44 @@ public class Main {
 
     public static final Player player = new Player(ROOM);
     public static final RulesCatalog RULES_CATALOG = new RulesCatalog();
+    public static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
-        ROOM.getDirections().put(Direction.SOUTH, GARDEN);
-        ROOM.getDirections().put(Direction.UP, LOFT);
-        GARDEN.getDirections().put(Direction.NORTH, ROOM);
-        LOFT.getDirections().put(Direction.DOWN, ROOM);
-        Item bottle = new Bottle("Бутылка", "Пустая бутылка из под виски", Moveable.YES);
-        Item bucket = new Bucket("Ведро", "Пустое ведро", Moveable.YES);
-        Item chain = new Chain("Цепь", "Ржавая цепь", Moveable.YES);
-        Item drinkWizard = new DrinkWizard("Волшебник", "Пьянющий волшебник", Moveable.NO);
-        Item frog = new Frog("Лягушка", "Обычная зелёная квакающая лягушка", Moveable.YES);
-        Item toad = new Frog("Жаба", "Толстая отвратительная жаба", Moveable.YES);
-        Item fountain = new Fountain("Колодец", "Глубокий колодец с отрезвляющей холодной водой", Moveable.NO);
-        Item gasJet = new GasJet("Горелка", "Старая газовая горелка", Moveable.NO);
-        Item bucketChain = new BucketChain("Ведро и цепь", "Цепь на ведре...на соплях", Moveable.YES);
-        Item bucketChainHard = new BucketChain("Ведроцепь", "Удивительная и не повторимая", Moveable.YES);
-        Item bottleFrog = new BottleFrog("Лягушка в бутылке", "Квакает, умоляет выпустить", Moveable.YES);
-        Item crystal = new Crystal("Кристалл", "Кристал всевластия", Moveable.YES);
-        Item waterBucket = new WaterBucket("Ведро с водой", "Старая добрая отрезвляющая водица", Moveable.YES);
+//        ROOM.getDirections().put(Direction.SOUTH, GARDEN);
+        ROOM.addDirection(Direction.SOUTH, GARDEN);
+        ROOM.addDirection(Direction.UP, LOFT);
+        GARDEN.addDirection(Direction.NORTH, ROOM);
+        LOFT.addDirection(Direction.DOWN, ROOM);
+        Item bottle = new Item("Бутылка", "Пустая бутылка из под виски", Moveable.YES);
+        Item bucket = new Item("Ведро", "Пустое ведро", Moveable.YES);
+        Item chain = new Item("Цепь", "Ржавая цепь", Moveable.YES);
+        Item drinkWizard = new Item("Волшебник", "Пьянющий волшебник", Moveable.NO);
+        Item frog = new Item("Лягушка", "Обычная зелёная квакающая лягушка", Moveable.YES);
+        Item toad = new Item("Жаба", "Толстая отвратительная жаба", Moveable.YES);
+        Item fountain = new Item("Колодец", "Глубокий колодец с отрезвляющей холодной водой", Moveable.NO);
+        Item gasJet = new Item("Горелка", "Старая газовая горелка", Moveable.NO);
+        Item bucketChain = new Item("Ведро и цепь", "Цепь на ведре...на соплях", Moveable.YES);
+        Item bucketChainHard = new Item("Ведроцепь", "Удивительная и не повторимая", Moveable.YES);
+        Item bottleFrog = new Item("Лягушка в бутылке", "Квакает, умоляет выпустить", Moveable.YES);
+        Item crystal = new Item("Кристалл", "Кристал всевластия", Moveable.YES);
+        Item waterBucket = new Item("Ведро с водой", "Старая добрая отрезвляющая водица", Moveable.YES);
 
-        ROOM.getLocationInventory().addItem(bottle);
-        ROOM.getLocationInventory().addItem(bucket);
-        ROOM.getLocationInventory().addItem(drinkWizard);
+        ROOM.fillInventory(bottle);
+        ROOM.fillInventory(bucket);
+        ROOM.fillInventory(drinkWizard);
 
-        GARDEN.getLocationInventory().addItem(chain);
-        GARDEN.getLocationInventory().addItem(frog);
-        GARDEN.getLocationInventory().addItem(fountain);
+        GARDEN.fillInventory(chain);
+        GARDEN.fillInventory(frog);
+        GARDEN.fillInventory(fountain);
 
-        LOFT.getLocationInventory().addItem(gasJet);
-        LOFT.getLocationInventory().addItem(toad);
-
+        LOFT.fillInventory(gasJet);
+        LOFT.fillInventory(toad);
 
         RULES_CATALOG.addCombo(new Combo(frog, bottle, bottleFrog, "Посадил лягушку в бутылку! я молодец."));
         RULES_CATALOG.addCombo(new Combo(bucket, chain, bucketChain, "Кое-как привязал - выглядит не надёжно..."));
         RULES_CATALOG.addCombo(new Combo(bucketChain, gasJet, bucketChainHard, "Надож до такого додуматься - ведроцепь!"));
         RULES_CATALOG.addCombo(new Combo(bucketChainHard, fountain, waterBucket, "Теперь есть ведро с отрезвляющей водой"));
         RULES_CATALOG.addCombo(new Combo(waterBucket, drinkWizard, crystal, "Волшебник очнулся и отдал кристал! УРА!"));
-
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Вы находитесь в гостиной в доме волшебника. А вот и он сам громко храпит на\n" +
                 "кровати. Вам необходимо разбудить этого старого алкаша и забрать волшебный кристалл!\n" +
@@ -76,44 +74,44 @@ public class Main {
         while (!player.getInventory().isItemExist("Кристалл")) {
             printMenu();
             try {
-                action = scanner.nextInt();
+                action = SCANNER.nextInt();
             } catch (InputMismatchException ex) {
                 System.out.println("\n\n\nВведите циферку пожалста.\n\n\n");
                 continue;
             } finally {
-                scanner.nextLine();
+                SCANNER.nextLine();
             }
 
 
             System.out.println("\n\n\n\n");
             switch (action) {
                 case 1:
-                    Menu.lookAround(player.getCurrentLocation());
+                    player.lookAround();
                     break;
                 case 2:
-                    Menu.goToLocation(player);
+                    player.goToLocation();
                     break;
                 case 3:
-                    Menu.takeItem(player);
+                    player.takeItem();
                     break;
                 case 4:
-                    Menu.modifyItem(player);
+                    player.modifyItem();
                     break;
                 case 5:
-                    Menu.researchItem(player);
+                    player.researchItem();
                     break;
                 case 6:
-                    Menu.showInventory(player);
+                    player.showMyInventory();
                     break;
                 case 7:
-                    Menu.applyItem(player);
+                    player.applyItem();
                     break;
                 case 8:
                 case 9:
                     System.out.println("И что делать?");
                     break;
                 case 0:
-                    Menu.exitGame();
+                    player.exitGame();
                     break;
             }
             System.out.println("\n");
@@ -133,33 +131,4 @@ public class Main {
         System.out.println("0 - Выход");
         System.out.print("Ваше действие: ");
     }
-
-/*    private static void init() {
-        Item bottle = new Bottle("Бутылка", "Пустая бутылка из под виски", Moveable.YES);
-        Item bucket = new Bucket("Ведро", "Пустое ведро", Moveable.YES);
-        Item chain = new Chain("Цепь", "Ржавая цепь", Moveable.YES);
-        Item drinkWizard = new DrinkWizard("Волшебник", "Пьянющий волшебник", Moveable.NO);
-        Item frog = new Frog("Лягушка", "Обычная зелёная квакающая лягушка", Moveable.YES);
-        Item toad = new Frog("Жаба", "Толстая отвратительная жаба", Moveable.YES);
-        Item fountain = new Fountain("Колодец", "Глубокий колодец с отрезвляющей холодной водой", Moveable.NO);
-        Item gasJet = new GasJet("Горелка", "Старая газовая горелка", Moveable.NO);
-
-
-        Location ROOM = new Location(Locations.ROOM,"Обыкновенная комнатушка в старом доме");
-        Location GARDEN = new Location(Locations.GARDEN, "Чудесный сад с цветами для алхимии и старым глубоким колодцем");
-        Location LOFT = new Location(Locations.LOFT, "Старый чердак, с разным хламом");
-
-        ROOM.putItem(bottle);
-        ROOM.putItem(bucket);
-        ROOM.putItem(drinkWizard);
-
-        GARDEN.putItem(chain);
-        GARDEN.putItem(frog);
-        GARDEN.putItem(fountain);
-
-        LOFT.putItem(gasJet);
-        LOFT.putItem(toad);
-
-        Player player = new Player(ROOM);
-    }*/
 }
