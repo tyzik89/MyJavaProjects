@@ -3,16 +3,22 @@ package locations;
 import inventories.Inventory;
 import items.Item;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Location {
 
     private Locations location;
     private String description;
     private Inventory locationInventory;
+    private Map<Direction, Location> directions;
 
-    public Location(Locations location, String description) {
+    public Location(Locations location, String description, Map<Direction, Location> directions) {
         this.location = location;
         this.description = description;
         this.locationInventory = new Inventory();
+        this.directions = directions;
     }
 
     public String getLocationName() {
@@ -33,5 +39,17 @@ public class Location {
 
     public Inventory getLocationInventory() {
         return locationInventory;
+    }
+
+    public Map<Direction, Location> getDirections() {
+        return directions;
+    }
+
+    public String showDirections() {
+        StringBuilder d = new StringBuilder("");
+        for (Direction direction : directions.keySet()) {
+            d.append(direction.getName()).append(" ");
+        }
+        return d.toString();
     }
 }
