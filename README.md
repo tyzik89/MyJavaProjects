@@ -1,4 +1,4 @@
-# MyProjects
+# MyJavaProjects
 Изучение возможностей Java
 
 
