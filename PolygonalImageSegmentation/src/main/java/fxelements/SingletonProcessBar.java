@@ -1,4 +1,4 @@
-package elements;
+package fxelements;
 
 import javafx.scene.control.ProgressBar;
 

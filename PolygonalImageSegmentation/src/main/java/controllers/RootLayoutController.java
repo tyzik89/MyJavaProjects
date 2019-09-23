@@ -4,7 +4,12 @@ import app.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+import utils.ImageConverterUtils;
 
 public class RootLayoutController {
 
@@ -24,9 +29,15 @@ public class RootLayoutController {
     @FXML
     private ImageView imgView;
     @FXML
-    private Accordion accordion;
-    @FXML
     private TitledPane commonTools;
+    @FXML
+    private TitledPane cannyTools;
+    @FXML
+    private TitledPane hafaTools;
+    @FXML
+    private Button cancel;
+    @FXML
+    private Button redo;
 
     public RootLayoutController() {
     }
@@ -51,7 +62,15 @@ public class RootLayoutController {
 
     @FXML
     private void handleOpen(ActionEvent event) {
-        accordion.setDisable(false);
+        commonTools.setDisable(false);
+        cannyTools.setDisable(false);
         commonTools.setExpanded(true);
+
+
+        Mat mat = Imgcodecs.imread("src/main/resources/img/1.png", Imgcodecs.IMREAD_GRAYSCALE);
+        //Перевод в бинарное изображение
+        Imgproc.threshold(mat, mat, 0, 255, Imgproc.THRESH_BINARY + Imgproc.THRESH_OTSU);
+
+        imgView.setImage(ImageConverterUtils.mat2Image(mat));
     }
 }
