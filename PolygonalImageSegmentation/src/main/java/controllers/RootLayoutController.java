@@ -6,19 +6,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import models.LoaderImages;
+import models.ImagesHandler;
 import models.Observer;
 import models.StorageImages;
 
 public class RootLayoutController implements Observer {
-
     // Ref on app.MainApp
     private MainApp mainApp;
-
-    //Ref on model class - LoaderImages
-    private LoaderImages loaderImages;
-
-    private StorageImages storageImages;
+    //Ref on model class - ImagesHandler
+    private ImagesHandler imagesHandler;
 
     @FXML
     private ProgressBar prBar;
@@ -42,19 +38,24 @@ public class RootLayoutController implements Observer {
     private Button cancel;
     @FXML
     private Button redo;
+    @FXML
+    private Button makeBinary;
 
     public RootLayoutController() {
         // контролер должен знать модель
         // в модели все вычисления и внутренние данные
-        this.loaderImages = new LoaderImages();
-        this.storageImages = StorageImages.getInstance();
+        this.imagesHandler = new ImagesHandler();
         //регистрация на сообщения от модели
-        loaderImages.registerObserver(this);
+        imagesHandler.registerObserver(this);
     }
 
     @FXML
     private void initialize() {
-
+        commonTools.setDisable(true);
+        cannyTools.setDisable(true);
+        hafaTools.setDisable(true);
+        cancel.setDisable(true);
+        redo.setDisable(true);
     }
 
     /**
@@ -73,16 +74,37 @@ public class RootLayoutController implements Observer {
     @FXML
     private void handleLoad(ActionEvent event) {
         commonTools.setDisable(false);
-        cannyTools.setDisable(false);
         commonTools.setExpanded(true);
 
-        loaderImages.load();
+        cannyTools.setDisable(false);
+
+        hafaTools.setDisable(true);
+        hafaTools.setExpanded(false);
+
+        imagesHandler.load();
+    }
+
+    @FXML
+    private void handleCancel(ActionEvent event) {
+        imagesHandler.doCancelRedo();
+        cancel.setDisable(true);
+    }
+
+    @FXML
+    private void handleRedo(ActionEvent event) {
+        imagesHandler.doCancelRedo();
+        redo.setDisable(true);
+    }
+
+    @FXML
+    private void handleMakeBinary(ActionEvent event){
+        imagesHandler.doMakeBinary();
     }
 
     @Override
     public void notification(String message) {
         if (NotifyConstants.IMAGE_READY.equals(message)) {
-            imgView.setImage(storageImages.getCurrentImage());
+            imgView.setImage(imagesHandler.getCurrentImage());
         }
     }
 }
