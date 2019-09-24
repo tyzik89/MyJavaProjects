@@ -9,9 +9,7 @@ import org.opencv.core.Mat;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
-import java.nio.file.Paths;
 
 public final class ImageConverterUtils {
 

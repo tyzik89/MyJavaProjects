@@ -1,27 +1,31 @@
 package controllers;
 
 import app.MainApp;
+import constants.NotifyConstants;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
-import utils.ImageConverterUtils;
+import models.LoaderImages;
+import models.Observer;
+import models.StorageImages;
 
-public class RootLayoutController {
+public class RootLayoutController implements Observer {
 
     // Ref on app.MainApp
     private MainApp mainApp;
+
+    //Ref on model class - LoaderImages
+    private LoaderImages loaderImages;
+
+    private StorageImages storageImages;
 
     @FXML
     private ProgressBar prBar;
     @FXML
     private ProgressIndicator prInd;
     @FXML
-    private MenuItem itmOpen;
+    private MenuItem itmLoad;
     @FXML
     private MenuItem itmExit;
     @FXML
@@ -40,6 +44,12 @@ public class RootLayoutController {
     private Button redo;
 
     public RootLayoutController() {
+        // контролер должен знать модель
+        // в модели все вычисления и внутренние данные
+        this.loaderImages = new LoaderImages();
+        this.storageImages = StorageImages.getInstance();
+        //регистрация на сообщения от модели
+        loaderImages.registerObserver(this);
     }
 
     @FXML
@@ -61,16 +71,18 @@ public class RootLayoutController {
     }
 
     @FXML
-    private void handleOpen(ActionEvent event) {
+    private void handleLoad(ActionEvent event) {
         commonTools.setDisable(false);
         cannyTools.setDisable(false);
         commonTools.setExpanded(true);
 
+        loaderImages.load();
+    }
 
-        Mat mat = Imgcodecs.imread("src/main/resources/img/1.png", Imgcodecs.IMREAD_GRAYSCALE);
-        //Перевод в бинарное изображение
-        Imgproc.threshold(mat, mat, 0, 255, Imgproc.THRESH_BINARY + Imgproc.THRESH_OTSU);
-
-        imgView.setImage(ImageConverterUtils.mat2Image(mat));
+    @Override
+    public void notification(String message) {
+        if (NotifyConstants.IMAGE_READY.equals(message)) {
+            imgView.setImage(storageImages.getCurrentImage());
+        }
     }
 }

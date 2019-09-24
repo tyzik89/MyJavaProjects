@@ -4,9 +4,9 @@ import javafx.scene.image.Image;
 
 public class StorageImages {
 
-    private Image SourceImage;
-    private Image CurrentImage;
-    private Image PreviousImage;
+    private static Image SourceImage;
+    private static Image CurrentImage;
+    private static Image PreviousImage;
 
     private static StorageImages INSTANCE = new StorageImages();
 
@@ -15,6 +15,13 @@ public class StorageImages {
     public static StorageImages getInstance()
     {
         return INSTANCE;
+    }
+
+
+    public void init(Image image) {
+        SourceImage = image;
+        CurrentImage = image;
+        PreviousImage = image;
     }
 
     public Image getSourceImage() {
