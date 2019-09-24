@@ -23,8 +23,13 @@ public class ImagesHandler implements Observable {
 
     public void load() {
         //fixme исправить загрузку изображения
-        Mat mat = Imgcodecs.imread("src/main/resources/img/1.png", Imgcodecs.IMREAD_COLOR);
-        Image image = ImageConverterUtils.mat2Image(mat);
+        // An image file on the hard drive.
+        /*File file = new File("C:/MyImages/myphoto.jpg");
+        // --> file:/C:/MyImages/myphoto.jpg
+        String localUrl = file.toURI().toURL().toString();
+        Image image = new Image(localUrl);*/
+        Mat mat = Imgcodecs.imread("src/main/resources/img/1.png", Imgcodecs.IMREAD_UNCHANGED);
+        Image image = ImageConverterUtils.matToImageFX(mat);
         storageImages.init(image);
 
         notifyObservers(NotifyConstants.IMAGE_READY);
@@ -41,15 +46,19 @@ public class ImagesHandler implements Observable {
         notifyObservers(NotifyConstants.IMAGE_READY);
     }
 
-    public void doMakeBinary() {
-        Mat mat = ImageConverterUtils.image2Mat(storageImages.getCurrentImage());
-        //Кодирование в одноканальное изображение
-        mat = Imgcodecs.imdecode(mat, CvType.CV_8UC1);
-        System.out.println(mat.cols());
+    public void doMakeBinary(int tresh, boolean isOtsu) {
+        Mat mat = ImageConverterUtils.imageFXToMat(storageImages.getCurrentImage());
+        Mat mat_gray = new Mat();
+        //Конвертируем изображение в одноканальное
+        Imgproc.cvtColor(mat, mat_gray, Imgproc.COLOR_BGR2GRAY);
         //Перевод в бинарное изображение
-        Imgproc.threshold(mat, mat, 0, 255, Imgproc.THRESH_BINARY + Imgproc.THRESH_OTSU);
-        System.out.println(mat.cols());
-        switchImagesOnNextStep(ImageConverterUtils.mat2Image(mat));
+        Mat mat_binary = new Mat();
+        if (isOtsu) {
+            Imgproc.threshold(mat_gray, mat_binary, 0, 255, Imgproc.THRESH_BINARY + Imgproc.THRESH_OTSU);
+        } else {
+            Imgproc.threshold(mat_gray, mat_binary, tresh, 255, Imgproc.THRESH_BINARY);
+        }
+        switchImagesOnNextStep(ImageConverterUtils.matToImageFX(mat_binary));
     }
 
     @Override
@@ -69,8 +78,7 @@ public class ImagesHandler implements Observable {
     }
 
     private void switchImagesOnNextStep(Image newImage) {
-        storageImages.setPreviousImage(storageImages.getCurrentImage());
-        storageImages.setCurrentImage(newImage);
+        storageImages.switchImagesOnNextStep(newImage);
         notifyObservers(NotifyConstants.IMAGE_READY);
     }
 }

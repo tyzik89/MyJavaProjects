@@ -2,68 +2,99 @@
 
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.Pane?>
 
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tooltip?>
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RootLayoutController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RootLayoutController">
    <top>
        <MenuBar BorderPane.alignment="CENTER">
-           <Menu mnemonicParsing="false" text="File">
-               <MenuItem fx:id="itmLoad" mnemonicParsing="false" onAction="#handleLoad" text="Load" />
-               <SeparatorMenuItem mnemonicParsing="false" />
-               <MenuItem fx:id="itmExit" mnemonicParsing="false" onAction="#handleItmExit" text="Exit" />
-           </Menu>
-           <Menu mnemonicParsing="false" text="View">
-               <MenuItem fx:id="itmSourceImage" mnemonicParsing="false" text="Source Image" />
-           </Menu>
+          <menus>
+              <Menu mnemonicParsing="false" text="File">
+                 <items>
+                     <MenuItem fx:id="itmLoad" mnemonicParsing="false" onAction="#handleLoad" text="Load" />
+                     <SeparatorMenuItem mnemonicParsing="false" />
+                     <MenuItem fx:id="itmExit" mnemonicParsing="false" onAction="#handleItmExit" text="Exit" />
+                 </items>
+              </Menu>
+              <Menu mnemonicParsing="false" text="View">
+                 <items>
+                     <MenuItem fx:id="itmSourceImage" mnemonicParsing="false" text="Source Image" />
+                 </items>
+              </Menu>
+          </menus>
        </MenuBar>
    </top>
 
    <bottom>
        <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="39.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-           <ProgressBar fx:id="prBar" prefHeight="18.0" prefWidth="836.0" progress="0.0" />
-           <ProgressIndicator fx:id="prInd" prefHeight="34.0" prefWidth="29.0" progress="0.0" />
-         <Separator orientation="VERTICAL" prefHeight="34.0" prefWidth="58.0" />
-         <Button fx:id="cancel" disable="true" mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="103.0" text="Cancel" >
-             <tooltip>
-                <Tooltip text="Отмена применения алгоритма и возврат к предыдущему состоянию изображения" />
-             </tooltip>
-         </Button>
-         <Separator layoutX="1001.0" layoutY="13.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="39.0" />
-         <Button fx:id="redo" disable="true" layoutX="1004.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleRedo" prefHeight="25.0" prefWidth="103.0" text="Redo" >
-             <tooltip>
-                 <Tooltip text="Возврат применения алгоритма и обновление состояния изображения" />
-             </tooltip>
-         </Button>
+          <children>
+              <ProgressBar fx:id="prBar" prefHeight="18.0" prefWidth="836.0" progress="0.0" />
+              <ProgressIndicator fx:id="prInd" prefHeight="34.0" prefWidth="29.0" progress="0.0" />
+            <Separator orientation="VERTICAL" prefHeight="34.0" prefWidth="58.0" />
+            <Button fx:id="cancel" disable="true" mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="103.0" text="Cancel">
+                <tooltip>
+                   <Tooltip text="Отмена применения алгоритма и возврат к предыдущему состоянию изображения" />
+                </tooltip>
+            </Button>
+            <Separator layoutX="1001.0" layoutY="13.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="39.0" />
+            <Button fx:id="redo" disable="true" layoutX="1004.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleRedo" prefHeight="25.0" prefWidth="103.0" text="Redo">
+                <tooltip>
+                    <Tooltip text="Возврат применения алгоритма и обновление состояния изображения" />
+                </tooltip>
+            </Button>
+          </children>
        </FlowPane>
    </bottom>
    <right>
       <Accordion BorderPane.alignment="CENTER">
         <panes>
             <TitledPane fx:id="commonTools" animated="false" disable="true" text="Общие Инструменты">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <Button fx:id="makeBinary" onAction="#handleMakeBinary" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Бинарное изображение"/>
-                </AnchorPane>
+               <content>
+                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                          <Button fx:id="makeBinary" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleMakeBinary" prefHeight="25.0" prefWidth="168.0" text="Binary">
+                              <tooltip>
+                                  <Tooltip text="Сделать изображение бинарным" />
+                              </tooltip>
+                          </Button>
+                          <Label layoutX="14.0" layoutY="39.0" text="Порог" />
+                          <CheckBox fx:id="otsu" layoutX="16.0" layoutY="56.0" mnemonicParsing="false" onAction="#selectOtsu" prefWidth="101.0" text="порог OTSU" />
+                          <Slider fx:id="binarySlider" layoutX="58.0" layoutY="41.0" max="255.0" prefHeight="14.0" prefWidth="129.0" />
+                          <Separator layoutY="73.0" prefHeight="24.0" prefWidth="200.0" />
+                          <Button layoutX="14.0" layoutY="97.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="169.0" text="Gauss Blur">
+                              <tooltip>
+                                  <Tooltip text="Размытие по Гауссу" />
+                              </tooltip>
+                          </Button>
+                      </children>
+                   </AnchorPane>
+               </content>
             </TitledPane>
             <TitledPane fx:id="cannyTools" animated="false" disable="true" text="Алгоритм Кэнни">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               <content>
+                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
             </TitledPane>
             <TitledPane fx:id="hafaTools" animated="false" disable="true" text="Преобразование Хафа">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               <content>
+                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
             </TitledPane>
         </panes>
          <effect>
@@ -72,8 +103,10 @@
       </Accordion>
    </right>
    <left>
-       <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
-           <ImageView fx:id="imgView" fitHeight="768.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="true" />
+       <ScrollPane fitToHeight="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+          <content>
+              <ImageView fx:id="imgView" pickOnBounds="true" preserveRatio="true" />
+          </content>
        </ScrollPane>
    </left>
 </BorderPane>

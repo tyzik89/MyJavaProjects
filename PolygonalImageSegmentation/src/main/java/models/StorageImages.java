@@ -24,6 +24,11 @@ public class StorageImages {
         PreviousImage = image;
     }
 
+    public void switchImagesOnNextStep(Image newImage) {
+        PreviousImage = CurrentImage;
+        CurrentImage = newImage;
+    }
+
     public Image getSourceImage() {
         return SourceImage;
     }

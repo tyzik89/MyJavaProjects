@@ -1,81 +1,88 @@
 package utils;
 
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritablePixelFormat;
+import javafx.scene.image.*;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.nio.ByteBuffer;
+import org.opencv.imgproc.Imgproc;
 
 public final class ImageConverterUtils {
 
     /**
-     * Convert a Mat object (OpenCV) in the corresponding Image for JavaFX
-     *
-     * @param frame the {@link Mat} representing the current frame
-     * @return the {@link Image} to show
+     * Конвертация матрицы {@link Mat} в объект Image {@link Image} для JavaFX
+     * @param m матрица
+     * @return объект WitableImage {@link WritableImage}
      */
-    public static Image mat2Image(Mat frame)
-    {
-        try
-        {
-            return SwingFXUtils.toFXImage(matToBufferedImage(frame), null);
-        }
-        catch (Exception e)
-        {
-            System.err.println("Cannot convert the Mat objуct: " + e);
-            return null;
-        }
-    }
+    public static WritableImage matToImageFX(Mat m) {
+        if (m == null || m.empty()) return null;
 
-    /**
-     * Support for the {@link #mat2Image(Mat)} method
-     *
-     * @param original the {@link Mat} object in BGR or grayscale
-     * @return the corresponding {@link BufferedImage}
-     */
-    private static BufferedImage matToBufferedImage(Mat original)
-    {
-        // init
-        BufferedImage image = null;
-        int width = original.width(), height = original.height(), channels = original.channels();
-        byte[] sourcePixels = new byte[width * height * channels];
-        original.get(0, 0, sourcePixels);
+        switch (m.depth()) {
+            case CvType.CV_8U:
+                break;
+            case CvType.CV_16U:
+                Mat m_16 = new Mat();
+                m.convertTo(m_16, CvType.CV_8U, 255.0 / 65535);
+                m = m_16;
+                break;
+            case CvType.CV_32F:
+                Mat m_32 = new Mat();
+                m.convertTo(m_32, CvType.CV_8U, 255);
+                m = m_32;
+                break;
+            default:
+                return null;
+        }
 
-        if (original.channels() > 1)
-        {
-            image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+        switch (m.channels()) {
+            case 1: {
+                Mat m_bgra = new Mat();
+                Imgproc.cvtColor(m, m_bgra, Imgproc.COLOR_GRAY2BGRA);
+                m = m_bgra;
+                break;
+            }
+            case 3: {
+                Mat m_bgra = new Mat();
+                Imgproc.cvtColor(m, m_bgra, Imgproc.COLOR_BGR2BGRA);
+                m = m_bgra;
+                break;
+            }
+            case 4:
+                break;
+            default:
+                return null;
         }
-        else
-        {
-            image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
-        }
-        final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-        System.arraycopy(sourcePixels, 0, targetPixels, 0, sourcePixels.length);
+
+        byte[] buf = new byte[m.channels() * m.cols() * m.rows()];
+        m.get(0, 0, buf);
+
+        WritableImage image = new WritableImage(m.cols(), m.rows());
+        PixelWriter pixelWriter = image.getPixelWriter();
+        pixelWriter.setPixels(
+                0 ,0, m.cols(), m.rows(),
+                WritablePixelFormat.getByteBgraInstance(),
+                buf, 0, m.cols() * 4);
 
         return image;
     }
 
     /**
-     * Convert an Image for JavaFX in the corresponding Mat object (OpenCV)
-     * @param image the current {@link Image} object JavaFX
-     * @return the corresponding {@link Mat}
+     * Конвертация объекта Image {@link Image} в матрицу {@link Mat}
+     * @param image входное изображение
+     * @return матрицу
      */
-    public static Mat image2Mat(Image image) {
-        int width = (int) image.getWidth();
-        int height = (int) image.getHeight();
-        byte[] buffer = new byte[width * height * 4];
+    public static Mat imageFXToMat(Image image) {
+        if (image == null) return new Mat();
 
-        PixelReader reader = image.getPixelReader();
-        WritablePixelFormat<ByteBuffer> format = WritablePixelFormat.getByteBgraInstance();
-        reader.getPixels(0, 0, width, height, format, buffer, 0, width * 4);
+        PixelReader pixelReader = image.getPixelReader();
+        int w = (int) image.getWidth();
+        int h = (int) image.getHeight();
+        byte[] buf = new byte[4 * w * h];
 
-        Mat mat = new Mat(height, width, CvType.CV_8UC4);
-        mat.put(0, 0, buffer);
-        return mat;
+        pixelReader.getPixels(
+                0, 0, w, h,
+                WritablePixelFormat.getByteBgraInstance(),
+                buf, 0, w * 4);
+        Mat m = new Mat(h, w, CvType.CV_8UC4);
+        m.put(0, 0, buf);
+        return m;
     }
 }

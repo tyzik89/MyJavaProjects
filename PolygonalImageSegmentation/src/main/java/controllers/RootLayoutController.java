@@ -11,6 +11,7 @@ import models.Observer;
 import models.StorageImages;
 
 public class RootLayoutController implements Observer {
+
     // Ref on app.MainApp
     private MainApp mainApp;
     //Ref on model class - ImagesHandler
@@ -40,6 +41,10 @@ public class RootLayoutController implements Observer {
     private Button redo;
     @FXML
     private Button makeBinary;
+    @FXML
+    private Slider binarySlider;
+    @FXML
+    private CheckBox otsu;
 
     public RootLayoutController() {
         // контролер должен знать модель
@@ -88,23 +93,35 @@ public class RootLayoutController implements Observer {
     private void handleCancel(ActionEvent event) {
         imagesHandler.doCancelRedo();
         cancel.setDisable(true);
+        redo.setDisable(false);
     }
 
     @FXML
     private void handleRedo(ActionEvent event) {
         imagesHandler.doCancelRedo();
         redo.setDisable(true);
+        cancel.setDisable(false);
     }
 
     @FXML
     private void handleMakeBinary(ActionEvent event){
-        imagesHandler.doMakeBinary();
+        imagesHandler.doMakeBinary((int)binarySlider.getValue(), otsu.isSelected());
+        cancel.setDisable(false);
     }
 
     @Override
     public void notification(String message) {
         if (NotifyConstants.IMAGE_READY.equals(message)) {
             imgView.setImage(imagesHandler.getCurrentImage());
+        }
+    }
+
+    @FXML
+    private void selectOtsu(ActionEvent event) {
+        if (otsu.isSelected()) {
+            binarySlider.setDisable(true);
+        } else {
+            binarySlider.setDisable(false);
         }
     }
 }
