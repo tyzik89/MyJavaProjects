@@ -1,7 +1,9 @@
 package models.algorithms;
 
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
@@ -41,13 +43,12 @@ public class CannyEdgeDetectorAlgorithm {
     }
 
     public Mat doAlgorithm(Mat mat) {
-        Mat mat_detected_edges = new Mat();
-
         //Конвертируем изображение в одноканальное
         Mat mat_gray = new Mat();
         Imgproc.cvtColor(mat, mat_gray, Imgproc.COLOR_BGR2GRAY);
 
         //Применяем размытие по Гауссу
+        Mat mat_detected_edges = new Mat();
         GaussBlurAlgorithm gaussBlurAlgorithm = new GaussBlurAlgorithm(sizeGaussFilter);
         mat_detected_edges = gaussBlurAlgorithm.doAlgorithm(mat_gray);
 
@@ -59,6 +60,13 @@ public class CannyEdgeDetectorAlgorithm {
           needToUseL2Gradient(false): флаг, указывающий на возможность использования более точного расчёта  величины градиента.*/
 
         Imgproc.Canny(mat_detected_edges, mat_detected_edges, threshold,threshold * 3, apertureSize, needToUseL2Gradient);
+
+        //Создаём матрицу и заполняем её нулями. Получаем совершенно чёрное изображение
+        Mat dest = new Mat();
+        Core.add(dest, Scalar.all(0), dest);
+
+        //Копируем только те зоны, которые идентифицированы как отрезки (на чёрном фоне)
+        mat.copyTo(dest, mat_detected_edges);
 
         return mat_detected_edges;
     }
