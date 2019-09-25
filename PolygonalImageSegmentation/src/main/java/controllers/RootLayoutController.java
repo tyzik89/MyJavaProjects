@@ -45,11 +45,17 @@ public class RootLayoutController implements Observer {
     @FXML
     private Slider binarySlider;
     @FXML
+    private Label showBinaryThreshold;
+    @FXML
     private CheckBox otsu;
     @FXML
     private Slider sizeGaussFilterCommon;
     @FXML
+    private Label showSizeGaussFilterCommon;
+    @FXML
     private Slider thresholdCanny;
+    @FXML
+    private Label showThresholdCanny;
     @FXML
     private TextField sizeGaussFilter;
     @FXML
@@ -147,6 +153,21 @@ public class RootLayoutController implements Observer {
         if (sizeGFString != null || !Objects.equals(sizeGFString, "")) sizeGF = Integer.parseInt(sizeGFString);
 
         imagesHandler.doCannyEdgeDetection(sizeGF, (int) thresholdCanny.getValue());
+    }
+
+    @FXML
+    private void changeBinarySlider() {
+        showBinaryThreshold.setText(String.valueOf((int) binarySlider.getValue()));
+    }
+
+    @FXML
+    private void changeSizeGaussFilterCommon() {
+        showSizeGaussFilterCommon.setText(String.valueOf((int) sizeGaussFilterCommon.getValue()));
+    }
+
+    @FXML
+    private void changeThresholdCanny() {
+        showThresholdCanny.setText(String.valueOf((int) thresholdCanny.getValue()));
     }
 
 }
