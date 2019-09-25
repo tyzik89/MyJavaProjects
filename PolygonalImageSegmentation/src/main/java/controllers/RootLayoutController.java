@@ -106,13 +106,14 @@ public class RootLayoutController implements Observer {
     @FXML
     private void handleMakeBinary(ActionEvent event){
         imagesHandler.doMakeBinary((int)binarySlider.getValue(), otsu.isSelected());
-        cancel.setDisable(false);
     }
 
     @Override
     public void notification(String message) {
         if (NotifyConstants.IMAGE_READY.equals(message)) {
             imgView.setImage(imagesHandler.getCurrentImage());
+            cancel.setDisable(false);
+            redo.setDisable(true);
         }
     }
 
