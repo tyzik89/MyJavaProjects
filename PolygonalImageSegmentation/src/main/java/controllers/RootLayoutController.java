@@ -6,9 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import models.ImagesHandler;
-import models.Observer;
-import models.StorageImages;
+import models.image.ImagesHandler;
+import models.notification.Observer;
 
 public class RootLayoutController implements Observer {
 

@@ -1,4 +1,4 @@
-package models;
+package models.notification;
 
 public interface Observable {
 

@@ -1,4 +1,4 @@
-package models;
+package models.notification;
 
 //Наблюдатель
 public interface Observer {

@@ -1,8 +1,9 @@
-package models;
+package models.image;
 
 import constants.NotifyConstants;
 import javafx.scene.image.Image;
-import org.opencv.core.CvType;
+import models.notification.Observable;
+import models.notification.Observer;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
