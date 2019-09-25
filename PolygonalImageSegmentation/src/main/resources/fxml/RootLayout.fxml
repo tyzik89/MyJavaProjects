@@ -13,6 +13,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
@@ -21,7 +22,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RootLayoutController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RootLayoutController">
    <top>
        <MenuBar BorderPane.alignment="CENTER">
           <menus>
@@ -77,24 +78,30 @@
                           <CheckBox fx:id="otsu" layoutX="16.0" layoutY="56.0" mnemonicParsing="false" onAction="#selectOtsu" prefWidth="101.0" text="порог OTSU" />
                           <Slider fx:id="binarySlider" layoutX="58.0" layoutY="41.0" max="255.0" prefHeight="14.0" prefWidth="129.0" />
                           <Separator layoutY="73.0" prefHeight="24.0" prefWidth="200.0" />
-                          <Button layoutX="14.0" layoutY="97.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="169.0" text="Gauss Blur">
+                          <Button onAction="#makeBlur" layoutX="14.0" layoutY="97.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="169.0" text="Gauss Blur">
                               <tooltip>
                                   <Tooltip text="Размытие по Гауссу" />
                               </tooltip>
                           </Button>
+                        <Label layoutX="35.0" layoutY="131.0" text="Размер фильтра Гаусса" />
+                        <Slider fx:id="sizeGaussFilterCommon" showTickMarks="true" showTickLabels="true" snapToTicks="true" layoutX="11.0" layoutY="148.0" max="255.0" prefHeight="14.0" prefWidth="178.0" />
                       </children>
                    </AnchorPane>
                </content>
             </TitledPane>
             <TitledPane fx:id="cannyTools" animated="false" disable="true" text="Алгоритм Кэнни">
-               <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <Label layoutX="42.0" layoutY="14.0" text="Пороговое значение" />
+                    <Slider fx:id="thresholdCanny" showTickMarks="true" showTickLabels="true" snapToTicks="true" layoutX="6.0" layoutY="31.0" prefHeight="14.0" prefWidth="190.0" />
+                    <Separator layoutX="1.0" layoutY="61.0" prefWidth="200.0" />
+                    <Label layoutX="5.0" layoutY="72.0" text="Размер фильтра Гаусса" />
+                    <TextField fx:id="sizeGaussFilter" layoutX="143.0" layoutY="68.0" prefHeight="25.0" prefWidth="43.0" text="0" />
+                    <Button fx:id="applyCanny" layoutX="61.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleApplyCanny" text="Применить" />
+                    <Separator layoutY="101.0" prefWidth="200.0" />
+                </AnchorPane>
             </TitledPane>
             <TitledPane fx:id="hafaTools" animated="false" disable="true" text="Преобразование Хафа">
-               <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </TitledPane>
         </panes>
          <effect>

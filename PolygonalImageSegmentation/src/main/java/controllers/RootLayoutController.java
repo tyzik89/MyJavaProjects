@@ -9,6 +9,8 @@ import javafx.scene.image.ImageView;
 import models.image.ImagesHandler;
 import models.notification.Observer;
 
+import java.util.Objects;
+
 public class RootLayoutController implements Observer {
 
     // Ref on app.MainApp
@@ -44,6 +46,14 @@ public class RootLayoutController implements Observer {
     private Slider binarySlider;
     @FXML
     private CheckBox otsu;
+    @FXML
+    private Slider sizeGaussFilterCommon;
+    @FXML
+    private Slider thresholdCanny;
+    @FXML
+    private TextField sizeGaussFilter;
+    @FXML
+    private Button applyCanny;
 
     public RootLayoutController() {
         // контролер должен знать модель
@@ -107,6 +117,11 @@ public class RootLayoutController implements Observer {
         imagesHandler.doMakeBinary((int)binarySlider.getValue(), otsu.isSelected());
     }
 
+    @FXML
+    private void makeBlur(ActionEvent event) {
+        imagesHandler.doMakeBlur((int) sizeGaussFilterCommon.getValue());
+    }
+
     @Override
     public void notification(String message) {
         if (NotifyConstants.IMAGE_READY.equals(message)) {
@@ -124,4 +139,14 @@ public class RootLayoutController implements Observer {
             binarySlider.setDisable(false);
         }
     }
+
+    @FXML
+    private void handleApplyCanny(ActionEvent event) {
+        String sizeGFString = sizeGaussFilter.getText();
+        int sizeGF = 0;
+        if (sizeGFString != null || !Objects.equals(sizeGFString, "")) sizeGF = Integer.parseInt(sizeGFString);
+
+        imagesHandler.doCannyEdgeDetection(sizeGF, (int) thresholdCanny.getValue());
+    }
+
 }
