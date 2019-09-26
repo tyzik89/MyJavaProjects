@@ -12,9 +12,9 @@ public class GaussBlurAlgorithm {
         this.sizeGaussFilter = sizeGaussFilter;
     }
 
-    public Mat doAlgorithm(Mat mat) {
+    public Mat doAlgorithm(Mat frame) {
         if (sizeGaussFilter > 0)
-            Imgproc.blur(mat, mat, new Size(sizeGaussFilter, sizeGaussFilter));
-        return mat;
+            Imgproc.blur(frame, frame, new Size(sizeGaussFilter, sizeGaussFilter));
+        return frame;
     }
 }

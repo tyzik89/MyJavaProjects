@@ -42,32 +42,35 @@ public class CannyEdgeDetectorAlgorithm {
         this.needToUseL2Gradient = needToUseL2Gradient;
     }
 
-    public Mat doAlgorithm(Mat mat) {
+    public Mat doAlgorithm(Mat frame) {
+        //Инициализация
+        Mat grayMat = new Mat();
+        Mat detectedEdgesMat = new Mat();
+
         //Конвертируем изображение в одноканальное
-        Mat mat_gray = new Mat();
-        Imgproc.cvtColor(mat, mat_gray, Imgproc.COLOR_BGR2GRAY);
+        Imgproc.cvtColor(frame, grayMat, Imgproc.COLOR_BGR2GRAY);
 
         //Применяем размытие по Гауссу
-        Mat mat_detected_edges = new Mat();
         GaussBlurAlgorithm gaussBlurAlgorithm = new GaussBlurAlgorithm(sizeGaussFilter);
-        mat_detected_edges = gaussBlurAlgorithm.doAlgorithm(mat_gray);
+        detectedEdgesMat = gaussBlurAlgorithm.doAlgorithm(grayMat);
 
         /*detectedEdges: Входное изображение, полутоновое
           detectedEdges: Выходная матрица
           threshold: Значение порога, заданное пользователем
           threshold * 3: Установка трёхкратного нижнего порога (following Canny’s recommendation)
           apertureSize(3): Размер ядра Собеля для внутреннего использования
-          needToUseL2Gradient(false): флаг, указывающий на возможность использования более точного расчёта  величины градиента.*/
+          needToUseL2Gradient(false): флаг, указывающий на возможность использования более точного расчёта величины градиента.*/
 
-        Imgproc.Canny(mat_detected_edges, mat_detected_edges, threshold,threshold * 3, apertureSize, needToUseL2Gradient);
+        Imgproc.Canny(detectedEdgesMat, detectedEdgesMat, threshold,threshold * 3, apertureSize, needToUseL2Gradient);
 
-        //Создаём матрицу и заполняем её нулями. Получаем совершенно чёрное изображение
+
+        //Используя результат Кэнни в качестве маски - выводим результат
+        //Создаём матрицу
         Mat dest = new Mat();
+        //Заполняем её нулями. Получаем совершенно чёрное изображение
         Core.add(dest, Scalar.all(0), dest);
+        frame.copyTo(dest, detectedEdgesMat);
 
-        //Копируем только те зоны, которые идентифицированы как отрезки (на чёрном фоне)
-        mat.copyTo(dest, mat_detected_edges);
-
-        return mat_detected_edges;
+        return dest;
     }
 }
