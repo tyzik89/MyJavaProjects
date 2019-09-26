@@ -4,10 +4,12 @@ import app.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import models.image.ImagesHandler;
 
 import java.io.IOException;
@@ -57,8 +59,8 @@ public class RootLayoutController {
             }
         });
         try {
-            ScrollPane scrollPane = loader.load();
-            mainApp.getRootLayout().setLeft(scrollPane);
+            Parent parent = loader.load();
+            mainApp.getRootLayout().setLeft(parent);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,15 +82,15 @@ public class RootLayoutController {
             }
         });
         try {
-            FlowPane flowPane = loader.load();
-            mainApp.getRootLayout().setBottom(flowPane);
+            Parent parent = loader.load();
+            mainApp.getRootLayout().setBottom(parent);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Загрузчик макетов из fxml файла.
         loader = new FXMLLoader();
-        //Загружаем слой, отображающий нижнюю панель с прогрессбаром и кнопками отмены/возврата
+        //Загружаем слой, отображающий панель с алгоритмами
         loader.setLocation(MainApp.class.getResource("/fxml/AlgorithmMenuLayout.fxml"));
         loader.setControllerFactory(clazz -> {
             if (clazz == AlgorithmMenuLayoutController.class) {
@@ -103,8 +105,8 @@ public class RootLayoutController {
             }
         });
         try {
-            AnchorPane anchorPane = loader.load();
-            mainApp.getRootLayout().setRight(anchorPane);
+            Parent parent = loader.load();
+            mainApp.getRootLayout().setRight(parent);
         } catch (IOException e) {
             e.printStackTrace();
         }
