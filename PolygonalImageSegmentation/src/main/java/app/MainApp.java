@@ -46,7 +46,12 @@ public class MainApp extends Application {
             // Отображаем сцену, содержащую корневой макет.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+            //primaryStage.setMaximized(true);
+            primaryStage.setResizable(false);
             primaryStage.show();
+
+            //Инициализация остальных элементов
+            rootLayoutController.initializeOtherElements();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -7,7 +7,6 @@ import models.algorithms.GaussBlurAlgorithm;
 import models.notification.Observable;
 import models.notification.Observer;
 import org.opencv.core.Mat;
-import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import utils.ImageConverterUtils;
@@ -36,7 +35,7 @@ public class ImagesHandler implements Observable {
         Image image = ImageConverterUtils.matToImageFX(mat);
         storageImages.init(image);
 
-        notifyObservers(NotifyConstants.IMAGE_READY);
+        notifyObservers(NotifyConstants.IMAGE_LOADED);
     }
 
     /**

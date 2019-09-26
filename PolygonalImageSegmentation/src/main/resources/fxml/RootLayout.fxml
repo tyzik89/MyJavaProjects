@@ -1,28 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.RootLayoutController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.172-ea"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.RootLayoutController"
+            maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0">
    <top>
        <MenuBar BorderPane.alignment="CENTER">
            <Menu mnemonicParsing="false" text="File">
@@ -35,74 +21,4 @@
            </Menu>
        </MenuBar>
    </top>
-
-   <bottom>
-       <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="39.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-           <ProgressBar fx:id="prBar" prefHeight="18.0" prefWidth="836.0" progress="0.0" />
-           <ProgressIndicator fx:id="prInd" prefHeight="34.0" prefWidth="29.0" progress="0.0" />
-           <Separator orientation="VERTICAL" prefHeight="34.0" prefWidth="58.0" />
-           <Button fx:id="cancel" disable="true" mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="103.0" text="Cancel">
-               <tooltip>
-                  <Tooltip text="Отмена применения алгоритма и возврат к предыдущему состоянию изображения" />
-               </tooltip>
-           </Button>
-           <Separator layoutX="1001.0" layoutY="13.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="39.0" />
-           <Button fx:id="redo" disable="true" layoutX="1004.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleRedo" prefHeight="25.0" prefWidth="103.0" text="Redo">
-               <tooltip>
-                   <Tooltip text="Возврат применения алгоритма и обновление состояния изображения" />
-               </tooltip>
-           </Button>
-       </FlowPane>
-   </bottom>
-   <right>
-      <Accordion BorderPane.alignment="CENTER">
-        <panes>
-            <TitledPane fx:id="commonTools" animated="false" disable="true" text="Общие Инструменты">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <Button fx:id="makeBinary" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleMakeBinary" prefHeight="25.0" prefWidth="168.0" text="Binary">
-                        <tooltip>
-                            <Tooltip text="Сделать изображение бинарным" />
-                        </tooltip>
-                    </Button>
-                    <Label layoutX="14.0" layoutY="40.0" text="Порог" />
-                    <Label fx:id="showBinaryThreshold" layoutX="54.0" layoutY="40.0" prefHeight="17.0" prefWidth="43.0" />
-                    <CheckBox fx:id="otsu" layoutX="17.0" layoutY="98.0" mnemonicParsing="false" onAction="#selectOtsu" prefWidth="101.0" text="порог OTSU" />
-                    <Slider fx:id="binarySlider" layoutX="14.0" layoutY="60.0" max="255.0" onMouseDragged="#changeBinarySlider" prefHeight="38.0" prefWidth="173.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                    <Separator layoutX="-2.0" layoutY="127.0" prefHeight="24.0" prefWidth="200.0" />
-                    <Button layoutX="18.0" layoutY="151.0" mnemonicParsing="false" onAction="#makeBlur" prefHeight="25.0" prefWidth="169.0" text="Gauss Blur">
-                        <tooltip>
-                            <Tooltip text="Размытие по Гауссу" />
-                        </tooltip>
-                    </Button>
-                    <Label layoutX="18.0" layoutY="182.0" text="Размер фильтра Гаусса" />
-                    <Label fx:id="showSizeGaussFilterCommon" layoutX="150.0" layoutY="181.0" prefHeight="17.0" prefWidth="32.0" />
-                    <Slider fx:id="sizeGaussFilterCommon" layoutX="14.0" layoutY="204.0" max="255.0" onMouseDragged="#changeSizeGaussFilterCommon" prefHeight="14.0" prefWidth="178.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                </AnchorPane>
-            </TitledPane>
-            <TitledPane fx:id="cannyTools" animated="false" disable="true" text="Алгоритм Кэнни">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <Label layoutX="12.0" layoutY="14.0" text="Пороговое значение" />
-                    <Label fx:id="showThresholdCanny" layoutX="141.0" layoutY="14.0" prefHeight="17.0" prefWidth="36.0" />
-                    <Slider fx:id="thresholdCanny" layoutX="6.0" layoutY="36.0" onMouseDragged="#changeThresholdCanny" prefHeight="14.0" prefWidth="190.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                    <Separator layoutX="1.0" layoutY="83.0" prefHeight="14.0" prefWidth="200.0" />
-                    <Label layoutX="7.0" layoutY="114.0" text="Размер фильтра Гаусса" />
-                    <TextField fx:id="sizeGaussFilter" layoutX="143.0" layoutY="110.0" prefHeight="25.0" prefWidth="43.0" text="0" />
-                    <Button fx:id="applyCanny" layoutX="61.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleApplyCanny" text="Применить" />
-                    <Separator layoutX="1.0" layoutY="146.0" prefHeight="12.0" prefWidth="200.0" />
-                </AnchorPane>
-            </TitledPane>
-            <TitledPane fx:id="hafaTools" animated="false" disable="true" text="Преобразование Хафа">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </TitledPane>
-        </panes>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Accordion>
-   </right>
-   <left>
-       <ScrollPane fitToHeight="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
-           <ImageView fx:id="imgView" pickOnBounds="true" preserveRatio="true" />
-       </ScrollPane>
-   </left>
 </BorderPane>

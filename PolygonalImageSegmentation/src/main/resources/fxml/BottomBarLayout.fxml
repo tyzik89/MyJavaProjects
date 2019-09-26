@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.FlowPane?>
+
+<FlowPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="controllers.BottomBarLayoutController"
+          alignment="CENTER"
+          columnHalignment="CENTER"
+          prefHeight="39.0" prefWidth="800.0">
+
+    <ProgressBar fx:id="prBar" prefHeight="18.0" prefWidth="836.0" progress="0.0" />
+    <ProgressIndicator fx:id="prInd" prefHeight="34.0" prefWidth="29.0" progress="0.0" />
+    <Separator orientation="VERTICAL" prefHeight="34.0" prefWidth="58.0" />
+    <Button fx:id="cancel" disable="true" mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="103.0" text="Cancel">
+        <tooltip>
+            <Tooltip text="Отмена применения алгоритма и возврат к предыдущему состоянию изображения" />
+        </tooltip>
+    </Button>
+    <Separator layoutX="1001.0" layoutY="13.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="39.0" />
+    <Button fx:id="redo" disable="true" layoutX="1004.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleRedo" prefHeight="25.0" prefWidth="103.0" text="Redo">
+        <tooltip>
+            <Tooltip text="Возврат применения алгоритма и обновление состояния изображения" />
+        </tooltip>
+    </Button>
+
+</FlowPane>
