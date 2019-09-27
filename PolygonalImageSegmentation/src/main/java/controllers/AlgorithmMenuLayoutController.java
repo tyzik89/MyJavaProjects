@@ -99,6 +99,11 @@ public class AlgorithmMenuLayoutController implements Observer {
         showThresholdCanny.setText(String.valueOf((int) thresholdCanny.getValue()));
     }
 
+    @FXML
+    public void handleApplyHafa(ActionEvent event) {
+        imagesHandler.doHafaConversion();
+    }
+
     @Override
     public void notification(String message) {
         switch (message) {

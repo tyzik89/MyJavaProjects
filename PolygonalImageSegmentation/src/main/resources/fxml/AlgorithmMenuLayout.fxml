@@ -12,13 +12,12 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controllers.AlgorithmMenuLayoutController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
 
     <Accordion prefHeight="650.0" prefWidth="200.0">
 
         <panes>
+
             <TitledPane fx:id="commonTools" animated="false" disable="true" prefHeight="650.0" prefWidth="200.0" text="Общие Инструменты">
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleMakeBinary" prefHeight="25.0" prefWidth="168.0" text="Бинарное изображение">
@@ -41,6 +40,7 @@
                     <Slider fx:id="sizeGaussFilterCommon" layoutX="14.0" layoutY="204.0" max="255.0" onMouseDragged="#changeSizeGaussFilterCommon" prefHeight="14.0" prefWidth="178.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                 </AnchorPane>
             </TitledPane>
+
             <TitledPane fx:id="cannyTools" animated="false" disable="true" prefHeight="650.0" prefWidth="200.0" text="Алгоритм Кэнни">
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <Label layoutX="12.0" layoutY="14.0" text="Пороговое значение" />
@@ -53,12 +53,16 @@
                     <Separator layoutX="1.0" layoutY="146.0" prefHeight="12.0" prefWidth="200.0" />
                 </AnchorPane>
             </TitledPane>
-            <TitledPane fx:id="hafaTools" animated="false" disable="true" prefHeight="650.0" prefWidth="200.0" text="Преобразование Хафа">
-                <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                </content>
+
+            <TitledPane fx:id="hafaTools" animated="false" disable="true" prefHeight="650.0" prefWidth="200.0"
+                        text="Преобразование Хафа">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <Button layoutX="60.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleApplyHafa" text="Применить"/>
+                </AnchorPane>
             </TitledPane>
+
         </panes>
+
         <effect>
             <DropShadow />
         </effect>
