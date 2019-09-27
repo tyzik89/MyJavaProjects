@@ -19,6 +19,11 @@ public class HoughConversionAlgorithm implements Algorithm {
         Mat matGray = new Mat();
         Imgproc.cvtColor(frame, matGray, Imgproc.COLOR_BGR2GRAY);
 
+        //Хранилище найденных линий
+        Mat storageLines = new Mat();
+
+        //Imgproc.HoughLines();
+
         return frame;
     }
 }
