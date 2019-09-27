@@ -36,6 +36,10 @@ public class AlgorithmMenuLayoutController implements Observer {
     private Label showThresholdCanny;
     @FXML
     private TextField sizeGaussFilter;
+    @FXML
+    private CheckBox gradientL2;
+    @FXML
+    private TextField sizeSobelKernel;
 
     public AlgorithmMenuLayoutController(ImagesHandler imagesHandler) {
         // контролер должен знать модель
@@ -77,11 +81,20 @@ public class AlgorithmMenuLayoutController implements Observer {
 
     @FXML
     private void handleApplyCanny(ActionEvent event) {
+        //Извлечения размера фильтра Гаусса
         String sizeGFString = sizeGaussFilter.getText();
         int sizeGF = 0;
         if (sizeGFString != null || !Objects.equals(sizeGFString, "")) sizeGF = Integer.parseInt(sizeGFString);
 
-        imagesHandler.doCannyEdgeDetection(sizeGF, (int) thresholdCanny.getValue());
+        //Извлечение значений ядра Собеля
+        String sizeSKString = sizeSobelKernel.getText();
+        int sizeSK = 0;
+        if (sizeSKString != null || !Objects.equals(sizeSKString, "")) sizeSK = Integer.parseInt(sizeSKString);
+
+        //Нужно ли использовать L2 градиент
+        boolean gL2 = gradientL2.isSelected();
+
+        imagesHandler.doCannyEdgeDetection(sizeGF, (int) thresholdCanny.getValue(), sizeSK, gL2);
     }
 
     @FXML

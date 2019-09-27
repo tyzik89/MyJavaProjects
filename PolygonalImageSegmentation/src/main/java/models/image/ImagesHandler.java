@@ -60,8 +60,8 @@ public class ImagesHandler implements Observable {
         doMakeAlgorithm(new BinaryImageAlgorithm(threshold, isOtsu));
     }
 
-    public void doCannyEdgeDetection(int sizeGaussFilter, int threshold) {
-        doMakeAlgorithm(new CannyEdgeDetectorAlgorithm(sizeGaussFilter, threshold));
+    public void doCannyEdgeDetection(int sizeGaussFilter, int threshold, int sizeSobelKernel, boolean isUseL2Gradient) {
+        doMakeAlgorithm(new CannyEdgeDetectorAlgorithm(sizeGaussFilter, threshold, sizeSobelKernel, isUseL2Gradient));
     }
 
     public void doHoughConversion() {
