@@ -19,7 +19,7 @@ public class AlgorithmMenuLayoutController implements Observer {
     @FXML
     private TitledPane cannyTools;
     @FXML
-    private TitledPane hafaTools;
+    private TitledPane houghTools;
     @FXML
     private Slider binarySlider;
     @FXML
@@ -49,11 +49,11 @@ public class AlgorithmMenuLayoutController implements Observer {
     private void initialize() {
         commonTools.setDisable(true);
         cannyTools.setDisable(true);
-        hafaTools.setDisable(true);
+        houghTools.setDisable(true);
 
         commonTools.setExpanded(false);
         cannyTools.setExpanded(false);
-        hafaTools.setExpanded(false);
+        houghTools.setExpanded(false);
     }
 
     @FXML
@@ -100,8 +100,8 @@ public class AlgorithmMenuLayoutController implements Observer {
     }
 
     @FXML
-    public void handleApplyHafa(ActionEvent event) {
-        imagesHandler.doHafaConversion();
+    public void handleApplyHough(ActionEvent event) {
+        imagesHandler.doHoughConversion();
     }
 
     @Override

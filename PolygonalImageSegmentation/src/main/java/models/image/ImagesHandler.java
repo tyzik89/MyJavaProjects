@@ -56,8 +56,8 @@ public class ImagesHandler implements Observable {
         doMakeAlgorithm(new CannyEdgeDetectorAlgorithm(sizeGaussFilter, threshold));
     }
 
-    public void doHafaConversion() {
-        doMakeAlgorithm(new HafaConversionAlgorithm());
+    public void doHoughConversion() {
+        doMakeAlgorithm(new HoughConversionAlgorithm());
     }
 
     public void doMakeBlur(int sizeGaussFilter) {
