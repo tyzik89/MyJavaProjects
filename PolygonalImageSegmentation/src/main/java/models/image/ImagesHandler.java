@@ -2,13 +2,14 @@ package models.image;
 
 import constants.NotifyConstants;
 import javafx.scene.image.Image;
+import models.algorithms.Algorithm;
+import models.algorithms.BinaryImageAlgorithm;
 import models.algorithms.CannyEdgeDetectorAlgorithm;
 import models.algorithms.GaussBlurAlgorithm;
 import models.notification.Observable;
 import models.notification.Observer;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
 import utils.ImageConverterUtils;
 
 import java.util.LinkedList;
@@ -51,29 +52,21 @@ public class ImagesHandler implements Observable {
 
     public void doMakeBinary(int threshold, boolean isOtsu) {
         Mat mat = ImageConverterUtils.imageFXToMat(storageImages.getCurrentImage());
-        Mat mat_gray = new Mat();
-        //Конвертируем изображение в одноканальное
-        Imgproc.cvtColor(mat, mat_gray, Imgproc.COLOR_BGR2GRAY);
-        //Перевод в бинарное изображение
-        Mat mat_binary = new Mat();
-        if (isOtsu) {
-            Imgproc.threshold(mat_gray, mat_binary, 0, 255, Imgproc.THRESH_BINARY + Imgproc.THRESH_OTSU);
-        } else {
-            Imgproc.threshold(mat_gray, mat_binary, threshold, 255, Imgproc.THRESH_BINARY);
-        }
-        switchImagesOnNextStep(ImageConverterUtils.matToImageFX(mat_binary));
+        Algorithm binaryImageAlgorithm = new BinaryImageAlgorithm(threshold, isOtsu);
+        Mat result = binaryImageAlgorithm.doAlgorithm(mat);
+        switchImagesOnNextStep(ImageConverterUtils.matToImageFX(result));
     }
 
     public void doCannyEdgeDetection(int sizeGaussFilter, int threshold) {
         Mat mat = ImageConverterUtils.imageFXToMat(storageImages.getCurrentImage());
-        CannyEdgeDetectorAlgorithm cannyEdgeDetectorAlgorithm = new CannyEdgeDetectorAlgorithm(sizeGaussFilter, threshold);
+        Algorithm cannyEdgeDetectorAlgorithm = new CannyEdgeDetectorAlgorithm(sizeGaussFilter, threshold);
         Mat result = cannyEdgeDetectorAlgorithm.doAlgorithm(mat);
         switchImagesOnNextStep(ImageConverterUtils.matToImageFX(result));
     }
 
     public void doMakeBlur(int sizeGaussFilter) {
         Mat mat = ImageConverterUtils.imageFXToMat(storageImages.getCurrentImage());
-        GaussBlurAlgorithm gaussBlurAlgorithm = new GaussBlurAlgorithm(sizeGaussFilter);
+        Algorithm gaussBlurAlgorithm = new GaussBlurAlgorithm(sizeGaussFilter);
         Mat result = gaussBlurAlgorithm.doAlgorithm(mat);
         switchImagesOnNextStep(ImageConverterUtils.matToImageFX(result));
     }

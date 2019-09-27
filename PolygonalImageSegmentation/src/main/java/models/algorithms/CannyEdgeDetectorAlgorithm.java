@@ -4,7 +4,6 @@ package models.algorithms;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
-import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 /**
@@ -14,7 +13,7 @@ import org.opencv.imgproc.Imgproc;
  * 3) Определение факта что пиксель является лучшим кандитатом на ребро, чем его соседи.
  * 4) Hysteresis thresholding находит где края начинаются и заканчиваются.
  */
-public class CannyEdgeDetectorAlgorithm {
+public class CannyEdgeDetectorAlgorithm implements Algorithm{
 
     private int sizeGaussFilter;
     private int threshold;
