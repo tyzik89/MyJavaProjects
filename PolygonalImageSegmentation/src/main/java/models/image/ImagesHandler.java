@@ -12,6 +12,14 @@ import utils.ImageConverterUtils;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Получает запрос на образобку от контроллеров
+ * вызывает нужный алгоритм
+ * получает результат работы
+ * отправляет уведомление контроллерам о готовности
+ *
+ * Работает с хранилищем изображений {@link StorageImages}
+ */
 public class ImagesHandler implements Observable {
 
     private StorageImages storageImages;

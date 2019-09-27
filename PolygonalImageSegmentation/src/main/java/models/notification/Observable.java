@@ -1,5 +1,6 @@
 package models.notification;
 
+//Наблюдаемый
 public interface Observable {
 
     //Регистрация слушателей

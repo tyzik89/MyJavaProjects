@@ -2,6 +2,10 @@ package models.image;
 
 import javafx.scene.image.Image;
 
+/**
+ * Хранилище изображений. Синглтон
+ * Хранит текущее, предыдущее и изначальное изображение
+ */
 public class StorageImages {
 
     private static Image SourceImage;

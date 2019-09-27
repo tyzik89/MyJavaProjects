@@ -9,6 +9,10 @@ import javafx.scene.control.ProgressIndicator;
 import models.image.ImagesHandler;
 import models.notification.Observer;
 
+/**
+ * Контроллер, обрабатывающий слой с прогресбаром и кнопка отменить/вернуть
+ * Отправляет в модель {@link ImagesHandler} данные о нажатии кнопок
+ */
 public class BottomBarLayoutController implements Observer {
 
     //Ref on model class - ImagesHandler

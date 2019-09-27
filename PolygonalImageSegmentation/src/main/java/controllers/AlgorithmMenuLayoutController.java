@@ -111,6 +111,7 @@ public class AlgorithmMenuLayoutController implements Observer {
                 commonTools.setDisable(false);
                 cannyTools.setDisable(false);
                 cannyTools.setExpanded(true);
+                houghTools.setDisable(false);
                 break;
             }
         }

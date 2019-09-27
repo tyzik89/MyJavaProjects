@@ -6,6 +6,10 @@ import javafx.scene.image.ImageView;
 import models.image.ImagesHandler;
 import models.notification.Observer;
 
+/**
+ * Контроллер отображающий изображение
+ * Получает уведомление о готовности изображения от {@link ImagesHandler} и отображает его
+ */
 public class ImageViewLayoutController implements Observer {
 
     //Ref on model class - ImagesHandler

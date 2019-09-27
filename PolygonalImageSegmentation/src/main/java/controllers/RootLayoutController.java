@@ -10,6 +10,12 @@ import models.image.ImagesHandler;
 
 import java.io.IOException;
 
+/**
+ * Главный контроллер
+ * Содержит главное меню
+ * Инициализирует остальные слои
+ * Имеет доступ к главному приложению для подгрузки дополнительных слоёв на главную сцену {@link javafx.stage.Stage}
+ */
 public class RootLayoutController {
 
     // Ref on app.MainApp
