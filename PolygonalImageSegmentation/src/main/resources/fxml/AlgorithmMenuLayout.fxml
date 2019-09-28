@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -77,15 +78,21 @@
                     <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="522.0" prefWidth="232.0" tabClosingPolicy="UNAVAILABLE">
                         <Tab text="Линии">
                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                <RadioButton layoutX="46.0" layoutY="26.0" mnemonicParsing="false" selected="true" text="классический">
+                                <RadioButton fx:id="radiobHoughClassic" layoutX="46.0" layoutY="26.0" mnemonicParsing="false" onAction="#changeRadioButtonHoughClassic" selected="true" text="классический">
                                     <tooltip>
                                         <Tooltip text="Классический метод трансформации Хафа. Каждая линия представляется двумя числами типа float (rho, theta), где rho — дистанция между точкой (0,0) и линией, а theta — угол между осью x и нормалью к линии (т.е. матрица должна иметь тип of CV_32FC2)" />
                                     </tooltip>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleGroupHough" />
+                           </toggleGroup>
                                 </RadioButton>
-                                <RadioButton layoutX="46.0" layoutY="49.0" mnemonicParsing="false" selected="false" text="вероятностный">
+                                <RadioButton fx:id="radiobHoughProbably" layoutX="46.0" layoutY="49.0" mnemonicParsing="false" onAction="#changeRadioButtonHoughProbably" selected="false" text="вероятностный">
                                     <tooltip>
                                         <Tooltip text="Вероятностный метод трансформации Хафа (более эффективен с случае изображений с несколькими длинными линейными сегментами). Возвращает сегменты линии, которые представляются точками начала и конца (т.е. матрица должна иметь тип of CV_32SC4)" />
                                     </tooltip>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="hough" />
+                           </toggleGroup>
                                 </RadioButton>
                                 <Label layoutX="18.0" layoutY="3.0" text="Метод преобразования Хафа:" />
                                 <Separator layoutY="73.0" prefHeight="3.0" prefWidth="232.0" />
@@ -105,20 +112,19 @@
                         <Separator layoutX="-1.0" layoutY="253.0" prefHeight="4.0" prefWidth="232.0" />
                         <Accordion layoutX="-2.0" layoutY="257.0">
                           <panes>
-                              <TitledPane animated="true" disable="false" expanded="true" prefWidth="231.0" text="Классический. Параметры.">
+                              <TitledPane fx:id="titledPaneHoughClassic" animated="true" disable="false" expanded="true" prefWidth="231.0" text="Классический. Параметры.">
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0">
-                                    <children>
-                                       <Label layoutX="18.0" layoutY="9.0" text="Делитель для расстояния:" />
-                                       <Label layoutX="69.0" layoutY="48.0" text="Делитель для угла:" />
-                                       <Label layoutX="9.0" layoutY="83.0" text="Мин. угол проверки линий:" />
-                                       <Label layoutX="6.0" layoutY="118.0" text="Макс. угол проверки линий:" />
-                                       <TextField layoutX="199.0" layoutY="2.0" prefHeight="31.0" prefWidth="35.0" />
-                                       <TextField layoutX="199.0" layoutY="110.0" prefHeight="31.0" prefWidth="35.0" />
-                                       <TextField layoutX="199.0" layoutY="76.0" prefHeight="31.0" prefWidth="35.0" />
-                                       <TextField layoutX="198.0" layoutY="40.0" prefHeight="31.0" prefWidth="35.0" />
-                                    </children></AnchorPane>
+                                      <Label layoutX="17.0" layoutY="9.0" text="Делитель для расстояния:" />
+                                      <Label layoutX="65.0" layoutY="48.0" text="Делитель для угла:" />
+                                      <Label layoutX="5.0" layoutY="83.0" text="Мин. угол проверки линий:" />
+                                      <Label layoutX="1.0" layoutY="118.0" text="Макс. угол проверки линий:" />
+                                      <TextField layoutX="196.0" layoutY="2.0" prefHeight="31.0" prefWidth="35.0" />
+                                      <TextField layoutX="195.0" layoutY="110.0" prefHeight="31.0" prefWidth="35.0" />
+                                      <TextField layoutX="195.0" layoutY="76.0" prefHeight="31.0" prefWidth="35.0" />
+                                      <TextField layoutX="195.0" layoutY="40.0" prefHeight="31.0" prefWidth="35.0" />
+                                  </AnchorPane>
                               </TitledPane>
-                              <TitledPane animated="true" disable="true" expanded="false" prefHeight="190.0" text="Вероятностный. Параметры:">
+                              <TitledPane fx:id="titledPaneHoughProbably" animated="true" disable="true" expanded="false" prefHeight="190.0" text="Вероятностный. Параметры:">
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="180.0">
                                     <children>
                                        <Label layoutX="13.0" layoutY="8.0" text="Минимальная длинна линии:" />

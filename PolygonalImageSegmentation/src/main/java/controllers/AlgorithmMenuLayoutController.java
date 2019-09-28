@@ -4,6 +4,7 @@ import constants.NotifyConstants;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import models.image.ImagesHandler;
 import models.notification.Observer;
 
@@ -40,6 +41,16 @@ public class AlgorithmMenuLayoutController implements Observer {
     private CheckBox gradientL2;
     @FXML
     private TextField sizeSobelKernel;
+    @FXML
+    private ToggleGroup toggleGroupHough;
+    @FXML
+    private RadioButton radiobHoughProbably;
+    @FXML
+    private RadioButton radiobHoughClassic;
+    @FXML
+    private TitledPane titledPaneHoughProbably;
+    @FXML
+    private TitledPane titledPaneHoughClassic;
 
     public AlgorithmMenuLayoutController(ImagesHandler imagesHandler) {
         // контролер должен знать модель
@@ -115,6 +126,29 @@ public class AlgorithmMenuLayoutController implements Observer {
     @FXML
     public void handleApplyHough(ActionEvent event) {
         imagesHandler.doHoughConversion();
+    }
+
+    @FXML
+    private void changeRadioButtonHoughClassic(ActionEvent event) {
+        //RadioButton button = (RadioButton) toggleGroupHough.getSelectedToggle();
+        radiobHoughClassic.setSelected(true);
+        titledPaneHoughClassic.setDisable(false);
+        titledPaneHoughClassic.setExpanded(true);
+
+        radiobHoughProbably.setSelected(false);
+        titledPaneHoughProbably.setDisable(true);
+        titledPaneHoughProbably.setExpanded(false);
+    }
+
+    @FXML
+    private void changeRadioButtonHoughProbably(ActionEvent event) {
+        radiobHoughProbably.setSelected(true);
+        titledPaneHoughProbably.setDisable(false);
+        titledPaneHoughProbably.setExpanded(true);
+
+        radiobHoughClassic.setSelected(false);
+        titledPaneHoughClassic.setDisable(true);
+        titledPaneHoughClassic.setExpanded(false);
     }
 
     @Override
