@@ -51,6 +51,10 @@ public class AlgorithmMenuLayoutController implements Observer {
     private TitledPane titledPaneHoughProbably;
     @FXML
     private TitledPane titledPaneHoughClassic;
+    @FXML
+    private Label thresholdHoughLabel;
+    @FXML
+    private Slider thresholdHoughSlider;
 
     public AlgorithmMenuLayoutController(ImagesHandler imagesHandler) {
         // контролер должен знать модель
@@ -149,6 +153,11 @@ public class AlgorithmMenuLayoutController implements Observer {
         radiobHoughClassic.setSelected(false);
         titledPaneHoughClassic.setDisable(true);
         titledPaneHoughClassic.setExpanded(false);
+    }
+
+    @FXML
+    private void changeThresholdHough() {
+        thresholdHoughLabel.setText(String.valueOf((int) thresholdHoughSlider.getValue()));
     }
 
     @Override

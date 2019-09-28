@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="650.0" prefWidth="232.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
+<AnchorPane prefHeight="650.0" prefWidth="232.0" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
 
     <Accordion prefHeight="650.0" prefWidth="232.0">
 
@@ -34,7 +34,7 @@
                     <Label layoutX="14.0" layoutY="45.0" text="Порог:" />
                     <Label fx:id="showBinaryThreshold" layoutX="68.0" layoutY="43.0" prefHeight="17.0" prefWidth="43.0" />
                     <CheckBox fx:id="otsu" layoutX="17.0" layoutY="108.0" mnemonicParsing="false" onAction="#selectOtsu" prefHeight="21.0" prefWidth="122.0" text="порог OTSU" />
-                    <Slider fx:id="binarySlider" layoutX="14.0" layoutY="64.0" max="255.0" onMouseDragged="#changeBinarySlider" prefHeight="45.0" prefWidth="205.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                    <Slider fx:id="binarySlider" layoutX="14.0" layoutY="64.0" max="255.0" onMouseClicked="#changeBinarySlider" onMouseDragged="#changeBinarySlider" prefHeight="45.0" prefWidth="205.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                     <Separator layoutX="-2.0" layoutY="127.0" prefHeight="24.0" prefWidth="232.0" />
                     <Button layoutX="14.0" layoutY="151.0" mnemonicParsing="false" onAction="#makeBlur" prefHeight="25.0" prefWidth="205.0" text="Размытие по Гауссу">
                         <tooltip>
@@ -43,7 +43,7 @@
                     </Button>
                     <Label layoutX="18.0" layoutY="189.0" text="Размер фильтра Гаусса:" />
                     <Label fx:id="showSizeGaussFilterCommon" layoutX="184.0" layoutY="187.0" prefHeight="21.0" prefWidth="39.0" />
-                    <Slider fx:id="sizeGaussFilterCommon" layoutX="14.0" layoutY="213.0" max="255.0" onMouseDragged="#changeSizeGaussFilterCommon" prefHeight="14.0" prefWidth="205.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                    <Slider fx:id="sizeGaussFilterCommon" layoutX="14.0" layoutY="213.0" max="255.0" onMouseClicked="#changeSizeGaussFilterCommon" onMouseDragged="#changeSizeGaussFilterCommon" prefHeight="14.0" prefWidth="205.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                 </AnchorPane>
             </TitledPane>
 
@@ -51,7 +51,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <Label layoutX="12.0" layoutY="14.0" text="Пороговое значение:" />
                     <Label fx:id="showThresholdCanny" layoutX="171.0" layoutY="14.0" prefHeight="17.0" prefWidth="36.0" />
-                    <Slider fx:id="thresholdCanny" layoutX="6.0" layoutY="36.0" onMouseDragged="#changeThresholdCanny" prefHeight="45.0" prefWidth="219.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                    <Slider fx:id="thresholdCanny" layoutX="6.0" layoutY="36.0" onMouseClicked="#changeThresholdCanny" onMouseDragged="#changeThresholdCanny" prefHeight="45.0" prefWidth="219.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                     <Separator layoutX="1.0" layoutY="83.0" prefHeight="14.0" prefWidth="232.0" />
                     <Label layoutX="7.0" layoutY="114.0" text="Размер фильтра Гаусса:" />
                     <TextField fx:id="sizeGaussFilter" layoutX="173.0" layoutY="110.0" prefHeight="25.0" prefWidth="43.0" text="0" />
@@ -101,14 +101,14 @@
                         <Label layoutX="7.0" layoutY="73.0" text="Разрешения:" />
                         <Spinner layoutX="152.0" layoutY="93.0" prefHeight="25.0" prefWidth="69.0" />
                         <Spinner layoutX="153.0" layoutY="130.0" prefHeight="25.0" prefWidth="69.0" />
-                        <Slider layoutX="7.0" layoutY="203.0" prefHeight="45.0" prefWidth="219.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                        <Slider fx:id="thresholdHoughSlider" layoutX="7.0" layoutY="203.0" onMouseClicked="#changeThresholdHough" onMouseDragged="#changeThresholdHough" prefHeight="45.0" prefWidth="219.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                             <tooltip>
                                 <Tooltip text="Линия возвращается, если аккумулирующий параметр больше порогового значения." />
                             </tooltip>
                         </Slider>
                         <Label layoutX="9.0" layoutY="176.0" text="Пороговый параметр: " />
                         <Separator layoutX="2.0" layoutY="168.0" prefHeight="4.0" prefWidth="232.0" />
-                        <Label layoutX="167.0" layoutY="169.0" prefHeight="31.0" prefWidth="44.0" />
+                        <Label fx:id="thresholdHoughLabel" layoutX="167.0" layoutY="169.0" prefHeight="31.0" prefWidth="44.0" />
                         <Separator layoutX="-1.0" layoutY="253.0" prefHeight="4.0" prefWidth="232.0" />
                         <Accordion layoutX="-2.0" layoutY="257.0">
                           <panes>
