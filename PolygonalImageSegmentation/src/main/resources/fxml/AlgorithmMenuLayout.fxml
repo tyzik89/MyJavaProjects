@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="650.0" prefWidth="232.0" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
 
     <Accordion prefHeight="650.0" prefWidth="232.0">
@@ -94,13 +79,21 @@
                               <ToggleGroup fx:id="hough" />
                            </toggleGroup>
                                 </RadioButton>
-                                <Label layoutX="18.0" layoutY="3.0" text="Метод преобразования Хафа:" />
-                                <Separator layoutY="73.0" prefHeight="3.0" prefWidth="232.0" />
+                        <Label layoutX="18.0" layoutY="3.0" text="Метод преобразования Хафа:" />
+                        <Separator layoutY="73.0" prefHeight="3.0" prefWidth="232.0" />
                         <Label layoutX="13.0" layoutY="97.0" text="- по дистанции:" />
                         <Label layoutX="12.0" layoutY="134.0" text="- по углу (радианы):" />
                         <Label layoutX="7.0" layoutY="73.0" text="Разрешения:" />
-                        <Spinner layoutX="152.0" layoutY="93.0" prefHeight="25.0" prefWidth="69.0" />
-                        <Spinner layoutX="153.0" layoutY="130.0" prefHeight="25.0" prefWidth="69.0" />
+                        <Spinner fx:id="spinnerHoughDistance" layoutX="152.0" layoutY="93.0" prefHeight="25.0" prefWidth="69.0" >
+                            <valueFactory>
+                                <SpinnerValueFactory.IntegerSpinnerValueFactory min="0" initialValue="0" amountToStepBy="1" max="100"/>
+                            </valueFactory>
+                        </Spinner>
+                        <Spinner fx:id="spinnerHoughAngle" layoutX="153.0" layoutY="130.0" prefHeight="25.0" prefWidth="69.0" >
+                            <valueFactory>
+                                <SpinnerValueFactory.IntegerSpinnerValueFactory min="0" initialValue="0" amountToStepBy="1" max="100"/>
+                            </valueFactory>
+                        </Spinner>
                         <Slider fx:id="thresholdHoughSlider" layoutX="7.0" layoutY="203.0" onMouseClicked="#changeThresholdHough" onMouseDragged="#changeThresholdHough" prefHeight="45.0" prefWidth="219.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                             <tooltip>
                                 <Tooltip text="Линия возвращается, если аккумулирующий параметр больше порогового значения." />
@@ -118,19 +111,27 @@
                                       <Label layoutX="65.0" layoutY="48.0" text="Делитель для угла:" />
                                       <Label layoutX="5.0" layoutY="83.0" text="Мин. угол проверки линий:" />
                                       <Label layoutX="1.0" layoutY="118.0" text="Макс. угол проверки линий:" />
-                                      <TextField layoutX="196.0" layoutY="2.0" prefHeight="31.0" prefWidth="35.0" />
-                                      <TextField layoutX="195.0" layoutY="110.0" prefHeight="31.0" prefWidth="35.0" />
-                                      <TextField layoutX="195.0" layoutY="76.0" prefHeight="31.0" prefWidth="35.0" />
-                                      <TextField layoutX="195.0" layoutY="40.0" prefHeight="31.0" prefWidth="35.0" />
+                                      <TextField fx:id="srnTextField" text="0" layoutX="196.0" layoutY="2.0" prefHeight="31.0" prefWidth="35.0" />
+                                      <TextField fx:id="stnTextField" text="0" layoutX="195.0" layoutY="110.0" prefHeight="31.0" prefWidth="35.0" />
+                                      <TextField fx:id="minThetaTextField" text="0" layoutX="195.0" layoutY="76.0" prefHeight="31.0" prefWidth="35.0" />
+                                      <TextField fx:id="maxThetaTextField" text="0" layoutX="195.0" layoutY="40.0" prefHeight="31.0" prefWidth="35.0" />
                                   </AnchorPane>
                               </TitledPane>
                               <TitledPane fx:id="titledPaneHoughProbably" animated="true" disable="true" expanded="false" prefHeight="190.0" text="Вероятностный. Параметры:">
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="180.0">
                                     <children>
                                        <Label layoutX="13.0" layoutY="8.0" text="Минимальная длинна линии:" />
-                                       <Spinner layoutX="20.0" layoutY="31.0" />
+                                       <Spinner fx:id="spinnerHoughProbablyMinLineLength" editable="true" layoutX="20.0" layoutY="31.0">
+                                           <valueFactory>
+                                               <SpinnerValueFactory.IntegerSpinnerValueFactory min="0" initialValue="0" amountToStepBy="1" max="100"/>
+                                           </valueFactory>
+                                       </Spinner>
                                        <Label layoutX="12.0" layoutY="75.0" text="Макс. расст. между точками:" />
-                                       <Spinner layoutX="19.0" layoutY="100.0" />
+                                       <Spinner fx:id="spinnerHoughProbablyMaxLineGap" editable="true" layoutX="19.0" layoutY="100.0">
+                                           <valueFactory>
+                                               <SpinnerValueFactory.IntegerSpinnerValueFactory min="0" initialValue="0" amountToStepBy="1" max="100"/>
+                                           </valueFactory>
+                                       </Spinner>
                                     </children></AnchorPane>
                               </TitledPane>
                           </panes>

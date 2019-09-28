@@ -7,7 +7,7 @@ import models.notification.Observable;
 import models.notification.Observer;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
-import utils.ImageConverterUtils;
+import utils.ImageUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class ImagesHandler implements Observable {
         String localUrl = file.toURI().toURL().toString();
         Image image = new Image(localUrl);*/
         Mat mat = Imgcodecs.imread("src/main/resources/img/1.png", Imgcodecs.IMREAD_UNCHANGED);
-        Image image = ImageConverterUtils.matToImageFX(mat);
+        Image image = ImageUtils.matToImageFX(mat);
         storageImages.init(image);
 
         notifyObservers(NotifyConstants.IMAGE_LOADED);
@@ -64,8 +64,8 @@ public class ImagesHandler implements Observable {
         doMakeAlgorithm(new CannyEdgeDetectorAlgorithm(sizeGaussFilter, threshold, sizeSobelKernel, isUseL2Gradient));
     }
 
-    public void doHoughConversion() {
-        doMakeAlgorithm(new HoughConversionAlgorithm());
+    public void doHoughConversion(int ... params) {
+        doMakeAlgorithm(new HoughConversionAlgorithm(params));
     }
 
     public void doMakeBlur(int sizeGaussFilter) {
@@ -73,9 +73,9 @@ public class ImagesHandler implements Observable {
     }
 
     private void doMakeAlgorithm(Algorithm algorithm){
-        Mat mat = ImageConverterUtils.imageFXToMat(storageImages.getCurrentImage());
+        Mat mat = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
         Mat result = algorithm.doAlgorithm(mat);
-        switchImagesOnNextStep(ImageConverterUtils.matToImageFX(result));
+        switchImagesOnNextStep(ImageUtils.matToImageFX(result));
     }
 
     @Override

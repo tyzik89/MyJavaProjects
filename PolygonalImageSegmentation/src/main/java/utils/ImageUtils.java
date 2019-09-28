@@ -3,9 +3,17 @@ package utils;
 import javafx.scene.image.*;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-public final class ImageConverterUtils {
+public final class ImageUtils {
+
+    public static final Scalar COLOR_BLACK = colorRGB(0, 0, 0);
+    public static final Scalar COLOR_WHITE = colorRGB(255, 255, 255);
+
+    public static Scalar colorRGB(double red, double green, double blue) {
+        return new Scalar(blue, green, red);
+    }
 
     /**
      * Конвертация матрицы {@link Mat} в объект Image {@link Image} для JavaFX

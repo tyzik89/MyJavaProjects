@@ -54,7 +54,23 @@ public class AlgorithmMenuLayoutController implements Observer {
     @FXML
     private Label thresholdHoughLabel;
     @FXML
+    private Spinner spinnerHoughAngle;
+    @FXML
+    private Spinner spinnerHoughDistance;
+    @FXML
     private Slider thresholdHoughSlider;
+    @FXML
+    private TextField maxThetaTextField;
+    @FXML
+    private TextField minThetaTextField;
+    @FXML
+    private TextField stnTextField;
+    @FXML
+    private TextField srnTextField;
+    @FXML
+    private Spinner spinnerHoughProbablyMaxLineGap;
+    @FXML
+    private Spinner spinnerHoughProbablyMinLineLength;
 
     public AlgorithmMenuLayoutController(ImagesHandler imagesHandler) {
         // контролер должен знать модель
@@ -129,12 +145,27 @@ public class AlgorithmMenuLayoutController implements Observer {
 
     @FXML
     public void handleApplyHough(ActionEvent event) {
-        imagesHandler.doHoughConversion();
+        int distance = (int) spinnerHoughDistance.getValue();
+        int angle = (int) spinnerHoughAngle.getValue();
+        int threshold = (int) thresholdHoughSlider.getValue();
+
+        RadioButton button = (RadioButton) toggleGroupHough.getSelectedToggle();
+        if (button.equals(radiobHoughClassic)) {
+            int srn = Integer.parseInt(srnTextField.getText());
+            int stn = Integer.parseInt(stnTextField.getText());
+            int minTheta = Integer.parseInt(minThetaTextField.getText());
+            int maxTheta = Integer.parseInt(maxThetaTextField.getText());
+        }
+        if (button.equals(radiobHoughProbably)) {
+            int maxLineGap = (int) spinnerHoughProbablyMaxLineGap.getValue();
+            int minLineLength = (int) spinnerHoughProbablyMinLineLength.getValue();
+        }
+
+        imagesHandler.doHoughConversion(distance, angle, threshold);
     }
 
     @FXML
     private void changeRadioButtonHoughClassic(ActionEvent event) {
-        //RadioButton button = (RadioButton) toggleGroupHough.getSelectedToggle();
         radiobHoughClassic.setSelected(true);
         titledPaneHoughClassic.setDisable(false);
         titledPaneHoughClassic.setExpanded(true);
