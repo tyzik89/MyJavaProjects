@@ -38,7 +38,7 @@ public class ImagesHandler implements Observable {
         // --> file:/C:/MyImages/myphoto.jpg
         String localUrl = file.toURI().toURL().toString();
         Image image = new Image(localUrl);*/
-        Mat mat = Imgcodecs.imread("src/main/resources/img/1.png", Imgcodecs.IMREAD_UNCHANGED);
+        Mat mat = Imgcodecs.imread("src/main/resources/img/3.jpg", Imgcodecs.IMREAD_UNCHANGED);
         Image image = ImageUtils.matToImageFX(mat);
         storageImages.init(image);
 
@@ -64,8 +64,8 @@ public class ImagesHandler implements Observable {
         doMakeAlgorithm(new CannyEdgeDetectorAlgorithm(sizeGaussFilter, threshold, sizeSobelKernel, isUseL2Gradient));
     }
 
-    public void doHoughConversion(int ... params) {
-        doMakeAlgorithm(new HoughConversionAlgorithm(params));
+    public void doHoughConversion(boolean typeHoughMethod, int ... params) {
+        doMakeAlgorithm(new HoughConversionAlgorithm(typeHoughMethod, params));
     }
 
     public void doMakeBlur(int sizeGaussFilter) {

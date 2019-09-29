@@ -2,6 +2,7 @@ package models.algorithms;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
 import utils.ImageUtils;
 
@@ -15,6 +16,8 @@ import utils.ImageUtils;
  */
 public class HoughConversionAlgorithm implements Algorithm {
 
+    private boolean typeHoughMethod;
+
     private int distance;
     private int angle;
     private int threshold;
@@ -27,10 +30,21 @@ public class HoughConversionAlgorithm implements Algorithm {
     private int minLineLength;
     private int maxLineGap;
 
-    public HoughConversionAlgorithm(int ... params) {
+    public HoughConversionAlgorithm(boolean typeHoughMethod, int ... params) {
+        this.typeHoughMethod = typeHoughMethod;
         this.distance = params[0];
         this.angle = params[1];
         this.threshold = params[2];
+
+        if (this.typeHoughMethod) {
+            this.srn = params[3];
+            this.stn = params[4];
+            this.minTheta = params[5];
+            this.maxTheta = params[6];
+        } else {
+            this.minLineLength = params[3];
+            this.maxLineGap = params[4];
+        }
     }
 
     @Override
@@ -41,10 +55,23 @@ public class HoughConversionAlgorithm implements Algorithm {
         //матрица для хранения отрезков
         Mat lines = new Mat();
 
-        Imgproc.HoughLinesP(matGray, lines, distance, Math.toRadians(angle), threshold);
+        if (typeHoughMethod) {
+            Imgproc.HoughLines(matGray, lines, distance, Math.toRadians(angle), threshold, srn, stn, minTheta, maxTheta);
+        } else {
+            Imgproc.HoughLinesP(matGray, lines, distance, Math.toRadians(angle), threshold, minLineLength, maxLineGap);
+        }
 
         Mat result = new Mat(frame.size(), CvType.CV_8UC3, ImageUtils.COLOR_WHITE);
-        //fixme доделать
-        return lines;
+        for (int i = 0, r = lines.rows(); i < r; i++) {
+            for (int j = 0, c = lines.cols(); j < c; j++) {
+                double[] line = lines.get(i, j);
+                Imgproc.line(
+                        result,
+                        new Point(line[0], line[1]),
+                        new Point(line[2], line[3]),
+                        ImageUtils.COLOR_BLACK);
+            }
+        }
+        return result;
     }
 }

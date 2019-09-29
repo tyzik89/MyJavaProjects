@@ -150,18 +150,19 @@ public class AlgorithmMenuLayoutController implements Observer {
         int threshold = (int) thresholdHoughSlider.getValue();
 
         RadioButton button = (RadioButton) toggleGroupHough.getSelectedToggle();
-        if (button.equals(radiobHoughClassic)) {
+        if (button.getId().equals("radiobHoughClassic")) {
             int srn = Integer.parseInt(srnTextField.getText());
             int stn = Integer.parseInt(stnTextField.getText());
             int minTheta = Integer.parseInt(minThetaTextField.getText());
             int maxTheta = Integer.parseInt(maxThetaTextField.getText());
+            imagesHandler.doHoughConversion(true, distance, angle, threshold, srn, stn, minTheta, maxTheta);
+            return;
         }
-        if (button.equals(radiobHoughProbably)) {
+        if (button.getId().equals("radiobHoughProbably")) {
             int maxLineGap = (int) spinnerHoughProbablyMaxLineGap.getValue();
             int minLineLength = (int) spinnerHoughProbablyMinLineLength.getValue();
+            imagesHandler.doHoughConversion(false, distance, angle, threshold, maxLineGap, minLineLength);
         }
-
-        imagesHandler.doHoughConversion(distance, angle, threshold);
     }
 
     @FXML
