@@ -16,7 +16,7 @@ import utils.ImageUtils;
  */
 public class HoughConversionAlgorithm implements Algorithm {
 
-    private boolean typeHoughMethod;
+    private boolean typeHoughMethodClassic;
 
     private int distance;
     private int angle;
@@ -31,12 +31,12 @@ public class HoughConversionAlgorithm implements Algorithm {
     private int maxLineGap;
 
     public HoughConversionAlgorithm(boolean typeHoughMethod, int ... params) {
-        this.typeHoughMethod = typeHoughMethod;
+        this.typeHoughMethodClassic = typeHoughMethod;
         this.distance = params[0];
         this.angle = params[1];
         this.threshold = params[2];
 
-        if (this.typeHoughMethod) {
+        if (typeHoughMethodClassic) {
             this.srn = params[3];
             this.stn = params[4];
             this.minTheta = params[5];
@@ -55,7 +55,7 @@ public class HoughConversionAlgorithm implements Algorithm {
         //матрица для хранения отрезков
         Mat lines = new Mat();
 
-        if (typeHoughMethod) {
+        if (typeHoughMethodClassic) {
             Imgproc.HoughLines(matGray, lines, distance, Math.toRadians(angle), threshold, srn, stn, minTheta, maxTheta);
         } else {
             Imgproc.HoughLinesP(matGray, lines, distance, Math.toRadians(angle), threshold, minLineLength, maxLineGap);
