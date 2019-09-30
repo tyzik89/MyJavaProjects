@@ -145,7 +145,7 @@
                                               <Tooltip text="Для стандартного и многомасштабного преобразования Хафа, &#10;минимальный угол для проверки линий. &#10;Должно попасть между 0 и max_theta." />
                                           </tooltip>
                                       </TextField>
-                                      <TextField fx:id="maxThetaTextField" layoutX="190.0" layoutY="40.0" prefHeight="31.0" prefWidth="35.0" text="0">
+                                      <TextField fx:id="maxThetaTextField" layoutX="190.0" layoutY="40.0" prefHeight="31.0" prefWidth="35.0" text="3.14159">
                                           <tooltip>
                                               <Tooltip text="Для стандартного и многомасштабного преобразования Хафа, максимальный угол для проверки линий. Должно попасть между min_theta и CV_PI" />
                                           </tooltip>

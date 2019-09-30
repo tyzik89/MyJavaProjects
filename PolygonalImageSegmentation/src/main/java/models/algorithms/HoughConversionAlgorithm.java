@@ -25,13 +25,13 @@ public class HoughConversionAlgorithm implements Algorithm {
     // Минимальное количество пересечений(голосов), чтобы "обнаружить" линию
     private int threshold;
 
-    private double srn;
-    private double stn;
-    private double minTheta;
-    private double maxTheta;
+    private double srn = 0.0;
+    private double stn = 0.0;
+    private double minTheta = 0.0;
+    private double maxTheta = Math.PI;
 
-    private double minLineLength;
-    private double maxLineGap;
+    private double minLineLength = 0.0;
+    private double maxLineGap = 0.0;
 
     public HoughConversionAlgorithm(boolean typeHoughMethod, double distance,  double angle, int threshold, double ... params) {
         this.typeHoughMethodClassic = typeHoughMethod;
