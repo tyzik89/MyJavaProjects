@@ -17,7 +17,7 @@
                <MenuItem fx:id="itmExit" mnemonicParsing="false" onAction="#handleItmExit" text="Выход" />
            </Menu>
            <Menu mnemonicParsing="false" text="Просмотр">
-               <MenuItem fx:id="itmSourceImage" onAction="#handleSourceImage" mnemonicParsing="false" text="исходное изображение" />
+               <MenuItem fx:id="itmSourceImage" onAction="#handleSourceImage" mnemonicParsing="false" text="Оригинал" />
            </Menu>
        </MenuBar>
    </top>
