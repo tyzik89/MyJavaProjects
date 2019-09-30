@@ -81,7 +81,7 @@
                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                 <RadioButton fx:id="radiobHoughClassic" layoutX="46.0" layoutY="26.0" mnemonicParsing="false" onAction="#changeRadioButtonHoughClassic" selected="true" text="классический">
                                     <tooltip>
-                                        <Tooltip  text="Классический метод трансформации Хафа.&#10;Каждая линия представляется двумя числами типа float (rho, theta), &#10;где rho — дистанция между точкой (0,0) и линией, &#10;а theta — угол между осью x и нормалью к линии (т.е. матрица должна иметь тип of CV_32FC2)" />
+                                        <Tooltip text="Классический метод трансформации Хафа.&#10;Каждая линия представляется двумя числами типа float (rho, theta), &#10;где rho — дистанция между точкой (0,0) и линией, &#10;а theta — угол между осью x и нормалью к линии (т.е. матрица должна иметь тип of CV_32FC2)" />
                                     </tooltip>
                            <toggleGroup>
                               <ToggleGroup fx:id="toggleGroupHough" />
@@ -130,22 +130,22 @@
                                       <Label layoutX="56.0" layoutY="48.0" text="Делитель для угла:" />
                                       <Label layoutX="7.0" layoutY="83.0" text="Мин. угол проверки линий:" />
                                       <Label layoutX="3.0" layoutY="118.0" text="Макс. угол проверки линий:" />
-                                      <TextField fx:id="srnTextField" layoutX="190.0" layoutY="2.0" prefHeight="31.0" prefWidth="35.0" text="0">
+                                      <TextField fx:id="srnTextField" layoutX="169.0" layoutY="2.0" prefHeight="31.0" prefWidth="56.0" text="0">
                                           <tooltip>
                                               <Tooltip text="Для многомасштабного преобразанования Хафа. &#10;Для точного разрешения расст. rho/srn. Если srn=0 and stn=0, то используется классическое преобразование.&#10;В другом случае параметры должны быть больше 0." />
                                           </tooltip>
                                       </TextField>
-                                      <TextField fx:id="stnTextField" layoutX="190.0" layoutY="110.0" prefHeight="31.0" prefWidth="35.0" text="0">
+                                      <TextField fx:id="stnTextField" layoutX="169.0" layoutY="37.0" prefHeight="31.0" prefWidth="56.0" text="0">
                                           <tooltip>
                                               <Tooltip text="Для многомасштабного преобразанования Хафа. &#10;Для точного разрешения: theta/stn. Если srn=0 and stn=0, то используется классическое преобразование. &#10;В другом случае параметры должны быть больше 0." />
                                           </tooltip>
                                       </TextField>
-                                      <TextField fx:id="minThetaTextField" layoutX="190.0" layoutY="76.0" prefHeight="31.0" prefWidth="35.0" text="0">
+                                      <TextField fx:id="minThetaTextField" layoutX="169.0" layoutY="72.0" prefHeight="31.0" prefWidth="56.0" text="0">
                                           <tooltip>
                                               <Tooltip text="Для стандартного и многомасштабного преобразования Хафа, &#10;минимальный угол для проверки линий. &#10;Должно попасть между 0 и max_theta." />
                                           </tooltip>
                                       </TextField>
-                                      <TextField fx:id="maxThetaTextField" layoutX="190.0" layoutY="40.0" prefHeight="31.0" prefWidth="35.0" text="3.14159">
+                                      <TextField fx:id="maxThetaTextField" layoutX="169.0" layoutY="107.0" prefHeight="31.0" prefWidth="56.0" >
                                           <tooltip>
                                               <Tooltip text="Для стандартного и многомасштабного преобразования Хафа, максимальный угол для проверки линий. Должно попасть между min_theta и CV_PI" />
                                           </tooltip>

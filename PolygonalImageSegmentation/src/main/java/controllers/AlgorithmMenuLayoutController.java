@@ -89,6 +89,8 @@ public class AlgorithmMenuLayoutController implements Observer {
         commonTools.setExpanded(false);
         cannyTools.setExpanded(false);
         houghTools.setExpanded(false);
+
+        maxThetaTextField.setText(String.valueOf(Math.PI));
     }
 
     @FXML
