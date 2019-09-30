@@ -1,6 +1,7 @@
 package controllers;
 
 import constants.NotifyConstants;
+import fxelements.SingletonProcess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,7 +20,7 @@ public class BottomBarLayoutController implements Observer {
     private ImagesHandler imagesHandler;
 
     @FXML
-    private ProgressBar prBar;
+    private ProgressBar prBar ;
     @FXML
     private ProgressIndicator prInd;
     @FXML
@@ -33,6 +34,9 @@ public class BottomBarLayoutController implements Observer {
         this.imagesHandler = imagesHandler;
         //Регистрация в качестве наблюдателя сообщений от модели
         imagesHandler.registerObserver(this);
+
+        this.prBar = SingletonProcess.getInstance().getProgressBar();
+        this.prInd = SingletonProcess.getInstance().getProgressIndicator();
     }
 
     @FXML
