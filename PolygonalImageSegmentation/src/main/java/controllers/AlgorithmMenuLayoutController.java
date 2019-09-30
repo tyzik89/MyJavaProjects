@@ -152,9 +152,9 @@ public class AlgorithmMenuLayoutController implements Observer {
         RadioButton button = (RadioButton) toggleGroupHough.getSelectedToggle();
         if (button.getId().equals("radiobHoughClassic")) {
             double srn = Double.parseDouble(srnTextField.getText());
-            double stn = Integer.parseInt(stnTextField.getText());
-            double minTheta = Integer.parseInt(minThetaTextField.getText());
-            double maxTheta = Integer.parseInt(maxThetaTextField.getText());
+            double stn = Double.parseDouble(stnTextField.getText());
+            double minTheta = Double.parseDouble(minThetaTextField.getText());
+            double maxTheta = Double.parseDouble(maxThetaTextField.getText());
             imagesHandler.doHoughConversion(true, distance, angle, threshold, srn, stn, minTheta, maxTheta);
             return;
         }
