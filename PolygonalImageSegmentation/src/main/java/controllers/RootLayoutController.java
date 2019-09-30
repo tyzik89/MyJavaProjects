@@ -5,7 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import models.image.ImagesHandler;
 
 import java.io.IOException;
@@ -134,5 +139,30 @@ public class RootLayoutController {
 
     @FXML
     private void handleSourceImage(ActionEvent event) {
+        Stage stage = new Stage();
+        /*
+            1	Modelity.NONE	Когда вы открываете новое окно с этой модальностью (modelity), новое окно будет независимым по отношению к родительскому окну. Вы можете интерактировать с родительским окном, или закрыть его не влияя на новое окно.
+            2	Modelity.WINDOW_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), новое окно блокирует родительское окно. Вы не можете интерактировать с родительским окном, до тех пор, пока это окно не закроется.
+            3	Modelity.APPLICATION_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), оно блокирует все другие окна приложения. Вы не можете интерактировать ни с каким окном, до тех пор пока это окно не закроется.
+            */
+        stage.initModality(Modality.NONE);
+        //Настройка родительского окна
+        //stage.initOwner(mainApp.getPrimaryStage());
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPannable(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setMaxWidth(1024.0);
+        scrollPane.setMaxHeight(768.0);
+        ImageView imageView = new ImageView();
+        imageView.setPickOnBounds(true);
+        imageView.setPreserveRatio(true);
+        scrollPane.setContent(imageView);
+        imageView.setImage(imagesHandler.getCurrentImage());
+
+        Scene scene = new Scene(scrollPane);
+        stage.setScene(scene);
+        stage.show();
     }
 }

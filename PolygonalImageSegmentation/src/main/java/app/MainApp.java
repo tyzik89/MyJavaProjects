@@ -62,7 +62,7 @@ public class MainApp extends Application {
      * Возвращает главную сцену.
      * @return primaryStage
      */
-    private Stage getPrimaryStage() {
+    public Stage getPrimaryStage() {
         return primaryStage;
     }
 
