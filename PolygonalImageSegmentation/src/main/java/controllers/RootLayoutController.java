@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,8 +34,6 @@ public class RootLayoutController {
     private MenuItem itmLoad;
     @FXML
     private MenuItem itmExit;
-    @FXML
-    private MenuItem itmSourceImage;
 
 
     public RootLayoutController() {
@@ -139,6 +138,9 @@ public class RootLayoutController {
 
     @FXML
     private void handleSourceImage(ActionEvent event) {
+        MenuItem menuItem = (MenuItem) event.getSource();
+        String type = menuItem.getUserData().toString();
+
         Stage stage = new Stage();
         /*
             1	Modelity.NONE	Когда вы открываете новое окно с этой модальностью (modelity), новое окно будет независимым по отношению к родительскому окну. Вы можете интерактировать с родительским окном, или закрыть его не влияя на новое окно.
@@ -159,7 +161,9 @@ public class RootLayoutController {
         imageView.setPickOnBounds(true);
         imageView.setPreserveRatio(true);
         scrollPane.setContent(imageView);
-        imageView.setImage(imagesHandler.getCurrentImage());
+
+        Image image = type.equals("SOURCE") ? imagesHandler.getSourceImage() : imagesHandler.getCurrentImage();
+        imageView.setImage(image);
 
         Scene scene = new Scene(scrollPane);
         stage.setScene(scene);

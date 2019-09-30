@@ -38,7 +38,7 @@ public class ImagesHandler implements Observable {
         // --> file:/C:/MyImages/myphoto.jpg
         String localUrl = file.toURI().toURL().toString();
         Image image = new Image(localUrl);*/
-        Mat mat = Imgcodecs.imread("src/main/resources/img/1.png", Imgcodecs.IMREAD_UNCHANGED);
+        Mat mat = Imgcodecs.imread("src/main/resources/img/2.png", Imgcodecs.IMREAD_UNCHANGED);
         Image image = ImageUtils.matToImageFX(mat);
         storageImages.init(image);
 
@@ -92,6 +92,10 @@ public class ImagesHandler implements Observable {
 
     public Image getCurrentImage() {
         return storageImages.getCurrentImage();
+    }
+
+    public Image getSourceImage() {
+        return storageImages.getSourceImage();
     }
 
     private void switchImagesOnNextStep(Image newImage) {
