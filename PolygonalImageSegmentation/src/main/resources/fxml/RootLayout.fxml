@@ -11,13 +11,13 @@
             prefHeight="900.0" prefWidth="1300.0">
    <top>
        <MenuBar BorderPane.alignment="CENTER">
-           <Menu mnemonicParsing="false" text="File">
-               <MenuItem fx:id="itmLoad" mnemonicParsing="false" onAction="#handleLoad" text="Load" />
+           <Menu mnemonicParsing="false" text="Файл">
+               <MenuItem fx:id="itmLoad" mnemonicParsing="false" onAction="#handleLoad" text="Загрузить" />
                <SeparatorMenuItem mnemonicParsing="false" />
-               <MenuItem fx:id="itmExit" mnemonicParsing="false" onAction="#handleItmExit" text="Exit" />
+               <MenuItem fx:id="itmExit" mnemonicParsing="false" onAction="#handleItmExit" text="Выход" />
            </Menu>
-           <Menu mnemonicParsing="false" text="View">
-               <MenuItem fx:id="itmSourceImage" mnemonicParsing="false" text="Source Image" />
+           <Menu mnemonicParsing="false" text="Просмотр">
+               <MenuItem fx:id="itmSourceImage" onAction="#handleSourceImage" mnemonicParsing="false" text="исходное изображение" />
            </Menu>
        </MenuBar>
    </top>

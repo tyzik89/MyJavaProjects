@@ -132,6 +132,7 @@ public class RootLayoutController {
         imagesHandler.load();
     }
 
-
-
+    @FXML
+    private void handleSourceImage(ActionEvent event) {
+    }
 }
