@@ -18,32 +18,35 @@ public class HoughConversionAlgorithm implements Algorithm {
 
     private boolean typeHoughMethodClassic;
 
-    private int distance;
-    private int angle;
+    // Разрешение параметра r в пикселях
+    private double distance;
+    // Разрешение параметра θ в радианах
+    private double angle;
+    // Минимальное количество пересечений(голосов), чтобы "обнаружить" линию
     private int threshold;
 
-    private int srn;
-    private int stn;
-    private int minTheta;
-    private int maxTheta;
+    private double srn;
+    private double stn;
+    private double minTheta;
+    private double maxTheta;
 
-    private int minLineLength;
-    private int maxLineGap;
+    private double minLineLength;
+    private double maxLineGap;
 
-    public HoughConversionAlgorithm(boolean typeHoughMethod, int ... params) {
+    public HoughConversionAlgorithm(boolean typeHoughMethod, double distance,  double angle, int threshold, double ... params) {
         this.typeHoughMethodClassic = typeHoughMethod;
-        this.distance = params[0];
-        this.angle = params[1];
-        this.threshold = params[2];
+        this.distance = distance;
+        this.angle = angle;
+        this.threshold = threshold;
 
         if (typeHoughMethodClassic) {
-            this.srn = params[3];
-            this.stn = params[4];
-            this.minTheta = params[5];
-            this.maxTheta = params[6];
+            this.srn = params[0];
+            this.stn = params[1];
+            this.minTheta = params[2];
+            this.maxTheta = params[3];
         } else {
-            this.minLineLength = params[3];
-            this.maxLineGap = params[4];
+            this.minLineLength = params[0];
+            this.maxLineGap = params[1];
         }
     }
 
@@ -52,24 +55,25 @@ public class HoughConversionAlgorithm implements Algorithm {
         //Конвертируем изображение в одноканальное
         Mat matGray = new Mat();
         Imgproc.cvtColor(frame, matGray, Imgproc.COLOR_BGR2GRAY);
-        //матрица для хранения отрезков
+        //Вектор, который будет хранить параметры (r, θ) обнаруженных линий
         Mat lines = new Mat();
+        //Результирующая матрица линий
+        Mat result = new Mat(frame.size(), CvType.CV_8UC3, ImageUtils.COLOR_WHITE);
 
         if (typeHoughMethodClassic) {
             Imgproc.HoughLines(matGray, lines, distance, Math.toRadians(angle), threshold, srn, stn, minTheta, maxTheta);
+            //fixme поправить вывод для типа преобразования. Т.к. Матрица линий представленая в классическом содержит 2 или 3 элемента
         } else {
             Imgproc.HoughLinesP(matGray, lines, distance, Math.toRadians(angle), threshold, minLineLength, maxLineGap);
-        }
-
-        Mat result = new Mat(frame.size(), CvType.CV_8UC3, ImageUtils.COLOR_WHITE);
-        for (int i = 0, r = lines.rows(); i < r; i++) {
-            for (int j = 0, c = lines.cols(); j < c; j++) {
-                double[] line = lines.get(i, j);
-                Imgproc.line(
-                        result,
-                        new Point(line[0], line[1]),
-                        new Point(line[2], line[3]),
-                        ImageUtils.COLOR_BLACK);
+            for (int i = 0, r = lines.rows(); i < r; i++) {
+                for (int j = 0, c = lines.cols(); j < c; j++) {
+                    double[] line = lines.get(i, j);
+                    Imgproc.line(
+                            result,
+                            new Point(line[0], line[1]),
+                            new Point(line[2], line[3]),
+                            ImageUtils.COLOR_BLACK);
+                }
             }
         }
         return result;
