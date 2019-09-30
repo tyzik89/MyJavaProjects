@@ -19,6 +19,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <AnchorPane prefHeight="650.0" prefWidth="232.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
 
     <Accordion prefHeight="650.0" prefWidth="232.0">
@@ -65,11 +66,14 @@
                        <Tooltip text="Флаг, указывающий на возможность использования более точного расчёта величины градиента" />
                    </tooltip>
                </CheckBox>
-               <TextField fx:id="sizeSobelKernel" layoutX="120.0" layoutY="186.0" prefHeight="25.0" prefWidth="46.0" text="3">
+               <Spinner fx:id="sizeSobelKernel" layoutX="105.0" layoutY="187.0" prefHeight="25.0" prefWidth="53.0" >
+                   <valueFactory>
+                       <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="2" initialValue="3" max="7" min="3" />
+                   </valueFactory>
                    <tooltip>
-                       <Tooltip text="Размер ядра Собеля. &#10;Необходим для внутреннего использования" />
+                       <Tooltip text="Значение может быть между 3 и 7. Нечётное" />
                    </tooltip>
-               </TextField>
+               </Spinner>
                 </AnchorPane>
             </TitledPane>
 
@@ -145,7 +149,7 @@
                                               <Tooltip text="Для стандартного и многомасштабного преобразования Хафа, &#10;минимальный угол для проверки линий. &#10;Должно попасть между 0 и max_theta." />
                                           </tooltip>
                                       </TextField>
-                                      <TextField fx:id="maxThetaTextField" layoutX="169.0" layoutY="107.0" prefHeight="31.0" prefWidth="56.0" >
+                                      <TextField fx:id="maxThetaTextField" layoutX="169.0" layoutY="107.0" prefHeight="31.0" prefWidth="56.0">
                                           <tooltip>
                                               <Tooltip text="Для стандартного и многомасштабного преобразования Хафа, максимальный угол для проверки линий. Должно попасть между min_theta и CV_PI" />
                                           </tooltip>

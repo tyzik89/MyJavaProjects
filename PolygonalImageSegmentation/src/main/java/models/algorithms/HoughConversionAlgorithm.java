@@ -63,6 +63,16 @@ public class HoughConversionAlgorithm implements Algorithm {
         if (typeHoughMethodClassic) {
             Imgproc.HoughLines(matGray, lines, distance, Math.toRadians(angle), threshold, srn, stn, minTheta, maxTheta);
             //fixme поправить вывод для типа преобразования. Т.к. Матрица линий представленая в классическом содержит 2 или 3 элемента
+            // Отрисовка линий
+            for (int i = 0; i < lines.rows(); i++) {
+                double rho = lines.get(i, 0)[0];
+                double theta = lines.get(i, 0)[1];
+                double a = Math.cos(theta), b = Math.sin(theta);
+                double x0 = a * rho, y0 = b * rho;
+                Point pt1 = new Point(Math.round(x0 + 1000 * (-b)), Math.round(y0 + 1000 * (a)));
+                Point pt2 = new Point(Math.round(x0 - 1000 * (-b)), Math.round(y0 - 1000 * (a)));
+                Imgproc.line(result, pt1, pt2, ImageUtils.COLOR_BLACK, 3, Imgproc.LINE_AA, 0);
+            }
         } else {
             Imgproc.HoughLinesP(matGray, lines, distance, Math.toRadians(angle), threshold, minLineLength, maxLineGap);
             for (int i = 0, r = lines.rows(); i < r; i++) {

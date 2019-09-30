@@ -40,7 +40,7 @@ public class AlgorithmMenuLayoutController implements Observer {
     @FXML
     private CheckBox gradientL2;
     @FXML
-    private TextField sizeSobelKernel;
+    private Spinner sizeSobelKernel;
     @FXML
     private ToggleGroup toggleGroupHough;
     @FXML
@@ -120,9 +120,7 @@ public class AlgorithmMenuLayoutController implements Observer {
         if (sizeGFString != null || !Objects.equals(sizeGFString, "")) sizeGF = Integer.parseInt(sizeGFString);
 
         //Извлечение значений ядра Собеля
-        String sizeSKString = sizeSobelKernel.getText();
-        int sizeSK = 0;
-        if (sizeSKString != null || !Objects.equals(sizeSKString, "")) sizeSK = Integer.parseInt(sizeSKString);
+        int sizeSK = (int) sizeSobelKernel.getValue();
 
         //Нужно ли использовать L2 градиент
         boolean gL2 = gradientL2.isSelected();
