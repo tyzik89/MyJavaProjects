@@ -12,7 +12,7 @@ public class StorageImages {
     private static Image CurrentImage;
     private static Image PreviousImage;
 
-    private static StorageImages INSTANCE = new StorageImages();
+    private static volatile StorageImages INSTANCE = new StorageImages();
 
     private StorageImages(){}
 

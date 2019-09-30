@@ -72,10 +72,17 @@ public class ImagesHandler implements Observable {
         doMakeAlgorithm(new GaussBlurAlgorithm(sizeGaussFilter));
     }
 
+    /**
+     * Общий метод запуска алгоритмов
+     * @param algorithm нужныйы алгоритм
+     */
     private void doMakeAlgorithm(Algorithm algorithm){
-        Mat mat = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
-        Mat result = algorithm.doAlgorithm(mat);
-        switchImagesOnNextStep(ImageUtils.matToImageFX(result));
+        new Thread(() -> {
+            Mat mat = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
+            Mat result = algorithm.doAlgorithm(mat);
+            switchImagesOnNextStep(ImageUtils.matToImageFX(result));
+        }).start();
+
     }
 
     @Override
@@ -98,7 +105,7 @@ public class ImagesHandler implements Observable {
         return storageImages.getSourceImage();
     }
 
-    private void switchImagesOnNextStep(Image newImage) {
+    private synchronized void switchImagesOnNextStep(Image newImage) {
         storageImages.switchImagesOnNextStep(newImage);
         notifyObservers(NotifyConstants.IMAGE_READY);
     }
