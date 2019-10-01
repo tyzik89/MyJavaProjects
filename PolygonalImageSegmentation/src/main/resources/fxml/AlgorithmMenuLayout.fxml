@@ -121,7 +121,7 @@
                                 <Tooltip text="В векторе (r,θ), хранящем обнаруженные линии &#10;- это разрешение параметра θ в радианах" />
                             </tooltip>
                         </Spinner>
-                        <Slider fx:id="thresholdHoughSlider" layoutX="7.0" layoutY="203.0" onMouseClicked="#changeThresholdHough" onMouseDragged="#changeThresholdHough" prefHeight="45.0" prefWidth="219.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                        <Slider fx:id="thresholdHoughSlider" layoutX="7.0" layoutY="203.0" onMouseClicked="#changeThresholdHough" onMouseDragged="#changeThresholdHough" prefHeight="45.0" prefWidth="219.0" showTickLabels="true" showTickMarks="true">
                             <tooltip>
                                 <Tooltip text="Минимальное количество пересечений, для обнаружения линии. &#10;Линия обнаруживается, если аккумулирующий параметр больше порогового значения." />
                             </tooltip>
