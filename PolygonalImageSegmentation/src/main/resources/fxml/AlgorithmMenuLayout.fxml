@@ -36,7 +36,7 @@
                     <Label layoutX="14.0" layoutY="45.0" text="Порог:" />
                     <Label fx:id="showBinaryThreshold" layoutX="68.0" layoutY="43.0" prefHeight="17.0" prefWidth="43.0" />
                     <CheckBox fx:id="otsu" layoutX="17.0" layoutY="108.0" mnemonicParsing="false" onAction="#selectOtsu" prefHeight="21.0" prefWidth="122.0" text="порог OTSU" />
-                    <Slider fx:id="binarySlider" layoutX="14.0" layoutY="64.0" max="255.0" onMouseClicked="#changeBinarySlider" onMouseDragged="#changeBinarySlider" prefHeight="45.0" prefWidth="205.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                    <Slider fx:id="binarySlider" layoutX="14.0" layoutY="64.0" max="100.0" onMouseClicked="#changeBinarySlider" onMouseDragged="#changeBinarySlider" prefHeight="45.0" prefWidth="205.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                     <Separator layoutX="-2.0" layoutY="127.0" prefHeight="24.0" prefWidth="232.0" />
                     <Button layoutX="14.0" layoutY="151.0" mnemonicParsing="false" onAction="#makeBlur" prefHeight="25.0" prefWidth="205.0" text="Размытие по Гауссу">
                         <tooltip>
@@ -45,7 +45,11 @@
                     </Button>
                     <Label layoutX="18.0" layoutY="189.0" text="Размер фильтра Гаусса:" />
                     <Label fx:id="showSizeGaussFilterCommon" layoutX="184.0" layoutY="187.0" prefHeight="21.0" prefWidth="39.0" />
-                    <Slider fx:id="sizeGaussFilterCommon" layoutX="14.0" layoutY="213.0" max="255.0" onMouseClicked="#changeSizeGaussFilterCommon" onMouseDragged="#changeSizeGaussFilterCommon" prefHeight="14.0" prefWidth="205.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                    <Slider fx:id="sizeGaussFilterCommon"
+                            layoutX="14.0" layoutY="213.0"
+                            max="10" blockIncrement="1" minorTickCount="1" majorTickUnit="5" showTickLabels="true" showTickMarks="true"
+                            onMouseClicked="#changeSizeGaussFilterCommon" onMouseDragged="#changeSizeGaussFilterCommon"
+                            prefHeight="14.0" prefWidth="205.0" />
                 </AnchorPane>
             </TitledPane>
 
@@ -117,7 +121,7 @@
                                 <Tooltip text="В векторе (r,θ), хранящем обнаруженные линии &#10;- это разрешение параметра θ в радианах" />
                             </tooltip>
                         </Spinner>
-                        <Slider fx:id="thresholdHoughSlider" layoutX="7.0" layoutY="203.0" onMouseClicked="#changeThresholdHough" onMouseDragged="#changeThresholdHough" prefHeight="45.0" prefWidth="219.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                        <Slider fx:id="thresholdHoughSlider" layoutX="7.0" layoutY="203.0" onMouseClicked="#changeThresholdHough" onMouseDragged="#changeThresholdHough" prefHeight="45.0" prefWidth="219.0" showTickLabels="true" showTickMarks="true">
                             <tooltip>
                                 <Tooltip text="Минимальное количество пересечений, для обнаружения линии. &#10;Линия обнаруживается, если аккумулирующий параметр больше порогового значения." />
                             </tooltip>

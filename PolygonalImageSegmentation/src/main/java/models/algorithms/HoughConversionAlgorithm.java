@@ -71,7 +71,12 @@ public class HoughConversionAlgorithm implements Algorithm {
                 double x0 = a * rho, y0 = b * rho;
                 Point pt1 = new Point(Math.round(x0 + 1000 * (-b)), Math.round(y0 + 1000 * (a)));
                 Point pt2 = new Point(Math.round(x0 - 1000 * (-b)), Math.round(y0 - 1000 * (a)));
-                Imgproc.line(result, pt1, pt2, ImageUtils.COLOR_BLACK, 3, Imgproc.LINE_AA, 0);
+                Imgproc.line(
+                        result,
+                        pt1,
+                        pt2,
+                        ImageUtils.COLOR_BLACK,
+                        3, Imgproc.LINE_AA, 0);
             }
         } else {
             Imgproc.HoughLinesP(matGray, lines, distance, Math.toRadians(angle), threshold, minLineLength, maxLineGap);
@@ -82,7 +87,7 @@ public class HoughConversionAlgorithm implements Algorithm {
                             result,
                             new Point(line[0], line[1]),
                             new Point(line[2], line[3]),
-                            ImageUtils.COLOR_BLACK);
+                            ImageUtils.COLOR_RED);
                 }
             }
         }
