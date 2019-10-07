@@ -62,7 +62,7 @@ public class HoughConversionAlgorithm implements Algorithm {
         //Вектор, который будет хранить параметры (r, θ) обнаруженных линий
         Mat lines = new Mat();
         //Результирующая матрица
-        Mat result = new Mat(frame.size(), CvType.CV_8UC1, ImageUtils.COLOR_WHITE);
+        Mat result = new Mat(frame.size(), CvType.CV_8UC3, ImageUtils.COLOR_WHITE);
 
         if (typeHoughMethodClassic) {
             LOGGER.debug(
