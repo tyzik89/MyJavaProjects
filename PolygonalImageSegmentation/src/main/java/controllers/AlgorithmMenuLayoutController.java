@@ -164,7 +164,7 @@ public class AlgorithmMenuLayoutController implements Observer {
         if (button.getId().equals("radiobHoughProbably")) {
             double maxLineGap = (double) spinnerHoughProbablyMaxLineGap.getValue();
             double minLineLength = (double) spinnerHoughProbablyMinLineLength.getValue();
-            imagesHandler.doHoughConversion(false, distance, angle, threshold, maxLineGap, minLineLength);
+            imagesHandler.doHoughConversion(false, distance, angle, threshold, minLineLength, maxLineGap);
         }
     }
 

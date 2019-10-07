@@ -58,30 +58,45 @@ public class HoughConversionAlgorithm implements Algorithm {
         //Конвертируем изображение в одноканальное
         Mat matGray = new Mat();
         Imgproc.cvtColor(frame, matGray, Imgproc.COLOR_BGR2GRAY);
+
         //Вектор, который будет хранить параметры (r, θ) обнаруженных линий
         Mat lines = new Mat();
-        //Результирующая матрица линий
-        Mat result = new Mat(frame.size(), CvType.CV_8UC3, ImageUtils.COLOR_WHITE);
+        //Результирующая матрица
+        Mat result = new Mat(frame.size(), CvType.CV_8UC1, ImageUtils.COLOR_WHITE);
 
         if (typeHoughMethodClassic) {
+            LOGGER.debug(
+                    "Классический метод Хафа с параметрами: distance={}, angle(rad.)={}, threshold={}, srn={}, stn={}, minTheta={}, maxTheta={}",
+                    distance, Math.toRadians(angle), threshold, srn, stn, minTheta, maxTheta);
+
             Imgproc.HoughLines(matGray, lines, distance, Math.toRadians(angle), threshold, srn, stn, minTheta, maxTheta);
-            //fixme поправить вывод для типа преобразования. Т.к. Матрица линий представленая в классическом содержит 2 или 3 элемента
+
             // Отрисовка линий
             for (int i = 0; i < lines.rows(); i++) {
-                double rho = lines.get(i, 0)[0];
-                double theta = lines.get(i, 0)[1];
-                double a = Math.cos(theta), b = Math.sin(theta);
-                double x0 = a * rho, y0 = b * rho;
-                Point pt1 = new Point(Math.round(x0 + 1000 * (-b)), Math.round(y0 + 1000 * (a)));
-                Point pt2 = new Point(Math.round(x0 - 1000 * (-b)), Math.round(y0 - 1000 * (a)));
+                double data[] = lines.get(i, 0);
+                double rho = data[0];
+                double theta = data[1];
+
+                double cosTheta = Math.cos(theta);
+                double sinTheta = Math.sin(theta);
+
+                double x0 = cosTheta * rho;
+                double y0 = sinTheta * rho;
+
+                Point pt1 = new Point(x0 + 1000 * (-sinTheta), y0 + 1000 * cosTheta);
+                Point pt2 = new Point(x0 - 1000 * (-sinTheta), y0 - 1000 * cosTheta);
                 Imgproc.line(
                         result,
                         pt1,
                         pt2,
-                        ImageUtils.COLOR_BLACK,
-                        3, Imgproc.LINE_AA, 0);
+                        ImageUtils.COLOR_RED);
             }
+
         } else {
+            LOGGER.debug(
+                    "Вероятностный метод Хафа с параметрами: distance={}, angle(rad.)={}, threshold={}, minLineLength={}, maxLineGap={}",
+                    distance, Math.toRadians(angle), threshold, minLineLength, maxLineGap);
+
             Imgproc.HoughLinesP(matGray, lines, distance, Math.toRadians(angle), threshold, minLineLength, maxLineGap);
             for (int i = 0, r = lines.rows(); i < r; i++) {
                 for (int j = 0, c = lines.cols(); j < c; j++) {
@@ -94,6 +109,7 @@ public class HoughConversionAlgorithm implements Algorithm {
                 }
             }
         }
+
         return result;
     }
 }
