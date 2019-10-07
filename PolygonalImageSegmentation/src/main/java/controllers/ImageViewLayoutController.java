@@ -5,12 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import models.image.ImagesHandler;
 import models.notification.Observer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Контроллер отображающий изображение
  * Получает уведомление о готовности изображения от {@link ImagesHandler} и отображает его
  */
 public class ImageViewLayoutController implements Observer {
+    private final static Logger LOGGER = LoggerFactory.getLogger(ImageViewLayoutController.class);
 
     //Ref on model class - ImagesHandler
     private ImagesHandler imagesHandler;

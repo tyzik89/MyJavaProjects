@@ -5,6 +5,8 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Алгоритм Кэнни по обнаружению границ состоит из четырём этапов:
@@ -14,6 +16,7 @@ import org.opencv.imgproc.Imgproc;
  * 4) Hysteresis thresholding находит где края начинаются и заканчиваются.
  */
 public class CannyEdgeDetectorAlgorithm implements Algorithm{
+    private final static Logger LOGGER = LoggerFactory.getLogger(CannyEdgeDetectorAlgorithm.class);
 
     private int sizeGaussFilter;
     private int threshold;

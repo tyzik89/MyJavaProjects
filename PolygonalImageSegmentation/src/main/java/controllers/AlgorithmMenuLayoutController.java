@@ -7,10 +7,13 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import models.image.ImagesHandler;
 import models.notification.Observer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
 public class AlgorithmMenuLayoutController implements Observer {
+    private final static Logger LOGGER = LoggerFactory.getLogger(AlgorithmMenuLayoutController.class);
 
     //Ref on model class - ImagesHandler
     private ImagesHandler imagesHandler;

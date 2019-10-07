@@ -9,12 +9,15 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import models.image.ImagesHandler;
 import models.notification.Observer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Контроллер, обрабатывающий слой с прогресбаром и кнопка отменить/вернуть
  * Отправляет в модель {@link ImagesHandler} данные о нажатии кнопок
  */
 public class BottomBarLayoutController implements Observer {
+    private final static Logger LOGGER = LoggerFactory.getLogger(BottomBarLayoutController.class);
 
     //Ref on model class - ImagesHandler
     private ImagesHandler imagesHandler;

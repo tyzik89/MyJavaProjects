@@ -2,11 +2,14 @@ package models.algorithms;
 
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Алгоритм бинаризации изображения, т.е. конвертация всех пикселей либо в 0 либо в 1 (чёрно/белая матрица)
  */
 public class BinaryImageAlgorithm implements Algorithm{
+    private final static Logger LOGGER = LoggerFactory.getLogger(BinaryImageAlgorithm.class);
 
     private int threshold;
     private boolean isOtsu;

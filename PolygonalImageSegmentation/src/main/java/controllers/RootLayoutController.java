@@ -13,6 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.image.ImagesHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -23,6 +25,7 @@ import java.io.IOException;
  * Имеет доступ к главному приложению для подгрузки дополнительных слоёв на главную сцену {@link javafx.stage.Stage}
  */
 public class RootLayoutController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(RootLayoutController.class);
 
     // Ref on app.MainApp
     private MainApp mainApp;

@@ -4,6 +4,8 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.ImageUtils;
 
 /**
@@ -15,6 +17,7 @@ import utils.ImageUtils;
  * накопительном пространстве (accumulator space) которое строится при вычислении трансформации Хафа.
  */
 public class HoughConversionAlgorithm implements Algorithm {
+    private final static Logger LOGGER = LoggerFactory.getLogger(HoughConversionAlgorithm.class);
 
     private boolean typeHoughMethodClassic;
 
