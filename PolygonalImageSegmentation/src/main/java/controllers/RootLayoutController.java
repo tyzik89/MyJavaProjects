@@ -139,6 +139,12 @@ public class RootLayoutController {
     @FXML
     private void handleLoad(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Выбрать изображение для обработки");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Изображения", "*.png", "*.jpg", "*.bmp"),
+                new FileChooser.ExtensionFilter("Все файлы", "*.*"));
+
+
         File selectedFile = fileChooser.showOpenDialog(mainApp.getPrimaryStage().getOwner());
         if (selectedFile != null && selectedFile.exists())
             imagesHandler.load(selectedFile);
