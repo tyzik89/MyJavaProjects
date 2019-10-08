@@ -9,6 +9,7 @@ import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 import utils.ImageUtils;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,15 +32,17 @@ public class ImagesHandler implements Observable {
         this.observers = new LinkedList<>();
     }
 
-    public void load() {
-        //fixme исправить загрузку изображения
+    public void load(File file) {
         // An image file on the hard drive.
-        /*File file = new File("C:/MyImages/myphoto.jpg");
+//        File file = new File("C:/MyImages/myphoto.jpg");
         // --> file:/C:/MyImages/myphoto.jpg
-        String localUrl = file.toURI().toURL().toString();
-        Image image = new Image(localUrl);*/
-        Mat mat = Imgcodecs.imread("src/main/resources/img/image1.png", Imgcodecs.IMREAD_UNCHANGED);
-        Image image = ImageUtils.matToImageFX(mat);
+
+        String localUrl = file.toURI().toString();
+        Image image = new Image(localUrl);
+
+//        Mat mat = Imgcodecs.imread("src/main/resources/img/image1.png", Imgcodecs.IMREAD_UNCHANGED);
+//        Image image = ImageUtils.matToImageFX(mat);
+
         storageImages.init(image);
 
         notifyObservers(NotifyConstants.IMAGE_LOADED);

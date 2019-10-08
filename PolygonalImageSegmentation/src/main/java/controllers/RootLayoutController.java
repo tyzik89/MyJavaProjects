@@ -10,12 +10,14 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.image.ImagesHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -136,7 +138,10 @@ public class RootLayoutController {
 
     @FXML
     private void handleLoad(ActionEvent event) {
-        imagesHandler.load();
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(mainApp.getPrimaryStage().getOwner());
+        if (selectedFile != null && selectedFile.exists())
+            imagesHandler.load(selectedFile);
     }
 
     @FXML
