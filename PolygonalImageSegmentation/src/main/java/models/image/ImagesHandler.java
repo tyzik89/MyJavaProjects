@@ -86,6 +86,12 @@ public class ImagesHandler implements Observable {
      * @param algorithm нужный алгоритм
      */
     private void doMakeAlgorithm(Algorithm algorithm){
+        /*Platform.runLater: если вам нужно обновить компонент GUI из потока, не являющегося GUI, вы можете использовать его,
+        чтобы поместить свое обновление в очередь, и оно будет обработано потоком GUI как можно скорее.
+
+        Task реализует интерфейс Worker который используется, когда вам нужно запустить длинную задачу вне потока GUI
+        (чтобы избежать зависания вашего приложения), но все же необходимо взаимодействовать с GUI на некотором этапе.*/
+
         Task task = new Task<Void>() {
             @Override public Void call() {
                 Mat mat = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
