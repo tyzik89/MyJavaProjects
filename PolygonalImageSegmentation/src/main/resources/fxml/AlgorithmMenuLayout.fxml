@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -19,7 +20,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <AnchorPane prefHeight="650.0" prefWidth="232.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
 
     <Accordion prefHeight="650.0" prefWidth="232.0">
@@ -45,11 +45,7 @@
                     </Button>
                     <Label layoutX="18.0" layoutY="189.0" text="Размер фильтра Гаусса:" />
                     <Label fx:id="showSizeGaussFilterCommon" layoutX="184.0" layoutY="187.0" prefHeight="21.0" prefWidth="39.0" />
-                    <Slider fx:id="sizeGaussFilterCommon"
-                            layoutX="14.0" layoutY="213.0"
-                            max="10" blockIncrement="1" minorTickCount="1" majorTickUnit="5" showTickLabels="true" showTickMarks="true"
-                            onMouseClicked="#changeSizeGaussFilterCommon" onMouseDragged="#changeSizeGaussFilterCommon"
-                            prefHeight="14.0" prefWidth="205.0" />
+                    <Slider fx:id="sizeGaussFilterCommon" blockIncrement="1" layoutX="14.0" layoutY="213.0" majorTickUnit="5" max="10" minorTickCount="1" onMouseClicked="#changeSizeGaussFilterCommon" onMouseDragged="#changeSizeGaussFilterCommon" prefHeight="14.0" prefWidth="205.0" showTickLabels="true" showTickMarks="true" />
                 </AnchorPane>
             </TitledPane>
 
@@ -70,7 +66,7 @@
                        <Tooltip text="Флаг, указывающий на возможность использования более точного расчёта величины градиента" />
                    </tooltip>
                </CheckBox>
-               <Spinner fx:id="sizeSobelKernel" layoutX="105.0" layoutY="187.0" prefHeight="25.0" prefWidth="53.0" >
+               <Spinner fx:id="sizeSobelKernel" layoutX="105.0" layoutY="187.0" prefHeight="25.0" prefWidth="53.0">
                    <valueFactory>
                        <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="2" initialValue="3" max="7" min="3" />
                    </valueFactory>
@@ -191,6 +187,12 @@
                         </Tab>
                     </TabPane>
                     <Button layoutX="61.0" layoutY="522.0" mnemonicParsing="false" onAction="#handleApplyHough" text="Применить" />
+                </AnchorPane>
+            </TitledPane>
+            <TitledPane fx:id="watershedTools" animated="false" disable="true"
+                        text="Сегментация по &quot;Водоразделам&quot;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <Button layoutX="89.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleApplyWatershed" text="Применить"/>
                 </AnchorPane>
             </TitledPane>
 

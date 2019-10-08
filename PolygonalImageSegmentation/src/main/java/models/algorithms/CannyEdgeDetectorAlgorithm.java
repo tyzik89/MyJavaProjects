@@ -45,6 +45,7 @@ public class CannyEdgeDetectorAlgorithm implements Algorithm{
     }
 
     public Mat doAlgorithm(Mat frame) {
+        LOGGER.debug("Started processing");
         //Инициализация
         Mat grayMat = new Mat();
         Mat detectedEdgesMat = new Mat();

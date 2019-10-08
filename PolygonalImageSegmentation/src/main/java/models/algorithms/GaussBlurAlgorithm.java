@@ -27,6 +27,7 @@ public class GaussBlurAlgorithm implements Algorithm{
      * @return размытую матрицу
      */
     public Mat doAlgorithm(Mat frame) {
+        LOGGER.debug("Started processing");
         if (sizeGaussFilter > 0)
             Imgproc.blur(frame, frame, new Size(sizeGaussFilter, sizeGaussFilter));
         return frame;

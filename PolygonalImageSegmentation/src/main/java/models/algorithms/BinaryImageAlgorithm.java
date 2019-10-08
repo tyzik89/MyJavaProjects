@@ -20,6 +20,7 @@ public class BinaryImageAlgorithm implements Algorithm{
     }
 
     public Mat doAlgorithm(Mat frame) {
+        LOGGER.debug("Started processing");
         //Конвертируем изображение в одноканальное
         Mat matGray = new Mat();
         Imgproc.cvtColor(frame, matGray, Imgproc.COLOR_BGR2GRAY);

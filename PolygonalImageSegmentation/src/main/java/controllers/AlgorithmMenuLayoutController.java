@@ -25,6 +25,8 @@ public class AlgorithmMenuLayoutController implements Observer {
     @FXML
     private TitledPane houghTools;
     @FXML
+    private TitledPane watershedTools;
+    @FXML
     private Slider binarySlider;
     @FXML
     private Label showBinaryThreshold;
@@ -88,10 +90,13 @@ public class AlgorithmMenuLayoutController implements Observer {
         commonTools.setDisable(true);
         cannyTools.setDisable(true);
         houghTools.setDisable(true);
+        watershedTools.setDisable(true);
+
 
         commonTools.setExpanded(false);
         cannyTools.setExpanded(false);
         houghTools.setExpanded(false);
+        watershedTools.setExpanded(false);
 
         maxThetaTextField.setText(String.valueOf(Math.PI));
     }
@@ -169,6 +174,11 @@ public class AlgorithmMenuLayoutController implements Observer {
     }
 
     @FXML
+    public void handleApplyWatershed (ActionEvent event) {
+        imagesHandler.doWatershedSegmentation();
+    }
+
+    @FXML
     private void changeRadioButtonHoughClassic(ActionEvent event) {
         radiobHoughClassic.setSelected(true);
         titledPaneHoughClassic.setDisable(false);
@@ -203,6 +213,7 @@ public class AlgorithmMenuLayoutController implements Observer {
                 cannyTools.setDisable(false);
                 cannyTools.setExpanded(true);
                 houghTools.setDisable(false);
+                watershedTools.setDisable(false);
                 break;
             }
         }

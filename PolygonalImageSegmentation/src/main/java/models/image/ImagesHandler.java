@@ -68,6 +68,10 @@ public class ImagesHandler implements Observable {
         doMakeAlgorithm(new HoughConversionAlgorithm(typeHoughMethodClassic, distance, angle, threshold, params));
     }
 
+    public void doWatershedSegmentation() {
+        doMakeAlgorithm(new WatershedSegmentation());
+    }
+
     public void doMakeBlur(int sizeGaussFilter) {
         doMakeAlgorithm(new GaussBlurAlgorithm(sizeGaussFilter));
     }
