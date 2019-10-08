@@ -2,9 +2,18 @@ package controllers;
 
 import constants.NotifyConstants;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import models.image.ImagesHandler;
 import models.notification.Observer;
 import org.slf4j.Logger;
@@ -152,7 +161,7 @@ public class AlgorithmMenuLayoutController implements Observer {
     }
 
     @FXML
-    public void handleApplyHough(ActionEvent event) {
+    private void handleApplyHough(ActionEvent event) {
         double distance = (double) spinnerHoughDistance.getValue();
         double angle = (double) spinnerHoughAngle.getValue();
         int threshold = (int) thresholdHoughSlider.getValue();
@@ -174,7 +183,7 @@ public class AlgorithmMenuLayoutController implements Observer {
     }
 
     @FXML
-    public void handleApplyWatershed (ActionEvent event) {
+    private void handleApplyWatershed (ActionEvent event) {
         imagesHandler.doWatershedSegmentation();
     }
 
@@ -203,6 +212,69 @@ public class AlgorithmMenuLayoutController implements Observer {
     @FXML
     private void changeThresholdHough() {
         thresholdHoughLabel.setText(String.valueOf((int) thresholdHoughSlider.getValue()));
+    }
+
+    @FXML
+    private void handleAddMarkers(ActionEvent event) {
+        //FIXME ПОПРАВИТЬ ДОБАВЛЕНИЕ МАРКЕРОВ ДЛЯ АЛГОРИТМА ВОДОРАЗДЕЛА!!!!!!!!!!!
+        Stage stage = new Stage();
+        /*
+            1	Modelity.NONE	Когда вы открываете новое окно с этой модальностью (modelity), новое окно будет независимым по отношению к родительскому окну. Вы можете интерактировать с родительским окном, или закрыть его не влияя на новое окно.
+            2	Modelity.WINDOW_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), новое окно блокирует родительское окно. Вы не можете интерактировать с родительским окном, до тех пор, пока это окно не закроется.
+            3	Modelity.APPLICATION_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), оно блокирует все другие окна приложения. Вы не можете интерактировать ни с каким окном, до тех пор пока это окно не закроется.
+            */
+        stage.initModality(Modality.NONE);
+        //Настройка родительского окна
+        //stage.initOwner(mainApp.getPrimaryStage());
+
+        AnchorPane anchorRoot = new AnchorPane();
+        anchorRoot.setMaxWidth(1024.0);
+        anchorRoot.setMaxHeight(768.0);
+        ImageView imageView = new ImageView();
+
+        Image image = imagesHandler.getCurrentImage();
+        imageView.setImage(image);
+
+        anchorRoot.getChildren().add(imageView);
+        final double[] initX = new double[1];
+        final double[] initY = new double[1];
+
+        final double maxX = imageView.getImage().getWidth();
+        final double maxY = imageView.getImage().getHeight();
+
+        imageView.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                System.out.println("Clicked, x:" + me.getSceneX() + " y:" + me.getSceneY());
+                //the event will be passed only to the circle which is on front
+                initX[0] = me.getSceneX();
+                initY[0] = me.getSceneY();
+                me.consume();
+            }
+        });
+
+        imageView.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                System.out.println("Dragged, x:" + me.getSceneX() + " y:" + me.getSceneY());
+                if (me.getSceneX() < maxX && me.getSceneY() < maxY) {
+                    Line line = new Line(initX[0], initY[0], me.getSceneX(), me.getSceneY());
+                    line.setFill(null);
+                    line.setStroke(Color.RED);
+                    line.setStrokeWidth(2);
+                    anchorRoot.getChildren().add(line);
+                    System.out.println(line.getStartX() + " " + line.getEndX());
+                    System.out.println(line.getEndX() + " " + line.getEndY());
+                }
+
+                initX[0] = me.getSceneX() > maxX ? maxX : me.getSceneX();
+                initY[0] = me.getSceneY() > maxY ? maxY : me.getSceneY();
+            }
+        });
+
+        Scene scene = new Scene(anchorRoot);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @Override
