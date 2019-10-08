@@ -7,6 +7,7 @@ import models.image.ImagesHandler;
 import models.notification.Observer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.JavaFXUtils;
 
 /**
  * Контроллер отображающий изображение
@@ -37,7 +38,8 @@ public class ImageViewLayoutController implements Observer {
         switch (message) {
             case NotifyConstants.IMAGE_LOADED:
             case NotifyConstants.IMAGE_READY: {
-                imgView.setImage(imagesHandler.getCurrentImage());
+                JavaFXUtils.onFXThread(imgView.imageProperty(), imagesHandler.getCurrentImage());
+                //imgView.setImage(imagesHandler.getCurrentImage());
                 break;
             }
         }

@@ -5,15 +5,23 @@ import javafx.scene.control.ProgressIndicator;
 
 public class SingletonProcess
 {
+    private static SingletonProcess INSTANCE;
+
     private ProgressBar progressBar;
     private ProgressIndicator progressIndicator;
 
-    private SingletonProcess(){}
 
-    private static SingletonProcess INSTANCE = new SingletonProcess();
+    private SingletonProcess(){}
 
     public static SingletonProcess getInstance()
     {
+        if (INSTANCE == null) {
+            synchronized (SingletonProcess.class) {
+                if(INSTANCE == null){
+                    INSTANCE = new SingletonProcess();
+                }
+            }
+        }
         return INSTANCE;
     }
 

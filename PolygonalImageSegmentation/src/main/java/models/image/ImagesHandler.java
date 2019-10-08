@@ -1,6 +1,8 @@
 package models.image;
 
 import constants.NotifyConstants;
+import fxelements.SingletonProcess;
+import javafx.concurrent.Task;
 import javafx.scene.image.Image;
 import models.algorithms.*;
 import models.notification.Observable;
@@ -81,15 +83,24 @@ public class ImagesHandler implements Observable {
 
     /**
      * Общий метод запуска алгоритмов
-     * @param algorithm нужныйы алгоритм
+     * @param algorithm нужный алгоритм
      */
     private void doMakeAlgorithm(Algorithm algorithm){
-        new Thread(() -> {
-            Mat mat = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
-            Mat result = algorithm.doAlgorithm(mat);
-            switchImagesOnNextStep(ImageUtils.matToImageFX(result));
-        }).start();
-
+        Task task = new Task<Void>() {
+            @Override public Void call() {
+                Mat mat = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
+                updateProgress(0.3, 1.0);
+                Mat result = algorithm.doAlgorithm(mat);
+                updateProgress(0.6, 1.0);
+                switchImagesOnNextStep(ImageUtils.matToImageFX(result));
+                updateProgress(1.0, 1.0);
+                return null;
+            }
+        };
+        SingletonProcess.getInstance().getProgressBar().progressProperty().bind(task.progressProperty());
+        SingletonProcess.getInstance().getProgressIndicator().progressProperty().bind(task.progressProperty());
+        //Запускаем обработку алгоритма в отдельном потоке
+        new Thread(task).start();
     }
 
     @Override

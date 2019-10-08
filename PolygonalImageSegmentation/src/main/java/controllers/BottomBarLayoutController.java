@@ -23,7 +23,7 @@ public class BottomBarLayoutController implements Observer {
     private ImagesHandler imagesHandler;
 
     @FXML
-    private ProgressBar prBar ;
+    private ProgressBar prBar;
     @FXML
     private ProgressIndicator prInd;
     @FXML
@@ -37,15 +37,16 @@ public class BottomBarLayoutController implements Observer {
         this.imagesHandler = imagesHandler;
         //Регистрация в качестве наблюдателя сообщений от модели
         imagesHandler.registerObserver(this);
-
-        this.prBar = SingletonProcess.getInstance().getProgressBar();
-        this.prInd = SingletonProcess.getInstance().getProgressIndicator();
     }
 
     @FXML
     private void initialize() {
         cancel.setDisable(true);
         redo.setDisable(true);
+        //Инициализиурем синглтон процессбара
+        SingletonProcess.getInstance().setProgressBar(prBar);
+        SingletonProcess.getInstance().setProgressIndicator(prInd);
+
     }
 
     @FXML
