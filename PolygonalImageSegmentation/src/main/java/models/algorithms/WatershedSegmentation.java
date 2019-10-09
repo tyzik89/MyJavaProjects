@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class WatershedSegmentation implements Algorithm {
+
     private final static Logger LOGGER = LoggerFactory.getLogger(WatershedSegmentation.class);
 
     public WatershedSegmentation() {
@@ -16,6 +17,7 @@ public class WatershedSegmentation implements Algorithm {
     @Override
     public Mat doAlgorithm(Mat frame) {
         LOGGER.debug("Started processing");
+
         return null;
     }
 }

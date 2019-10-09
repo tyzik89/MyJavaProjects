@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
  * Отправляет в модель {@link ImagesHandler} данные о нажатии кнопок
  */
 public class BottomBarLayoutController implements Observer {
+
     private final static Logger LOGGER = LoggerFactory.getLogger(BottomBarLayoutController.class);
 
     //Ref on model class - ImagesHandler

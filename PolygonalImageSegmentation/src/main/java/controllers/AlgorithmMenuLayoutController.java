@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Objects;
 
 public class AlgorithmMenuLayoutController implements Observer {
+
     private final static Logger LOGGER = LoggerFactory.getLogger(AlgorithmMenuLayoutController.class);
 
     //Ref on model class - ImagesHandler

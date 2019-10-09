@@ -14,6 +14,7 @@ import utils.JavaFXUtils;
  * Получает уведомление о готовности изображения от {@link ImagesHandler} и отображает его
  */
 public class ImageViewLayoutController implements Observer {
+
     private final static Logger LOGGER = LoggerFactory.getLogger(ImageViewLayoutController.class);
 
     //Ref on model class - ImagesHandler

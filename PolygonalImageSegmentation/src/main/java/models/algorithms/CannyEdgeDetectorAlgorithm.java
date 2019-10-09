@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
  * 4) Hysteresis thresholding находит где края начинаются и заканчиваются.
  */
 public class CannyEdgeDetectorAlgorithm implements Algorithm{
+
     private final static Logger LOGGER = LoggerFactory.getLogger(CannyEdgeDetectorAlgorithm.class);
 
     private int sizeGaussFilter;
@@ -46,6 +47,7 @@ public class CannyEdgeDetectorAlgorithm implements Algorithm{
 
     public Mat doAlgorithm(Mat frame) {
         LOGGER.debug("Started processing");
+
         //Инициализация
         Mat grayMat = new Mat();
         Mat detectedEdgesMat = new Mat();

@@ -17,10 +17,11 @@ import utils.ImageUtils;
  * накопительном пространстве (accumulator space) которое строится при вычислении трансформации Хафа.
  */
 public class HoughConversionAlgorithm implements Algorithm {
+
     private final static Logger LOGGER = LoggerFactory.getLogger(HoughConversionAlgorithm.class);
 
+    //Тип метода Хафа
     private boolean typeHoughMethodClassic;
-
     // Разрешение параметра r в пикселях
     private double distance;
     // Разрешение параметра θ в радианах
@@ -56,6 +57,7 @@ public class HoughConversionAlgorithm implements Algorithm {
     @Override
     public Mat doAlgorithm(Mat frame) {
         LOGGER.debug("Started processing");
+
         //Конвертируем изображение в одноканальное
         Mat matGray = new Mat();
         Imgproc.cvtColor(frame, matGray, Imgproc.COLOR_BGR2GRAY);

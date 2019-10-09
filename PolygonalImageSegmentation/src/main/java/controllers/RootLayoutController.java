@@ -27,6 +27,7 @@ import java.io.IOException;
  * Имеет доступ к главному приложению для подгрузки дополнительных слоёв на главную сцену {@link javafx.stage.Stage}
  */
 public class RootLayoutController {
+
     private final static Logger LOGGER = LoggerFactory.getLogger(RootLayoutController.class);
 
     // Ref on app.MainApp

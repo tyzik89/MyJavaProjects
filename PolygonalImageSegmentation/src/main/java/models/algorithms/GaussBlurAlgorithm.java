@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
  * Фильтр Гаусса используется для снижения уровня шумов и даёт размытие
  */
 public class GaussBlurAlgorithm implements Algorithm{
+
     private final static Logger LOGGER = LoggerFactory.getLogger(GaussBlurAlgorithm.class);
 
     /**
@@ -28,6 +29,7 @@ public class GaussBlurAlgorithm implements Algorithm{
      */
     public Mat doAlgorithm(Mat frame) {
         LOGGER.debug("Started processing");
+
         if (sizeGaussFilter > 0)
             Imgproc.blur(frame, frame, new Size(sizeGaussFilter, sizeGaussFilter));
         return frame;
