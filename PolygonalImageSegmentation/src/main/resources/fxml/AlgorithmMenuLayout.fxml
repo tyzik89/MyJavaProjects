@@ -191,7 +191,7 @@
             </TitledPane>
             <TitledPane fx:id="watershedTools" animated="false" disable="true" text="Сегментация по &quot;Водоразделам&quot;">
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <Button layoutX="54.0" layoutY="426.0" mnemonicParsing="false" onAction="#handleAddMarkers" text="Добавить маркеры" />
+                    <Button layoutX="29.0" layoutY="426.0" mnemonicParsing="false" onAction="#handleAddMarkers" text="Добавить маркеры вручную" />
                     <Button layoutX="76.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleApplyWatershed" text="Применить" />
                 </AnchorPane>
             </TitledPane>

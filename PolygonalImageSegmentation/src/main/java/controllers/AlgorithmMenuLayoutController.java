@@ -224,19 +224,26 @@ public class AlgorithmMenuLayoutController implements Observer {
             2	Modelity.WINDOW_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), новое окно блокирует родительское окно. Вы не можете интерактировать с родительским окном, до тех пор, пока это окно не закроется.
             3	Modelity.APPLICATION_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), оно блокирует все другие окна приложения. Вы не можете интерактировать ни с каким окном, до тех пор пока это окно не закроется.
             */
-        stage.initModality(Modality.NONE);
+        stage.initModality(Modality.APPLICATION_MODAL);
         //Настройка родительского окна
         //stage.initOwner(mainApp.getPrimaryStage());
 
-        AnchorPane anchorRoot = new AnchorPane();
-        anchorRoot.setMaxWidth(1024.0);
-        anchorRoot.setMaxHeight(768.0);
-        ImageView imageView = new ImageView();
+        ScrollPane scrollPane = new ScrollPane();
+        //scrollPane.setPannable(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setMaxWidth(1024.0);
+        scrollPane.setMaxHeight(768.0);
 
+        AnchorPane anchorPane = new AnchorPane();
+
+        ImageView imageView = new ImageView();
         Image image = imagesHandler.getCurrentImage();
         imageView.setImage(image);
 
-        anchorRoot.getChildren().add(imageView);
+        scrollPane.setContent(anchorPane);
+        anchorPane.getChildren().add(imageView);
+
         final double[] initX = new double[1];
         final double[] initY = new double[1];
 
@@ -248,8 +255,8 @@ public class AlgorithmMenuLayoutController implements Observer {
             public void handle(MouseEvent me) {
                 System.out.println("Clicked, x:" + me.getSceneX() + " y:" + me.getSceneY());
                 //the event will be passed only to the circle which is on front
-                initX[0] = me.getSceneX();
-                initY[0] = me.getSceneY();
+                initX[0] = me.getX();
+                initY[0] = me.getY();
                 me.consume();
             }
         });
@@ -259,21 +266,21 @@ public class AlgorithmMenuLayoutController implements Observer {
             public void handle(MouseEvent me) {
                 System.out.println("Dragged, x:" + me.getSceneX() + " y:" + me.getSceneY());
                 if (me.getSceneX() < maxX && me.getSceneY() < maxY) {
-                    Line line = new Line(initX[0], initY[0], me.getSceneX(), me.getSceneY());
+                    Line line = new Line(initX[0], initY[0], me.getX(), me.getY());
                     line.setFill(null);
                     line.setStroke(Color.RED);
                     line.setStrokeWidth(2);
-                    anchorRoot.getChildren().add(line);
+                    anchorPane.getChildren().add(line);
                     System.out.println(line.getStartX() + " " + line.getEndX());
                     System.out.println(line.getEndX() + " " + line.getEndY());
                 }
 
-                initX[0] = me.getSceneX() > maxX ? maxX : me.getSceneX();
-                initY[0] = me.getSceneY() > maxY ? maxY : me.getSceneY();
+                initX[0] = me.getX() > maxX ? maxX : me.getX();
+                initY[0] = me.getY() > maxY ? maxY : me.getY();
             }
         });
 
-        Scene scene = new Scene(anchorRoot);
+        Scene scene = new Scene(scrollPane);
         stage.setScene(scene);
         stage.show();
     }
