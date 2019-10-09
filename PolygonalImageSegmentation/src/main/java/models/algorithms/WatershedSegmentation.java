@@ -11,13 +11,16 @@ public class WatershedSegmentation implements Algorithm {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(WatershedSegmentation.class);
 
-    public WatershedSegmentation() {
+    private Mat mask;
+
+    public WatershedSegmentation(Mat mask) {
+        this.mask = mask;
     }
 
     @Override
     public Mat doAlgorithm(Mat frame) {
         LOGGER.debug("Started processing");
 
-        return null;
+        return mask;
     }
 }

@@ -4,11 +4,16 @@ import constants.NotifyConstants;
 import fxelements.SingletonProcess;
 import javafx.concurrent.Task;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Line;
 import models.algorithms.*;
 import models.notification.Observable;
 import models.notification.Observer;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
 import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
 import utils.ImageUtils;
 
 import java.io.File;
@@ -73,8 +78,18 @@ public class ImagesHandler implements Observable {
         doMakeAlgorithm(new HoughConversionAlgorithm(typeHoughMethodClassic, distance, angle, threshold, params));
     }
 
-    public void doWatershedSegmentation() {
-        doMakeAlgorithm(new WatershedSegmentation());
+    public void doWatershedSegmentation(List<Line> lineList) {
+        // Рисуем маркеры
+        Mat matCurr = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
+        Mat mask = new Mat(matCurr.size(), CvType.CV_8UC1, new Scalar(0));
+
+        for (Line line : lineList) {
+            Imgproc.line(mask,
+                    new Point(line.getStartX(), line.getStartY()), new Point(line.getEndX(), line.getEndY()),
+                    new Scalar(255), 2);
+        }
+
+        doMakeAlgorithm(new WatershedSegmentation(mask));
     }
 
     public void doMakeBlur(int sizeGaussFilter) {

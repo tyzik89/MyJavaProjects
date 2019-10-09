@@ -20,6 +20,8 @@ import models.notification.Observer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class AlgorithmMenuLayoutController implements Observer {
@@ -220,6 +222,8 @@ public class AlgorithmMenuLayoutController implements Observer {
         final double maxX = imageView.getImage().getWidth();
         final double maxY = imageView.getImage().getHeight();
 
+        List<Line> lineList = new ArrayList<>();
+
         imageView.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
@@ -239,6 +243,7 @@ public class AlgorithmMenuLayoutController implements Observer {
                     line.setStroke(Color.RED);
                     line.setStrokeWidth(2);
                     anchorPane.getChildren().add(line);
+                    lineList.add(line);
 //                    System.out.println(line.getStartX() + " " + line.getEndX());
 //                    System.out.println(line.getEndX() + " " + line.getEndY());
                 }
@@ -251,7 +256,7 @@ public class AlgorithmMenuLayoutController implements Observer {
         run.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                imagesHandler.doWatershedSegmentation();
+                imagesHandler.doWatershedSegmentation(lineList);
                 //Закрываем текущее окно
                 stageWatershed.close();
             }
