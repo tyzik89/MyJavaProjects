@@ -217,19 +217,16 @@ public class AlgorithmMenuLayoutController implements Observer {
 
     @FXML
     private void handleAddMarkers(ActionEvent event) {
-        //FIXME ПОПРАВИТЬ ДОБАВЛЕНИЕ МАРКЕРОВ ДЛЯ АЛГОРИТМА ВОДОРАЗДЕЛА!!!!!!!!!!!
+//        1	Modelity.NONE	Когда вы открываете новое окно с этой модальностью (modelity), новое окно будет независимым по отношению к родительскому окну.
+//            Вы можете интерактировать с родительским окном, или закрыть его не влияя на новое окно.
+//        2	Modelity.WINDOW_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), новое окно блокирует родительское окно.
+//            Вы не можете интерактировать с родительским окном, до тех пор, пока это окно не закроется.
+//        3	Modelity.APPLICATION_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), оно блокирует все другие окна приложения.
+//            Вы не можете интерактировать ни с каким окном, до тех пор пока это окно не закроется.
         Stage stage = new Stage();
-        /*
-            1	Modelity.NONE	Когда вы открываете новое окно с этой модальностью (modelity), новое окно будет независимым по отношению к родительскому окну. Вы можете интерактировать с родительским окном, или закрыть его не влияя на новое окно.
-            2	Modelity.WINDOW_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), новое окно блокирует родительское окно. Вы не можете интерактировать с родительским окном, до тех пор, пока это окно не закроется.
-            3	Modelity.APPLICATION_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), оно блокирует все другие окна приложения. Вы не можете интерактировать ни с каким окном, до тех пор пока это окно не закроется.
-            */
         stage.initModality(Modality.APPLICATION_MODAL);
-        //Настройка родительского окна
-        //stage.initOwner(mainApp.getPrimaryStage());
 
         ScrollPane scrollPane = new ScrollPane();
-        //scrollPane.setPannable(true);
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
         scrollPane.setMaxWidth(1024.0);
@@ -264,7 +261,6 @@ public class AlgorithmMenuLayoutController implements Observer {
         imageView.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                System.out.println("Dragged, x:" + me.getSceneX() + " y:" + me.getSceneY());
                 if (me.getSceneX() < maxX && me.getSceneY() < maxY) {
                     Line line = new Line(initX[0], initY[0], me.getX(), me.getY());
                     line.setFill(null);
