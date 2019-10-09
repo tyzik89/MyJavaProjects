@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Modality;
@@ -123,11 +124,7 @@ public class AlgorithmMenuLayoutController implements Observer {
 
     @FXML
     private void selectOtsu(ActionEvent event) {
-        if (otsu.isSelected()) {
-            binarySlider.setDisable(true);
-        } else {
-            binarySlider.setDisable(false);
-        }
+        binarySlider.setDisable(otsu.isSelected());
     }
 
     @FXML
@@ -185,7 +182,84 @@ public class AlgorithmMenuLayoutController implements Observer {
 
     @FXML
     private void handleApplyWatershed (ActionEvent event) {
-        imagesHandler.doWatershedSegmentation();
+//        1	Modelity.NONE	Когда вы открываете новое окно с этой модальностью (modelity), новое окно будет независимым по отношению к родительскому окну.
+//            Вы можете интерактировать с родительским окном, или закрыть его не влияя на новое окно.
+//        2	Modelity.WINDOW_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), новое окно блокирует родительское окно.
+//            Вы не можете интерактировать с родительским окном, до тех пор, пока это окно не закроется.
+//        3	Modelity.APPLICATION_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), оно блокирует все другие окна приложения.
+//            Вы не можете интерактировать ни с каким окном, до тех пор пока это окно не закроется.
+        Stage stageWatershed = new Stage();
+        stageWatershed.initModality(Modality.APPLICATION_MODAL);
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.maxHeight(800);
+        borderPane.maxWidth(1300);
+
+        Button run = new Button("Запустить обработку");
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setMaxWidth(1024.0);
+        scrollPane.setMaxHeight(768.0);
+
+        AnchorPane anchorPane = new AnchorPane();
+
+        ImageView imageView = new ImageView();
+        Image image = imagesHandler.getCurrentImage();
+        imageView.setImage(image);
+
+        borderPane.setTop(run);
+        borderPane.setCenter(scrollPane);
+        scrollPane.setContent(anchorPane);
+        anchorPane.getChildren().add(imageView);
+
+        run.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                imagesHandler.doWatershedSegmentation();
+                //Закрываем текущее окно
+                stageWatershed.close();
+            }
+        });
+
+        final double[] initX = new double[1];
+        final double[] initY = new double[1];
+
+        final double maxX = imageView.getImage().getWidth();
+        final double maxY = imageView.getImage().getHeight();
+
+        imageView.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                //the event will be passed only to the circle which is on front
+                initX[0] = me.getX();
+                initY[0] = me.getY();
+                me.consume();
+            }
+        });
+
+        imageView.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                if (me.getSceneX() < maxX && me.getSceneY() < maxY) {
+                    Line line = new Line(initX[0], initY[0], me.getX(), me.getY());
+                    line.setFill(null);
+                    line.setStroke(Color.RED);
+                    line.setStrokeWidth(2);
+                    anchorPane.getChildren().add(line);
+//                    System.out.println(line.getStartX() + " " + line.getEndX());
+//                    System.out.println(line.getEndX() + " " + line.getEndY());
+                }
+
+                initX[0] = me.getX() > maxX ? maxX : me.getX();
+                initY[0] = me.getY() > maxY ? maxY : me.getY();
+            }
+        });
+
+        Scene scene = new Scene(borderPane);
+        stageWatershed.setScene(scene);
+        stageWatershed.show();
     }
 
     @FXML
@@ -213,72 +287,6 @@ public class AlgorithmMenuLayoutController implements Observer {
     @FXML
     private void changeThresholdHough() {
         thresholdHoughLabel.setText(String.valueOf((int) thresholdHoughSlider.getValue()));
-    }
-
-    @FXML
-    private void handleAddMarkers(ActionEvent event) {
-//        1	Modelity.NONE	Когда вы открываете новое окно с этой модальностью (modelity), новое окно будет независимым по отношению к родительскому окну.
-//            Вы можете интерактировать с родительским окном, или закрыть его не влияя на новое окно.
-//        2	Modelity.WINDOW_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), новое окно блокирует родительское окно.
-//            Вы не можете интерактировать с родительским окном, до тех пор, пока это окно не закроется.
-//        3	Modelity.APPLICATION_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), оно блокирует все другие окна приложения.
-//            Вы не можете интерактировать ни с каким окном, до тех пор пока это окно не закроется.
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setFitToHeight(true);
-        scrollPane.setFitToWidth(true);
-        scrollPane.setMaxWidth(1024.0);
-        scrollPane.setMaxHeight(768.0);
-
-        AnchorPane anchorPane = new AnchorPane();
-
-        ImageView imageView = new ImageView();
-        Image image = imagesHandler.getCurrentImage();
-        imageView.setImage(image);
-
-        scrollPane.setContent(anchorPane);
-        anchorPane.getChildren().add(imageView);
-
-        final double[] initX = new double[1];
-        final double[] initY = new double[1];
-
-        final double maxX = imageView.getImage().getWidth();
-        final double maxY = imageView.getImage().getHeight();
-
-        imageView.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent me) {
-                System.out.println("Clicked, x:" + me.getSceneX() + " y:" + me.getSceneY());
-                //the event will be passed only to the circle which is on front
-                initX[0] = me.getX();
-                initY[0] = me.getY();
-                me.consume();
-            }
-        });
-
-        imageView.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent me) {
-                if (me.getSceneX() < maxX && me.getSceneY() < maxY) {
-                    Line line = new Line(initX[0], initY[0], me.getX(), me.getY());
-                    line.setFill(null);
-                    line.setStroke(Color.RED);
-                    line.setStrokeWidth(2);
-                    anchorPane.getChildren().add(line);
-                    System.out.println(line.getStartX() + " " + line.getEndX());
-                    System.out.println(line.getEndX() + " " + line.getEndY());
-                }
-
-                initX[0] = me.getX() > maxX ? maxX : me.getX();
-                initY[0] = me.getY() > maxY ? maxY : me.getY();
-            }
-        });
-
-        Scene scene = new Scene(scrollPane);
-        stage.setScene(scene);
-        stage.show();
     }
 
     @Override
