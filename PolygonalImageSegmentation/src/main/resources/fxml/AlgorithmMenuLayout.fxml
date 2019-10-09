@@ -20,23 +20,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="650.0" prefWidth="232.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
 
-    <Accordion prefHeight="650.0" prefWidth="232.0">
+    <Accordion AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
         <panes>
 
-            <TitledPane fx:id="commonTools" animated="false" disable="true" prefHeight="650.0" prefWidth="200.0" text="Общие Инструменты">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleMakeBinary" prefHeight="25.0" prefWidth="205.0" text="Бинарное изображение">
+            <TitledPane fx:id="commonTools" animated="false" disable="true" text="Общие Инструменты">
+                <AnchorPane>
+                    <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleMakeBinary" text="Бинарное изображение">
                         <tooltip>
                             <Tooltip text="Сделать изображение бинарным" />
                         </tooltip>
                     </Button>
                     <Label layoutX="14.0" layoutY="45.0" text="Порог:" />
-                    <Label fx:id="showBinaryThreshold" layoutX="68.0" layoutY="43.0" prefHeight="17.0" prefWidth="43.0" />
-                    <CheckBox fx:id="otsu" layoutX="17.0" layoutY="108.0" mnemonicParsing="false" onAction="#selectOtsu" prefHeight="21.0" prefWidth="122.0" text="порог OTSU" />
-                    <Slider fx:id="binarySlider" layoutX="14.0" layoutY="64.0" max="100.0" onMouseClicked="#changeBinarySlider" onMouseDragged="#changeBinarySlider" prefHeight="45.0" prefWidth="205.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                    <Label fx:id="showBinaryThreshold" layoutX="68.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="45.0" />
+                    <CheckBox fx:id="otsu" layoutX="17.0" layoutY="108.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectOtsu" prefHeight="21.0" prefWidth="122.0" text="порог OTSU" />
+                    <Slider fx:id="binarySlider" layoutX="14.0" layoutY="64.0" max="100.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#changeBinarySlider" onMouseDragged="#changeBinarySlider" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                     <Separator layoutX="-2.0" layoutY="127.0" prefHeight="24.0" prefWidth="232.0" />
                     <Button layoutX="14.0" layoutY="151.0" mnemonicParsing="false" onAction="#makeBlur" prefHeight="25.0" prefWidth="205.0" text="Размытие по Гауссу">
                         <tooltip>
@@ -49,8 +49,8 @@
                 </AnchorPane>
             </TitledPane>
 
-            <TitledPane fx:id="cannyTools" animated="false" disable="true" prefHeight="650.0" prefWidth="200.0" text="Алгоритм Кэнни">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <TitledPane fx:id="cannyTools" animated="false" disable="true" text="Алгоритм Кэнни">
+                <AnchorPane>
                     <Label layoutX="12.0" layoutY="14.0" text="Пороговое значение:" />
                     <Label fx:id="showThresholdCanny" layoutX="171.0" layoutY="14.0" prefHeight="17.0" prefWidth="36.0" />
                     <Slider fx:id="thresholdCanny" layoutX="6.0" layoutY="36.0" onMouseClicked="#changeThresholdCanny" onMouseDragged="#changeThresholdCanny" prefHeight="45.0" prefWidth="219.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
@@ -77,8 +77,8 @@
                 </AnchorPane>
             </TitledPane>
 
-            <TitledPane fx:id="houghTools" animated="false" disable="true" prefHeight="650.0" prefWidth="200.0" text="Преобразование Хафа">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <TitledPane fx:id="houghTools" animated="false" disable="true" text="Преобразование Хафа">
+                <AnchorPane>
                <VBox layoutX="60.0" layoutY="514.0" />
                     <TabPane prefHeight="522.0" prefWidth="230.0" tabClosingPolicy="UNAVAILABLE">
                         <Tab text="Линии">
@@ -190,7 +190,7 @@
                 </AnchorPane>
             </TitledPane>
             <TitledPane fx:id="watershedTools" animated="false" disable="true" text="Сегментация по &quot;Водоразделам&quot;">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane>
                     <Button layoutX="76.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleApplyWatershed" text="Применить" />
                 </AnchorPane>
             </TitledPane>
