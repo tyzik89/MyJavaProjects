@@ -214,15 +214,6 @@ public class AlgorithmMenuLayoutController implements Observer {
         scrollPane.setContent(anchorPane);
         anchorPane.getChildren().add(imageView);
 
-        run.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                imagesHandler.doWatershedSegmentation();
-                //Закрываем текущее окно
-                stageWatershed.close();
-            }
-        });
-
         final double[] initX = new double[1];
         final double[] initY = new double[1];
 
@@ -254,6 +245,15 @@ public class AlgorithmMenuLayoutController implements Observer {
 
                 initX[0] = me.getX() > maxX ? maxX : me.getX();
                 initY[0] = me.getY() > maxY ? maxY : me.getY();
+            }
+        });
+
+        run.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                imagesHandler.doWatershedSegmentation();
+                //Закрываем текущее окно
+                stageWatershed.close();
             }
         });
 
