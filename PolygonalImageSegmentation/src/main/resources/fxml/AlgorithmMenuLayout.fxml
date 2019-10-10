@@ -78,7 +78,7 @@
 
             <TitledPane fx:id="houghTools" animated="false" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Преобразование Хафа">
                 <AnchorPane>
-                    <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <Tab text="Линии">
                             <AnchorPane>
                                 <RadioButton fx:id="radiobHoughClassic" layoutX="46.0" layoutY="26.0" mnemonicParsing="false" onAction="#changeRadioButtonHoughClassic" selected="true" text="классический" AnchorPane.leftAnchor="0.0">
@@ -124,7 +124,7 @@
                                 <Separator layoutX="2.0" layoutY="168.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                 <Label fx:id="thresholdHoughLabel" layoutX="167.0" layoutY="169.0" prefHeight="31.0" prefWidth="44.0" />
                                 <Separator layoutX="-1.0" layoutY="253.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                <Accordion layoutY="257.0">
+                                <Accordion AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="257.0">
                                     <panes>
                                         <TitledPane fx:id="titledPaneHoughClassic" animated="true" disable="false" expanded="true" text="Классический. Параметры.">
                                             <AnchorPane>
