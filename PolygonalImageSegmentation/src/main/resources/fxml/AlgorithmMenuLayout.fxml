@@ -157,7 +157,7 @@
                                         <TitledPane fx:id="titledPaneHoughProbably" animated="true" disable="true" expanded="false" text="Вероятностный. Параметры:">
                                             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="210.0">
                                                 <Label layoutX="13.0" layoutY="8.0" text="Минимальная длинна линии:" AnchorPane.leftAnchor="0.0" />
-                                                <Spinner fx:id="spinnerHoughProbablyMinLineLength" editable="true" layoutX="20.0" layoutY="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                                                <Spinner fx:id="spinnerHoughProbablyMinLineLength" editable="true" layoutX="20.0" layoutY="31.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="190.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
                                                     <valueFactory>
                                                         <SpinnerValueFactory.DoubleSpinnerValueFactory amountToStepBy="0.1" initialValue="0.0" max="1000" min="0.0" />
                                                     </valueFactory>
@@ -166,7 +166,7 @@
                                                     </tooltip>
                                                 </Spinner>
                                                 <Label layoutX="12.0" layoutY="75.0" text="Макс. расст. между точками:" AnchorPane.leftAnchor="0.0" />
-                                                <Spinner fx:id="spinnerHoughProbablyMaxLineGap" editable="true" layoutX="19.0" layoutY="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                                                <Spinner fx:id="spinnerHoughProbablyMaxLineGap" editable="true" layoutX="19.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="190.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                                                     <valueFactory>
                                                         <SpinnerValueFactory.DoubleSpinnerValueFactory amountToStepBy="0.1" initialValue="0.0" max="1000" min="0.0" />
                                                     </valueFactory>
