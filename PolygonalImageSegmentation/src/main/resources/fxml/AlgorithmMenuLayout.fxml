@@ -192,7 +192,11 @@
             <TitledPane fx:id="watershedTools" animated="false" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Сегментация по &quot;Водоразделам&quot;">
                 <AnchorPane>
                     <Button layoutX="12.0" layoutY="82.0" mnemonicParsing="false" onAction="#handleApplyWatershed" text="Применить" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                    <ToggleButton fx:id="watershedMode" onAction="#handleWatershedMode" layoutX="90.0" layoutY="25.0" mnemonicParsing="false" text="Ручной режим" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                    <ToggleButton fx:id="watershedMode" onAction="#handleWatershedMode" layoutX="90.0" layoutY="25.0" mnemonicParsing="false" text="Ручной режим" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" >
+                        <tooltip>
+                            <Tooltip text="Режим расстановки маркеров на изображении" />
+                        </tooltip>
+                    </ToggleButton>
                 </AnchorPane>
             </TitledPane>
 

@@ -34,8 +34,6 @@ public class WatershedSegmentation implements Algorithm {
         Mat frame8SC3 = new Mat();
         Imgproc.cvtColor(frame, frame8SC3, Imgproc.COLOR_BGRA2BGR);
 
-        LOGGER.debug("frame = {}, {}, {}", frame8SC3.type(), frame8SC3.depth(), frame8SC3.channels());
-
         // Находим контуры маркеров
         ArrayList<MatOfPoint> contours = new ArrayList<MatOfPoint>();
         Imgproc.findContours(mask, contours, new Mat(),
