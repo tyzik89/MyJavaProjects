@@ -12,7 +12,7 @@ public final class ImageUtils {
     public static final Scalar COLOR_WHITE = colorRGB(255, 255, 255);
     public static final Scalar COLOR_RED = colorRGB(255, 0, 0);
 
-    public static Scalar colorRGB(double red, double green, double blue) {
+    private static Scalar colorRGB(double red, double green, double blue) {
         return new Scalar(blue, green, red);
     }
 

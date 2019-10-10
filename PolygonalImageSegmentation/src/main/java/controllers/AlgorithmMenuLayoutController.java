@@ -202,8 +202,8 @@ public class AlgorithmMenuLayoutController implements Observer {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
-        scrollPane.setMaxWidth(1024.0);
-        scrollPane.setMaxHeight(768.0);
+        scrollPane.setMaxWidth(1040.0);
+        scrollPane.setMaxHeight(800.0);
 
         AnchorPane anchorPane = new AnchorPane();
 

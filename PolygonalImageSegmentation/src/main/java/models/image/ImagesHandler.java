@@ -81,12 +81,12 @@ public class ImagesHandler implements Observable {
     public void doWatershedSegmentation(List<Line> lineList) {
         // Рисуем маркеры
         Mat matCurr = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
-        Mat mask = new Mat(matCurr.size(), CvType.CV_8UC1, new Scalar(0));
+        Mat mask = new Mat(matCurr.size(), CvType.CV_8UC1,  new Scalar(0));
 
         for (Line line : lineList) {
             Imgproc.line(mask,
                     new Point(line.getStartX(), line.getStartY()), new Point(line.getEndX(), line.getEndY()),
-                    new Scalar(255), 2);
+                    new Scalar(255), 5);
         }
 
         doMakeAlgorithm(new WatershedSegmentation(mask));
