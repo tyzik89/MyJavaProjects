@@ -24,15 +24,13 @@
     <Loggers>
         <Logger name="models.algorithms" level="debug">
             <AppenderRef ref="Algorithms-File-Appender"/>
-            <AppenderRef ref="Console-Appender"/>
         </Logger>
 
         <Logger name="controllers" level="debug">
             <AppenderRef ref="Controllers-File-Appender"/>
-            <AppenderRef ref="Console-Appender"/>
         </Logger>
 
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="Console-Appender" />
         </Root>
     </Loggers>
