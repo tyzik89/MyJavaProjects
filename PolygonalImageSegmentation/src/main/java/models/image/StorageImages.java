@@ -11,6 +11,7 @@ public class StorageImages {
     private static Image SourceImage;
     private static Image CurrentImage;
     private static Image PreviousImage;
+    private static Image TempImage;
 
     private static volatile StorageImages INSTANCE = new StorageImages();
 
@@ -26,6 +27,7 @@ public class StorageImages {
         SourceImage = image;
         CurrentImage = image;
         PreviousImage = image;
+        TempImage = image;
     }
 
     public void switchImagesOnNextStep(Image newImage) {
@@ -35,10 +37,6 @@ public class StorageImages {
 
     public Image getSourceImage() {
         return SourceImage;
-    }
-
-    public void setSourceImage(Image sourceImage) {
-        SourceImage = sourceImage;
     }
 
     public Image getCurrentImage() {
@@ -55,5 +53,13 @@ public class StorageImages {
 
     public void setPreviousImage(Image previousImage) {
         PreviousImage = previousImage;
+    }
+
+    public Image getTempImage() {
+        return TempImage;
+    }
+
+    public void setTempImage(Image tempImage) {
+        TempImage = tempImage;
     }
 }

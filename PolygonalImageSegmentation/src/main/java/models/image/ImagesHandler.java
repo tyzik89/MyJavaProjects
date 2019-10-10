@@ -88,6 +88,8 @@ public class ImagesHandler implements Observable {
                     new Point(line.getStartX(), line.getStartY()), new Point(line.getEndX(), line.getEndY()),
                     new Scalar(255), 5);
         }
+        storageImages.setTempImage(ImageUtils.matToImageFX(mask));
+        notifyObservers(NotifyConstants.TEMP_IMAGE_READY);
 
         doMakeAlgorithm(new WatershedSegmentation(mask));
     }
@@ -142,6 +144,10 @@ public class ImagesHandler implements Observable {
 
     public Image getSourceImage() {
         return storageImages.getSourceImage();
+    }
+
+    public Image getTempImage() {
+        return storageImages.getTempImage();
     }
 
     private synchronized void switchImagesOnNextStep(Image newImage) {

@@ -240,6 +240,27 @@ public class AlgorithmMenuLayoutController implements Observer {
                 watershedTools.setDisable(false);
                 break;
             }
+            case NotifyConstants.TEMP_IMAGE_READY: {
+                Stage stage = new Stage();
+                stage.initModality(Modality.NONE);
+                ScrollPane scrollPane = new ScrollPane();
+                scrollPane.setFitToHeight(true);
+                scrollPane.setFitToWidth(true);
+                scrollPane.setMaxWidth(1040.0);
+                scrollPane.setMaxHeight(800.0);
+                AnchorPane anchorPane = new AnchorPane();
+                ImageView imageView = new ImageView();
+                Image image = imagesHandler.getTempImage();
+
+                imageView.setImage(image);
+                scrollPane.setContent(anchorPane);
+                anchorPane.getChildren().add(imageView);
+
+                Scene scene = new Scene(scrollPane);
+                stage.setScene(scene);
+                stage.show();
+                break;
+            }
         }
     }
 
