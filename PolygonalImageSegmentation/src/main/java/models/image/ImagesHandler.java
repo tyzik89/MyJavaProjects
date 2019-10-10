@@ -112,7 +112,7 @@ public class ImagesHandler implements Observable {
                 Mat mat = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
                 updateProgress(0.3, 1.0);
                 Mat result = algorithm.doAlgorithm(mat);
-                updateProgress(0.6, 1.0);
+                updateProgress(0.8, 1.0);
                 switchImagesOnNextStep(ImageUtils.matToImageFX(result));
                 updateProgress(1.0, 1.0);
                 return null;
