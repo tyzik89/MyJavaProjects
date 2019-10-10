@@ -19,14 +19,14 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxWidth="260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
+<AnchorPane maxWidth="265.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
 
-    <Accordion maxWidth="260.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <Accordion maxWidth="265.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
         <panes>
 
             <TitledPane fx:id="commonTools" animated="false" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Общие Инструменты">
-                <AnchorPane maxWidth="260.0">
+                <AnchorPane>
                     <Button layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleMakeBinary" text="Бинарное изображение" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                         <tooltip>
                             <Tooltip text="Сделать изображение бинарным" />
@@ -49,7 +49,7 @@
             </TitledPane>
 
             <TitledPane fx:id="cannyTools" animated="false" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Алгоритм Кэнни">
-                <AnchorPane maxWidth="260.0">
+                <AnchorPane>
                     <Label layoutX="12.0" layoutY="14.0" text="Пороговое значение:" AnchorPane.leftAnchor="0.0" />
                     <Label fx:id="showThresholdCanny" layoutX="171.0" layoutY="14.0" prefHeight="17.0" prefWidth="36.0" />
                     <Slider fx:id="thresholdCanny" layoutX="6.0" layoutY="36.0" onMouseClicked="#changeThresholdCanny" onMouseDragged="#changeThresholdCanny" showTickLabels="true" showTickMarks="true" snapToTicks="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
@@ -77,7 +77,7 @@
             </TitledPane>
 
             <TitledPane fx:id="houghTools" animated="false" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Преобразование Хафа">
-                <AnchorPane maxWidth="260.0">
+                <AnchorPane>
                     <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <Tab text="Линии">
                             <AnchorPane>
@@ -189,7 +189,7 @@
             </TitledPane>
 
             <TitledPane fx:id="watershedTools" animated="false" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Сегментация по &quot;Водоразделам&quot;">
-                <AnchorPane maxWidth="260.0">
+                <AnchorPane>
                     <Button layoutX="12.0" layoutY="82.0" mnemonicParsing="false" onAction="#handleApplyWatershed" text="Применить" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" />
                 </AnchorPane>
             </TitledPane>
