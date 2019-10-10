@@ -89,6 +89,8 @@ public class AlgorithmMenuLayoutController implements Observer {
     private Spinner spinnerHoughProbablyMaxLineGap;
     @FXML
     private Spinner spinnerHoughProbablyMinLineLength;
+    @FXML
+    private ToggleButton watershedMode;
 
     public AlgorithmMenuLayoutController(ImagesHandler imagesHandler) {
         // контролер должен знать модель
@@ -184,7 +186,65 @@ public class AlgorithmMenuLayoutController implements Observer {
 
     @FXML
     private void handleApplyWatershed (ActionEvent event) {
-//        1	Modelity.NONE	Когда вы открываете новое окно с этой модальностью (modelity), новое окно будет независимым по отношению к родительскому окну.
+        if (watershedMode.isSelected()) {
+            autoHandleWatershed();
+        } else {
+            manualHandleWatershed();
+        }
+    }
+
+    @FXML
+    private void changeRadioButtonHoughClassic(ActionEvent event) {
+        radiobHoughClassic.setSelected(true);
+        titledPaneHoughClassic.setDisable(false);
+        titledPaneHoughClassic.setExpanded(true);
+
+        radiobHoughProbably.setSelected(false);
+        titledPaneHoughProbably.setDisable(true);
+        titledPaneHoughProbably.setExpanded(false);
+    }
+
+    @FXML
+    private void changeRadioButtonHoughProbably(ActionEvent event) {
+        radiobHoughProbably.setSelected(true);
+        titledPaneHoughProbably.setDisable(false);
+        titledPaneHoughProbably.setExpanded(true);
+
+        radiobHoughClassic.setSelected(false);
+        titledPaneHoughClassic.setDisable(true);
+        titledPaneHoughClassic.setExpanded(false);
+    }
+
+    @FXML
+    private void changeThresholdHough() {
+        thresholdHoughLabel.setText(String.valueOf((int) thresholdHoughSlider.getValue()));
+    }
+
+    @FXML
+    private void handleWatershedMode(ActionEvent event) {
+        if (watershedMode.isSelected()) {
+            watershedMode.setText("Автоматический режим");
+        } else {
+            watershedMode.setText("Ручной режим");
+        }
+    }
+
+    @Override
+    public void notification(String message) {
+        switch (message) {
+            case NotifyConstants.IMAGE_LOADED: {
+                commonTools.setDisable(false);
+                cannyTools.setDisable(false);
+                cannyTools.setExpanded(true);
+                houghTools.setDisable(false);
+                watershedTools.setDisable(false);
+                break;
+            }
+        }
+    }
+
+    private void manualHandleWatershed() {
+        //        1	Modelity.NONE	Когда вы открываете новое окно с этой модальностью (modelity), новое окно будет независимым по отношению к родительскому окну.
 //            Вы можете интерактировать с родительским окном, или закрыть его не влияя на новое окно.
 //        2	Modelity.WINDOW_MODAL	Когда вы открываете новое окно с этой модальностью (modelity), новое окно блокирует родительское окно.
 //            Вы не можете интерактировать с родительским окном, до тех пор, пока это окно не закроется.
@@ -267,44 +327,7 @@ public class AlgorithmMenuLayoutController implements Observer {
         stageWatershed.show();
     }
 
-    @FXML
-    private void changeRadioButtonHoughClassic(ActionEvent event) {
-        radiobHoughClassic.setSelected(true);
-        titledPaneHoughClassic.setDisable(false);
-        titledPaneHoughClassic.setExpanded(true);
+    private void autoHandleWatershed() {
 
-        radiobHoughProbably.setSelected(false);
-        titledPaneHoughProbably.setDisable(true);
-        titledPaneHoughProbably.setExpanded(false);
-    }
-
-    @FXML
-    private void changeRadioButtonHoughProbably(ActionEvent event) {
-        radiobHoughProbably.setSelected(true);
-        titledPaneHoughProbably.setDisable(false);
-        titledPaneHoughProbably.setExpanded(true);
-
-        radiobHoughClassic.setSelected(false);
-        titledPaneHoughClassic.setDisable(true);
-        titledPaneHoughClassic.setExpanded(false);
-    }
-
-    @FXML
-    private void changeThresholdHough() {
-        thresholdHoughLabel.setText(String.valueOf((int) thresholdHoughSlider.getValue()));
-    }
-
-    @Override
-    public void notification(String message) {
-        switch (message) {
-            case NotifyConstants.IMAGE_LOADED: {
-                commonTools.setDisable(false);
-                cannyTools.setDisable(false);
-                cannyTools.setExpanded(true);
-                houghTools.setDisable(false);
-                watershedTools.setDisable(false);
-                break;
-            }
-        }
     }
 }
