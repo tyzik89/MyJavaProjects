@@ -316,7 +316,7 @@ public class AlgorithmMenuLayoutController implements Observer {
         run.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                imagesHandler.doWatershedSegmentation(lineList);
+                imagesHandler.doWatershedSegmentationManualMode(lineList);
                 //Закрываем текущее окно
                 stageWatershed.close();
             }

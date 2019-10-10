@@ -78,7 +78,7 @@ public class ImagesHandler implements Observable {
         doMakeAlgorithm(new HoughConversionAlgorithm(typeHoughMethodClassic, distance, angle, threshold, params));
     }
 
-    public void doWatershedSegmentation(List<Line> lineList) {
+    public void doWatershedSegmentationManualMode(List<Line> lineList) {
         // Рисуем маркеры
         Mat matCurr = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
         Mat mask = new Mat(matCurr.size(), CvType.CV_8UC1,  new Scalar(0));
