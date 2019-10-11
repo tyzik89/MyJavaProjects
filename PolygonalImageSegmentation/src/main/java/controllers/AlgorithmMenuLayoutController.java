@@ -11,7 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -279,6 +281,10 @@ public class AlgorithmMenuLayoutController implements Observer {
         borderPane.maxWidth(1300);
 
         Button run = new Button("Запустить обработку");
+        ColorPicker colorPicker = new ColorPicker();
+        colorPicker.setValue(Color.RED);
+        HBox hBoxPanelTop = new HBox();
+        hBoxPanelTop.getChildren().addAll(run, colorPicker);
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setFitToHeight(true);
@@ -292,7 +298,7 @@ public class AlgorithmMenuLayoutController implements Observer {
         Image image = imagesHandler.getCurrentImage();
         imageView.setImage(image);
 
-        borderPane.setTop(run);
+        borderPane.setTop(hBoxPanelTop);
         borderPane.setCenter(scrollPane);
         scrollPane.setContent(anchorPane);
         anchorPane.getChildren().add(imageView);
@@ -321,7 +327,7 @@ public class AlgorithmMenuLayoutController implements Observer {
                 if (me.getSceneX() < maxX && me.getSceneY() < maxY) {
                     Line line = new Line(initX[0], initY[0], me.getX(), me.getY());
                     line.setFill(null);
-                    line.setStroke(Color.RED);
+                    line.setStroke(colorPicker.getValue());
                     line.setStrokeWidth(2);
                     anchorPane.getChildren().add(line);
                     lineList.add(line);
