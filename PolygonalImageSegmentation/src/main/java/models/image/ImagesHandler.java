@@ -88,12 +88,12 @@ public class ImagesHandler implements Observable {
     public void doWatershedSegmentationManualMode(List<Line> lineList) {
         // Рисуем маркеры
         Mat matCurr = ImageUtils.imageFXToMat(storageImages.getCurrentImage());
-        Mat mask = new Mat(matCurr.size(), CvType.CV_8UC1,  new Scalar(0));
+        Mat mask = new Mat(matCurr.size(), CvType.CV_8UC1,  ImageUtils.COLOR_BLACK);
 
         for (Line line : lineList) {
             Imgproc.line(mask,
                     new Point(line.getStartX(), line.getStartY()), new Point(line.getEndX(), line.getEndY()),
-                    new Scalar(255), 5);
+                    ImageUtils.COLOR_WHITE, 3);
         }
         storageImages.setTempImage(ImageUtils.matToImageFX(mask));
         notifyObservers(NotifyConstants.TEMP_IMAGE_READY);
@@ -102,21 +102,22 @@ public class ImagesHandler implements Observable {
     }
 
     public void doWatershedSegmentationAutoMode(Mat detectedLines) {
-        Mat temp = ImageUtils.imageFXToMat(storageImages.getSourceImage());
+        Mat matCurr = ImageUtils.imageFXToMat(storageImages.getSourceImage());
+        Mat mask = new Mat(matCurr.size(), CvType.CV_8UC1,  ImageUtils.COLOR_BLACK);
+
         for (int i = 0, r = detectedLines.rows(); i < r; i++) {
             for (int j = 0, c = detectedLines.cols(); j < c; j++) {
                 double[] line = detectedLines.get(i, j);
                 Imgproc.line(
-                        temp,
-                        new Point(line[0], line[1]),
-                        new Point(line[2], line[3]),
-                        ImageUtils.COLOR_RED,
-                        1,
-                        4);
+                        mask,
+                        new Point(line[0], line[1]), new Point(line[2], line[3]),
+                        ImageUtils.COLOR_WHITE,3);
+                break;
             }
+            break;
         }
 
-        storageImages.setTempImage(ImageUtils.matToImageFX(temp));
+        storageImages.setTempImage(ImageUtils.matToImageFX(mask));
         notifyObservers(NotifyConstants.TEMP_IMAGE_READY);
     }
 
