@@ -14,6 +14,8 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.ImageUtils;
 
 import java.io.File;
@@ -27,14 +29,19 @@ import java.util.List;
  * отправляет уведомление контроллерам о готовности
  *
  * Работает с хранилищем изображений {@link StorageImages}
+ * Работает с хранилищем матриц {@link StorageMatrix}
  */
 public class ImagesHandler implements Observable {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(ImagesHandler.class);
+
     private StorageImages storageImages;
+    private StorageMatrix storageMatrix;
     private List<Observer> observers;
 
     public ImagesHandler() {
         this.storageImages = StorageImages.getInstance();
+        this.storageMatrix = StorageMatrix.getInstance();
         //Список наблюдателей о результатах работы
         this.observers = new LinkedList<>();
     }
@@ -92,6 +99,25 @@ public class ImagesHandler implements Observable {
         notifyObservers(NotifyConstants.TEMP_IMAGE_READY);
 
         doMakeAlgorithm(new WatershedSegmentation(mask));
+    }
+
+    public void doWatershedSegmentationAutoMode(Mat detectedLines) {
+        Mat temp = ImageUtils.imageFXToMat(storageImages.getSourceImage());
+        for (int i = 0, r = detectedLines.rows(); i < r; i++) {
+            for (int j = 0, c = detectedLines.cols(); j < c; j++) {
+                double[] line = detectedLines.get(i, j);
+                Imgproc.line(
+                        temp,
+                        new Point(line[0], line[1]),
+                        new Point(line[2], line[3]),
+                        ImageUtils.COLOR_RED,
+                        1,
+                        4);
+            }
+        }
+
+        storageImages.setTempImage(ImageUtils.matToImageFX(temp));
+        notifyObservers(NotifyConstants.TEMP_IMAGE_READY);
     }
 
     public void doMakeBlur(int sizeGaussFilter) {

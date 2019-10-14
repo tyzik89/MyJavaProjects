@@ -1,5 +1,6 @@
 package models.algorithms;
 
+import models.image.StorageMatrix;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -116,6 +117,9 @@ public class HoughConversionAlgorithm implements Algorithm {
                 }
             }
         }
+
+        //Сохраняем линии отдельно, для последующего использования
+        StorageMatrix.getInstance().setMatrixOfLines(lines);
 
         return result;
     }

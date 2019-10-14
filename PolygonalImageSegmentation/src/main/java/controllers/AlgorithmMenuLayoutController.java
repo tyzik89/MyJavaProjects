@@ -18,6 +18,7 @@ import javafx.scene.shape.Line;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.image.ImagesHandler;
+import models.image.StorageMatrix;
 import models.notification.Observer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -355,6 +356,6 @@ public class AlgorithmMenuLayoutController implements Observer {
     }
 
     private void autoHandleWatershed() {
-
+        imagesHandler.doWatershedSegmentationAutoMode(StorageMatrix.getInstance().getMatrixOfLines());
     }
 }
