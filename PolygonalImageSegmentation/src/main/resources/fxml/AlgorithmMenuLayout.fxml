@@ -20,7 +20,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxWidth="270.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
+<AnchorPane maxWidth="320.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlgorithmMenuLayoutController">
 
     <Accordion AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
@@ -53,7 +53,7 @@
                 <AnchorPane>
                     <Label layoutX="12.0" layoutY="14.0" text="Пороговое значение:" AnchorPane.leftAnchor="0.0" />
                     <Label fx:id="showThresholdCanny" layoutX="171.0" layoutY="14.0" prefHeight="17.0" prefWidth="36.0" />
-                    <Slider fx:id="thresholdCanny" layoutX="6.0" layoutY="36.0" onMouseClicked="#changeThresholdCanny" onMouseDragged="#changeThresholdCanny" showTickLabels="true" showTickMarks="true" snapToTicks="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                    <Slider fx:id="thresholdCanny" layoutX="6.0" layoutY="36.0" max="200.0" onMouseClicked="#changeThresholdCanny" onMouseDragged="#changeThresholdCanny" showTickLabels="true" showTickMarks="true" snapToTicks="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                     <Separator layoutX="1.0" layoutY="83.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                     <Label layoutX="4.0" layoutY="105.0" text="Размер фильтра Гаусса:" AnchorPane.leftAnchor="0.0" />
                     <TextField fx:id="sizeGaussFilter" layoutX="207.0" layoutY="101.0" prefHeight="25.0" prefWidth="43.0" text="0" AnchorPane.rightAnchor="0.0" />
@@ -192,7 +192,7 @@
             <TitledPane fx:id="watershedTools" animated="false" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Сегментация по &quot;Водоразделам&quot;">
                 <AnchorPane>
                     <Button layoutX="12.0" layoutY="82.0" mnemonicParsing="false" onAction="#handleApplyWatershed" text="Применить" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                    <ToggleButton fx:id="watershedMode" onAction="#handleWatershedMode" layoutX="90.0" layoutY="25.0" mnemonicParsing="false" text="Ручной режим" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" >
+                    <ToggleButton fx:id="watershedMode" layoutX="90.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleWatershedMode" text="Ручной режим" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                         <tooltip>
                             <Tooltip text="Режим расстановки маркеров на изображении" />
                         </tooltip>
