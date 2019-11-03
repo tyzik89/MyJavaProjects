@@ -1,11 +1,18 @@
-# MyJavaProjects
+﻿# MyJavaProjects
 Изучение возможностей Java
 
 
-FileManager - проводник + функции обработки фотографии
+EmulGetPostFx, HttpRequests(GET, POST) - Эмулятор запросов GET/POST;
 
-StudingGson - изучение библиотеки GSON и работы с json
+FileEncryption - Шифрование файлов алгоритмом AES + RSA;
 
-RecoveryImage - восстановление изображения(бинарная морфология). Необходима библиотека OpenCV
+FileManager - проводник + функции обработки фотографии;
 
-QuestTextsGameMagicCrystal - простенький текстовый квест
+StudingGson - изучение библиотеки GSON и работы с json;
+
+StudingXML - изучение библиотек для работы с xml;
+
+Lessons - решение мелких задач;
+
+QuestTextsGameMagicCrystal - простенький текстовый квест;
+
