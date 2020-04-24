@@ -60,7 +60,7 @@ public class AttractorOfLorenz implements Fractal {
         return pixelsArray;
     }
 
-    //Паттерг строитель
+    //Паттерн строитель
     public static class Builder {
         //Mandatory
         private final int iterations;
