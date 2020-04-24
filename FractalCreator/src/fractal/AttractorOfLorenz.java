@@ -54,7 +54,7 @@ public class AttractorOfLorenz implements Fractal {
             row = (int) Math.round(30 * x + 1000);
             col = (int) Math.round(30 * z + 100);
 
-            pixelsArray[row][col] = 255;
+            pixelsArray[row][col] = 1;
         }
 
         return pixelsArray;
