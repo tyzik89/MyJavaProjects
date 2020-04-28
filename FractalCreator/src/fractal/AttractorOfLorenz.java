@@ -44,6 +44,12 @@ public class AttractorOfLorenz implements Fractal {
         z = znew;
     }
 
+    //метод для вращения вокруг указанной пользователем точки
+    private int[] flip(int x, int y, int angle) {
+
+        return new int[]{1, 2};
+    }
+
     @Override
     public int[][] create(int rows, int cols) {
         int[][] pixelsArray = new int[rows][cols];
@@ -51,8 +57,20 @@ public class AttractorOfLorenz implements Fractal {
 
         for (int i = 0; i < iterations; i++) {
             update(dt);
+
+//            row = (int) Math.round(30 * (x * Math.cos(0) + z * Math.sin(0)));
+//            col = (int) Math.round(30 * (-x * Math.sin(0) + z * Math.cos(0)));
+
+//            row = (int) (30 * x);
+//            col = (int) (30 * z);
+//
+//            row = (int)(row * Math.cos(0.8) + col * Math.sin(0.8) - 600);
+//            col = (int) (-row * Math.sin(0.8) + col * Math.cos(0.8) + 400);
+
             row = (int) Math.round(30 * x + 1000);
             col = (int) Math.round(30 * z + 100);
+
+            pixelsArray[row][col] = 1;
 
             pixelsArray[row][col] = 1;
         }

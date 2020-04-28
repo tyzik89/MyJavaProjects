@@ -4,7 +4,6 @@ import fractal.Fractal;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,6 +35,7 @@ public class Main {
             Integer iterations = Integer.parseInt(property.getProperty("iterations"));
             String background_color = property.getProperty("background_color");
             String attractor_color = property.getProperty("attractor_color");
+            Double angle_of_rotation = Double.parseDouble(property.getProperty("angle_of_rotation"));
 
             Fractal fractal =
                     new AttractorOfLorenz.Builder(iterations)
@@ -48,7 +48,7 @@ public class Main {
                             .build();
             int[][] result = fractal.create(size, size);
 
-            BufferedImage bufferImage2 = new BufferedImage(size, size, "png".equals(extension.toLowerCase()) ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
+            BufferedImage bufferImage = new BufferedImage(size, size, "png".equals(extension.toLowerCase()) ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
 
             Color curr_attractor_color;
             try {
@@ -70,14 +70,17 @@ public class Main {
 //                    int argb = alpha << 24 + red << 16 + green << 8 + blue
 //                    int pixel = result[x_coord][y_coord] << 16 | result[x_coord][y_coord] << 8 | result[x_coord][y_coord];
                     int pixel = result[x_coord][y_coord] != 1 ? curr_background_color.getRGB() : curr_attractor_color.getRGB();
-                    bufferImage2.setRGB(x_coord, y_coord, pixel);
+                    bufferImage.setRGB(x_coord, y_coord, pixel);
                 }
             }
 
             File outputfile = new File(savePath + System.currentTimeMillis() + "." + extension);
             System.out.println(outputfile);
+
+            BufferedImage bufferImageRotated = rotateImage(bufferImage, angle_of_rotation, curr_background_color, extension);
+
             try {
-                ImageIO.write(bufferImage2, extension, outputfile);
+                ImageIO.write(bufferImageRotated, extension, outputfile);
             } catch (FileNotFoundException e) {
                 System.err.println("Error: Unable to save file! Please correct the path in config file.");
             } catch (IOException e) {
@@ -86,5 +89,25 @@ public class Main {
         } catch (IOException e) {
             System.err.println("Error: config not found! Please input correct path.");
         }
+    }
+
+    private static BufferedImage rotateImage(BufferedImage buffImage, double angle, Color color, String extension) {
+        double radian = Math.toRadians(angle);
+        double sin = Math.abs(Math.sin(radian));
+        double cos = Math.abs(Math.cos(radian));
+        int width = buffImage.getWidth();
+        int height = buffImage.getHeight();
+        int nWidth = (int) Math.floor((double) width * cos + (double) height * sin);
+        int nHeight = (int) Math.floor((double) width * sin + (double) height * cos);
+        BufferedImage rotatedImage = new BufferedImage(nWidth, nHeight, "png".equals(extension.toLowerCase()) ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics = rotatedImage.createGraphics();
+        graphics.setColor(color);
+        graphics.fillRect(0, 0, nWidth, nHeight);
+        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        graphics.translate((nWidth - width) / 2, (nHeight - height) / 2);
+        graphics.rotate(radian, (double) (width / 2), (double) (height / 2));
+        graphics.drawImage(buffImage, 0, 0,null);
+        graphics.dispose();
+        return rotatedImage;
     }
 }
