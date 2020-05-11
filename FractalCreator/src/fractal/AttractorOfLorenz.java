@@ -44,12 +44,6 @@ public class AttractorOfLorenz implements Fractal {
         z = znew;
     }
 
-    //метод для вращения вокруг указанной пользователем точки
-    private int[] flip(int x, int y, int angle) {
-
-        return new int[]{1, 2};
-    }
-
     @Override
     public int[][] create(int rows, int cols) {
         int[][] pixelsArray = new int[rows][cols];
@@ -57,21 +51,8 @@ public class AttractorOfLorenz implements Fractal {
 
         for (int i = 0; i < iterations; i++) {
             update(dt);
-
-//            row = (int) Math.round(30 * (x * Math.cos(0) + z * Math.sin(0)));
-//            col = (int) Math.round(30 * (-x * Math.sin(0) + z * Math.cos(0)));
-
-//            row = (int) (30 * x);
-//            col = (int) (30 * z);
-//
-//            row = (int)(row * Math.cos(0.8) + col * Math.sin(0.8) - 600);
-//            col = (int) (-row * Math.sin(0.8) + col * Math.cos(0.8) + 400);
-
             row = (int) Math.round(30 * x + 1000);
             col = (int) Math.round(30 * z + 100);
-
-            pixelsArray[row][col] = 1;
-
             pixelsArray[row][col] = 1;
         }
 
@@ -134,32 +115,4 @@ public class AttractorOfLorenz implements Fractal {
             return new AttractorOfLorenz(this);
         }
     }
-
-    /*@Override
-    public int[][] build(int rows, int cols) {
-        int[][] pixelsArray = new int[rows][cols];
-
-        double x = 3.051522, y = 1.582542, z = 15.62388, x1, y1, z1;
-        double dt = 0.0001;
-        int a = 5, b = 15, c = 1;
-
-        int step = 1000000;
-        int col, row;
-
-        while (step > 0) {
-            step--;
-            x1 = x + a * (-x + y) * dt;
-            y1 = y + (b * x - y - z * x) * dt;
-            z1 = z + (-c * z + x * y) * dt;
-            x = x1;
-            y = y1;
-            z = z1;
-
-            row = (int) Math.round(19.3 * (y - x * 0.292893) + 320);
-            col = (int) Math.round(-11 * (z + x * 0.292893) + 392);
-
-            pixelsArray[row][col] = 255;
-        }
-        return pixelsArray;
-    }*/
 }
