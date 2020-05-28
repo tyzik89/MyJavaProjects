@@ -9,7 +9,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Properties;
+import java.util.concurrent.*;
+import java.util.List;
 
 public class Main {
 
@@ -29,24 +32,56 @@ public class Main {
             Double sigma = Double.parseDouble(property.getProperty("sigma"));
             Double r = Double.parseDouble(property.getProperty("r"));
             Double dt = Double.parseDouble(property.getProperty("dt"));
-            Double x = Double.parseDouble(property.getProperty("x"));
-            Double y = Double.parseDouble(property.getProperty("y"));
-            Double z = Double.parseDouble(property.getProperty("z"));
             Integer iterations = Integer.parseInt(property.getProperty("iterations"));
             String background_color = property.getProperty("background_color");
             String attractor_color = property.getProperty("attractor_color");
             Double angle_of_rotation = Double.parseDouble(property.getProperty("angle_of_rotation"));
 
-            Fractal fractal =
-                    new AttractorOfLorenz.Builder(iterations)
-                            .setSigma(sigma)
-                            .setDT(dt)
-                            .setR(r)
-                            .setX(x)
-                            .setY(y)
-                            .setZ(z)
-                            .build();
-            int[][] result = fractal.create(size, size);
+            Integer count_threads = Integer.parseInt(property.getProperty("count_threads"));
+            if (count_threads <= 0) return;
+
+            ArrayList<Integer[][]> resultList = new ArrayList<>();
+
+            // Определяем пул из потоков
+            ExecutorService executor = Executors.newFixedThreadPool(count_threads);
+            // Список ассоциированных с Callable задач Future
+            List<Future<Integer[][]>>  futures = new ArrayList<Future<Integer[][]>>();
+            for (int i = 0; i < count_threads; i++) {
+                double x = Double.parseDouble(property.getProperty("x" + (i + 1)));
+                double y = Double.parseDouble(property.getProperty("y" + (i + 1)));
+                double z = Double.parseDouble(property.getProperty("z" + (i + 1)));
+                System.out.println("x=" + x + " y=" + y + " z=" + z);
+
+                // Создание экземпляра Callable класса
+                Callable<Integer[][]> fractal =
+                        new AttractorOfLorenz.Builder(iterations, size)
+                                .setSigma(sigma)
+                                .setDT(dt)
+                                .setR(r)
+                                .setX(x)
+                                .setY(y)
+                                .setZ(z)
+                                .build();
+                //Стартуем возвращаюший результат исполнения
+                //в виде объекта Future поток
+                Future<Integer[][]> future = executor.submit(fractal);
+                /*
+                 * Добавляем объект Future в список для
+                 * отображения результата выполнения
+                 */
+                futures.add(future);
+            }
+
+            for ( Future<Integer[][]> future : futures){
+                try {
+                    resultList.add(future.get());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+            executor.shutdown();
 
             BufferedImage bufferImage = new BufferedImage(size, size, "png".equals(extension.toLowerCase()) ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
 
@@ -55,6 +90,7 @@ public class Main {
                 Field field = Color.class.getField(attractor_color);
                 curr_attractor_color = (Color) field.get(null);
             } catch (Exception e) {
+                System.out.println("Color not defined");
                 curr_attractor_color = Color.WHITE; // Not defined
             }
             Color curr_background_color;
@@ -62,15 +98,21 @@ public class Main {
                 Field field = Color.class.getField(background_color);
                 curr_background_color = (Color) field.get(null);
             } catch (Exception e) {
+                System.out.println("Color not defined");
                 curr_background_color = Color.BLACK; // Not defined
             }
 
-            for(int y_coord = 0; y_coord < size; y_coord++){
-                for(int x_coord = 0; x_coord < size; x_coord++){
+            for (Integer[][] result : resultList) {
+                for(int y_coord = 0; y_coord < size; y_coord++){
+                    for(int x_coord = 0; x_coord < size; x_coord++){
 //                    int argb = alpha << 24 + red << 16 + green << 8 + blue
 //                    int pixel = result[x_coord][y_coord] << 16 | result[x_coord][y_coord] << 8 | result[x_coord][y_coord];
-                    int pixel = result[x_coord][y_coord] != 1 ? curr_background_color.getRGB() : curr_attractor_color.getRGB();
-                    bufferImage.setRGB(x_coord, y_coord, pixel);
+                        int pixel = result[x_coord][y_coord] == null ? curr_background_color.getRGB() : curr_attractor_color.getRGB();
+                        int currPixel = bufferImage.getRGB(x_coord, y_coord);
+                        if (currPixel != curr_attractor_color.getRGB()) {
+                            bufferImage.setRGB(x_coord, y_coord, pixel);
+                        }
+                    }
                 }
             }
 

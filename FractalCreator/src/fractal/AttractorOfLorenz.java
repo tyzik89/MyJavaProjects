@@ -1,6 +1,8 @@
 package fractal;
 
-public class AttractorOfLorenz implements Fractal {
+import java.util.concurrent.Callable;
+
+public class AttractorOfLorenz implements Callable<Integer[][]> {
 
     private final double sigma;
     private final double r;
@@ -10,6 +12,7 @@ public class AttractorOfLorenz implements Fractal {
     private double z;
     private final double dt;
     private final int iterations;
+    int size;
 
     private AttractorOfLorenz(Builder builder) {
          sigma = builder.sigma;
@@ -20,6 +23,7 @@ public class AttractorOfLorenz implements Fractal {
          z = builder.z;
          dt = builder.dt;
          iterations = builder.iterations;
+         size = builder.size;
     }
 
 
@@ -45,8 +49,8 @@ public class AttractorOfLorenz implements Fractal {
     }
 
     @Override
-    public int[][] create(int rows, int cols) {
-        int[][] pixelsArray = new int[rows][cols];
+    public Integer[][] call() throws Exception {
+        Integer[][] pixelsArray = new Integer[size][size];
         int col, row;
 
         for (int i = 0; i < iterations; i++) {
@@ -55,7 +59,6 @@ public class AttractorOfLorenz implements Fractal {
             col = (int) Math.round(30 * z + 100);
             pixelsArray[row][col] = 1;
         }
-
         return pixelsArray;
     }
 
@@ -63,6 +66,7 @@ public class AttractorOfLorenz implements Fractal {
     public static class Builder {
         //Mandatory
         private final int iterations;
+        private final int size;
         //Optional
         private double sigma = 10;
         private double r = 28;
@@ -72,8 +76,9 @@ public class AttractorOfLorenz implements Fractal {
         private double z = 35.0;
         private double dt = 0.001;
 
-        public Builder(int iterations) {
+        public Builder(int iterations, int size) {
             this.iterations = iterations;
+            this.size = size;
         }
 
         public Builder setSigma(double val) {
