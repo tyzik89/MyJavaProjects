@@ -17,7 +17,7 @@ class Pool<T> {
         //Заполнение пула объектами
         for (int i = 0; i < size; ++i) {
             try {
-                //Предполагается констурктор по умолчанию:
+                //Предполагается конструктор по умолчанию:
                 items.add(classObject.newInstance());
             } catch (Exception e) {
                 throw new RuntimeException(e);
