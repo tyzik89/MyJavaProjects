@@ -16,4 +16,4 @@ Lessons - решение мелких задач;
 
 QuestTextsGameMagicCrystal - простенький текстовый квест;
 
-AttractorOfLorentz - построение фрактала - аттрактора Лоренца;
+FractalCreator - построение фрактала - аттрактора Лоренца;
