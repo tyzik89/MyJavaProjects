@@ -8,9 +8,9 @@ FileEncryption - Шифрование файлов алгоритмом AES + RS
 
 FileManager - проводник + функции обработки фотографии;
 
-TrainingGson - изучение библиотеки GSON и работы с json;
+StudyingGson - изучение библиотеки GSON и работы с json;
 
-TrainingXML - изучение библиотек для работы с xml;
+StudyingXML - изучение библиотек для работы с xml;
 
 Lessons - решение мелких задач;
 
