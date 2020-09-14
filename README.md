@@ -8,12 +8,12 @@ FileEncryption - Шифрование файлов алгоритмом AES + RS
 
 FileManager - проводник + функции обработки фотографии;
 
-StudingGson - изучение библиотеки GSON и работы с json;
+StudyingGson - изучение библиотеки GSON и работы с json;
 
-StudingXML - изучение библиотек для работы с xml;
+StudyingXML - изучение библиотек для работы с xml;
 
 Lessons - решение мелких задач;
 
 QuestTextsGameMagicCrystal - простенький текстовый квест;
 
-AttractorOfLorentz - построение фрактала - аттрактора Лоренца;
+FractalCreator - построение фрактала - аттрактора Лоренца;
