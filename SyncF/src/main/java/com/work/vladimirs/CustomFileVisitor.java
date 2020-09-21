@@ -6,17 +6,17 @@ import java.nio.file.FileVisitor;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.HashSet;
+import java.util.TreeSet;
 
-public class CustomFileVisitor implements FileVisitor<Path> {
-    private HashSet<Path> pathHashSet;
+class CustomFileVisitor implements FileVisitor<Path> {
+    private TreeSet<Path> pathHashSet;
     private Path startPath;
     private String stringStartPath;
 
-    public CustomFileVisitor(HashSet<Path> pathHashSet, Path startPath) {
+    public CustomFileVisitor(TreeSet<Path> pathHashSet, Path startPath) {
         this.pathHashSet = pathHashSet;
         this.startPath = startPath;
-        stringStartPath = startPath.toString().replace("\\", "\\\\");
+        stringStartPath = startPath.toString().replace("\\", "\\\\");   //Замена для использования в регулярном выражении
     }
 
     @Override
@@ -43,7 +43,7 @@ public class CustomFileVisitor implements FileVisitor<Path> {
         return FileVisitResult.CONTINUE;
     }
 
-    public HashSet<Path> getPathHashSet() {
+    public TreeSet<Path> getPathHashSet() {
         return pathHashSet;
     }
 
