@@ -1,4 +1,4 @@
-package com.work.vladimirs;
+package com.work.vladimirs.algorithms;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -9,12 +9,12 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.TreeSet;
 
 class CustomFileVisitor implements FileVisitor<Path> {
-    private TreeSet<Path> pathHashSet;
+    private TreeSet<Path> pathSet;
     private Path startPath;
     private String stringStartPath;
 
-    public CustomFileVisitor(TreeSet<Path> pathHashSet, Path startPath) {
-        this.pathHashSet = pathHashSet;
+    public CustomFileVisitor(TreeSet<Path> pathSet, Path startPath) {
+        this.pathSet = pathSet;
         this.startPath = startPath;
         stringStartPath = startPath.toString().replace("\\", "\\\\");   //Замена для использования в регулярном выражении
     }
@@ -22,14 +22,14 @@ class CustomFileVisitor implements FileVisitor<Path> {
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
         Path newPath = getPathForRegexp(dir);
-        if (!newPath.toString().isEmpty()) pathHashSet.add(newPath);
+        if (!newPath.toString().isEmpty()) pathSet.add(newPath);
         return FileVisitResult.CONTINUE;
     }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         Path newPath = getPathForRegexp(file);
-        if (!newPath.toString().isEmpty()) pathHashSet.add(newPath);
+        if (!newPath.toString().isEmpty()) pathSet.add(newPath);
         return FileVisitResult.CONTINUE;
     }
 
@@ -43,8 +43,8 @@ class CustomFileVisitor implements FileVisitor<Path> {
         return FileVisitResult.CONTINUE;
     }
 
-    public TreeSet<Path> getPathHashSet() {
-        return pathHashSet;
+    public TreeSet<Path> getPathSet() {
+        return pathSet;
     }
 
     private Path getPathForRegexp(Path pathWithRoot) {

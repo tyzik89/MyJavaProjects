@@ -1,10 +1,14 @@
 package com.work.vladimirs.controllers;
 
-import com.work.vladimirs.AnalyzeSyncPathes;
+import com.work.vladimirs.algorithms.AnalyzeSyncPathes;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,8 +49,10 @@ public class RootLayoutController {
     public Button btnClear_1;
     public Button btnClear_2;
 
-    public TextArea txtArea_1;
-    public TextArea txtArea_2;
+    public TableView<Path> tblViewPaths_1;
+    public TableColumn<Path, Path> tblColumnPath_1;
+    public TableView<Path> tblViewPaths_2;
+    public TableColumn<Path, Path> tblColumnPath_2;
 
     public Button btnSwitchMode;
     public Button btnAnalyze;
@@ -55,8 +61,38 @@ public class RootLayoutController {
 
     @FXML
     private void initialize () {
+        //Установка первоначального режима работы
         mode = Mode.REMOTE_TO_LOCAL;
         setImageOnBtnSwitch(mode.getImageAndSetMode());
+    }
+
+    @FXML
+    public void clickBtnAnalyze(ActionEvent event) {
+        String strField_1 = txtField_1.getCharacters().toString();
+        String strField_2 = txtField_2.getCharacters().toString();
+        if (!strField_1.isEmpty() && !strField_2.isEmpty()) {
+            try {
+                TreeSet<Path> pathSet_1 = AnalyzeSyncPathes.analyzeDir(strField_1);
+                TreeSet<Path> pathSet_2 = AnalyzeSyncPathes.analyzeDir(strField_2);
+                ObservableList<Path> rowsPath = FXCollections.observableArrayList();
+                if (Mode.REMOTE_TO_LOCAL.equals(mode)) {
+                    pathSet_2.removeAll(pathSet_1);
+                    rowsPath.addAll(pathSet_2);
+                    tblViewPaths_2.setItems(rowsPath);
+
+                    tblColumnPath_2.setCellValueFactory(
+                            cell -> new SimpleObjectProperty<Path>(cell.getValue()));
+//                    tblColumnPath_2.setCellFactory(
+//                            column -> new CellFactory(strField_2));
+                } else if (Mode.LOCAL_TO_REMOTE.equals(mode)) {
+
+                } else if (Mode.MUTUAL.equals(mode)) {
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void setImageOnBtnSwitch(String mode) {
@@ -104,25 +140,8 @@ public class RootLayoutController {
 
     @FXML
     public void clickBtnClear(ActionEvent event) {
-        txtArea_1.clear();
-        txtArea_2.clear();
-    }
-
-    @FXML
-    public void clickBtnAnalyze(ActionEvent event) {
-        String strField_1 = txtField_1.getCharacters().toString();
-        if (strField_1 != null && !strField_1.isEmpty()) {
-            txtArea_1.clear();
-            try {
-                TreeSet<Path> pathSet_1 = AnalyzeSyncPathes.analyzeDir(strField_1);
-                for (Path path : pathSet_1) {
-                    txtArea_1.appendText(path.toString());
-                    txtArea_1.appendText("\n");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        tblViewPaths_1.getItems().clear();
+        tblViewPaths_2.getItems().clear();
     }
 
     @FXML
