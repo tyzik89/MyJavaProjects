@@ -9,11 +9,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicLong;
 
 class CustomFileVisitor implements FileVisitor<Path> {
     private TreeSet<InfoFile> infoFiles;
     private Path startPath;
     private String stringStartPath;
+    private AtomicLong sizeDir;
 
     public CustomFileVisitor(TreeSet<InfoFile> infoFiles, Path startPath) {
         this.infoFiles = infoFiles;
@@ -23,29 +25,22 @@ class CustomFileVisitor implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-        Path newPath = getPathForRegexp(dir);
-        if (!newPath.toString().isEmpty()) {
-            infoFiles.add(
-                    new InfoFile.Builder()
-                    .fullPath(dir.toString())
-                    .isFile(false)
-                    .shortPath(newPath)
-                    .build());
-        }
+        sizeDir  = new AtomicLong(0);
         return FileVisitResult.CONTINUE;
     }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        Path newPath = getPathForRegexp(file);
-        if (!newPath.toString().isEmpty()) {
-            infoFiles.add(
-                    new InfoFile.Builder()
+        Path shortPath = getShortPathForRegexp(file);
+        if (!shortPath.toString().isEmpty()) {
+            sizeDir.addAndGet(attrs.size());
+            InfoFile infoFile = new InfoFile.Builder()
                     .fullPath(file.toString())
                     .isFile(true)
-                    .shortPath(newPath)
-                    .nameFile(String.valueOf(file.getName(file.getNameCount() -1 )))
-                    .build());
+                    .shortPath(shortPath)
+                    .size(attrs.size())
+                    .build();
+            infoFiles.add(infoFile);
         }
         return FileVisitResult.CONTINUE;
     }
@@ -57,6 +52,16 @@ class CustomFileVisitor implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+        Path shortPath = getShortPathForRegexp(dir);
+        if (!shortPath.toString().isEmpty()) {
+            InfoFile infoFile = new InfoFile.Builder()
+                    .fullPath(dir.toString())
+                    .isFile(false)
+                    .shortPath(shortPath)
+                    .size(sizeDir.get())
+                    .build();
+            infoFiles.add(infoFile);
+        }
         return FileVisitResult.CONTINUE;
     }
 
@@ -64,7 +69,7 @@ class CustomFileVisitor implements FileVisitor<Path> {
         return infoFiles;
     }
 
-    private Path getPathForRegexp(Path pathWithRoot) {
+    private Path getShortPathForRegexp(Path pathWithRoot) {
         String stringPathWithRoot = pathWithRoot.toString();
         String stringClearPath = stringPathWithRoot.replaceFirst(stringStartPath, "");    // Выделяем из пути часть, не содержащую сам корневой путь.
         return Paths.get(stringClearPath);

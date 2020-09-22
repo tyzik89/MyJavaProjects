@@ -7,12 +7,14 @@ public class InfoFile implements Comparable<InfoFile> {
     private final String nameFile;
     private final String fullPath;
     private final boolean isFile;
+    private final long size;
 
     public static class Builder {
         private Path shortPath;
         private String nameFile;
         private String fullPath;
         private boolean isFile;
+        private long size;
 
         public Builder() {}
 
@@ -36,6 +38,11 @@ public class InfoFile implements Comparable<InfoFile> {
             return this;
         }
 
+        public Builder size(long size) {
+            this.size = size;
+            return this;
+        }
+
         public InfoFile build() {
             return new InfoFile(this);
         }
@@ -46,6 +53,7 @@ public class InfoFile implements Comparable<InfoFile> {
         nameFile = builder.nameFile;
         fullPath = builder.fullPath;
         isFile = builder.isFile;
+        size = builder.size;
     }
 
     @Override
@@ -61,15 +69,17 @@ public class InfoFile implements Comparable<InfoFile> {
         InfoFile infoFile = (InfoFile) o;
 
         if (isFile != infoFile.isFile) return false;
+        if (size != infoFile.size) return false;
         if (!shortPath.equals(infoFile.shortPath)) return false;
-        return fullPath.equals(infoFile.fullPath);
+        return fullPath != null ? fullPath.equals(infoFile.fullPath) : infoFile.fullPath == null;
     }
 
     @Override
     public int hashCode() {
         int result = shortPath.hashCode();
-        result = 31 * result + fullPath.hashCode();
+        result = 31 * result + (fullPath != null ? fullPath.hashCode() : 0);
         result = 31 * result + (isFile ? 1 : 0);
+        result = 31 * result + (int) (size ^ (size >>> 32));
         return result;
     }
 
@@ -97,5 +107,9 @@ public class InfoFile implements Comparable<InfoFile> {
 
     public boolean isFile() {
         return isFile;
+    }
+
+    public long getSize() {
+        return size;
     }
 }

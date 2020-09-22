@@ -51,9 +51,12 @@ public class RootLayoutController {
 
     public TableView<InfoFile> tblViewPaths_1;
     public TableColumn<InfoFile, Path> tblColumnPath_1;
+    public TableColumn<InfoFile, Long> tblColumnSize_1;
     public TableColumn<InfoFile, String> tblColumnRef_1;
+
     public TableView<InfoFile> tblViewPaths_2;
     public TableColumn<InfoFile, Path> tblColumnPath_2;
+    public TableColumn<InfoFile, Long> tblColumnSize_2;
     public TableColumn<InfoFile, String> tblColumnRef_2;
 
 
@@ -67,11 +70,16 @@ public class RootLayoutController {
         //Установка первоначального режима работы
         mode = Mode.REMOTE_TO_LOCAL;
         setImageOnBtnSwitch(mode.getImageAndSetMode());
-        //Первоначальная инициализация колонок таблицы
+
+        //Первоначальная инициализация колонок таблицы #1
         tblColumnPath_1.setCellValueFactory(new PropertyValueFactory<InfoFile, Path>("shortPath"));
+        tblColumnSize_1.setCellValueFactory(new PropertyValueFactory<InfoFile, Long>("size"));
         tblColumnRef_1.setCellValueFactory(new PropertyValueFactory<InfoFile, String>("fullPath"));
         tblColumnRef_1.setCellFactory(param -> new OpenTableCell());      //Открытие папки с файлами по клику
+
+        //Первоначальная инициализация колонок таблицы #2
         tblColumnPath_2.setCellValueFactory(new PropertyValueFactory<InfoFile, Path>("shortPath"));
+        tblColumnSize_2.setCellValueFactory(new PropertyValueFactory<InfoFile, Long>("size"));
         tblColumnRef_2.setCellValueFactory(new PropertyValueFactory<InfoFile, String>("fullPath"));
         tblColumnRef_2.setCellFactory(param -> new OpenTableCell());      //Открытие папки с файлами по клику
     }

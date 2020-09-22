@@ -97,6 +97,7 @@
                         <TableView fx:id="tblViewPaths_1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                             <TableColumn fx:id="tblColumnPath_1" minWidth="75.0" prefWidth="75.0" text="Путь" />
+                            <TableColumn fx:id="tblColumnSize_1" minWidth="75.0" prefWidth="75.0" text="Размер" />
                             <TableColumn fx:id="tblColumnRef_1" minWidth="75.0" prefWidth="75.0" sortable="false" text="Открыть" />
                           </columns>
                            <columnResizePolicy>
@@ -110,6 +111,7 @@
                         <TableView fx:id="tblViewPaths_2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
                               <TableColumn fx:id="tblColumnPath_2" minWidth="75.0" prefWidth="75.0" text="Путь" />
+                              <TableColumn fx:id="tblColumnSize_2" minWidth="75.0" prefWidth="75.0" text="Размер" />
                               <TableColumn fx:id="tblColumnRef_2" minWidth="75.0" prefWidth="75.0" sortable="false" text="Открыть" />
                            </columns>
                            <columnResizePolicy>

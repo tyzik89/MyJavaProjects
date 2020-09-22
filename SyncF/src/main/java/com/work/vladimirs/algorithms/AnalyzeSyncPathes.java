@@ -11,9 +11,9 @@ import java.util.TreeSet;
 public class AnalyzeSyncPathes {
 
     public static final TreeSet<InfoFile> analyzeDir(String strDir) throws IOException {
-        CustomFileVisitor remoteFileVisitor = new CustomFileVisitor(new TreeSet<>(), Paths.get(strDir));
-        Files.walkFileTree(Paths.get(strDir), Collections.EMPTY_SET, Integer.MAX_VALUE, remoteFileVisitor);
-        return remoteFileVisitor.getInfoFiles();
+        CustomFileVisitor customFileVisitor = new CustomFileVisitor(new TreeSet<>(), Paths.get(strDir));
+        Files.walkFileTree(Paths.get(strDir), Collections.EMPTY_SET, Integer.MAX_VALUE, customFileVisitor);
+        return customFileVisitor.getInfoFiles();
     }
 
     /* remotePaths.removeAll(localPaths);
