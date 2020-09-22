@@ -1,15 +1,13 @@
 package com.work.vladimirs.controllers;
 
 import com.work.vladimirs.algorithms.AnalyzeSyncPathes;
-import javafx.beans.property.SimpleObjectProperty;
+import com.work.vladimirs.entities.InfoFile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.DirectoryChooser;
@@ -40,6 +38,7 @@ public class RootLayoutController {
         public abstract String getImageAndSetMode();
     }
 
+
     public TextField txtField_1;
     public TextField txtField_2;
     @FXML
@@ -49,10 +48,14 @@ public class RootLayoutController {
     public Button btnClear_1;
     public Button btnClear_2;
 
-    public TableView<Path> tblViewPaths_1;
-    public TableColumn<Path, Path> tblColumnPath_1;
-    public TableView<Path> tblViewPaths_2;
-    public TableColumn<Path, Path> tblColumnPath_2;
+
+    public TableView<InfoFile> tblViewPaths_1;
+    public TableColumn<InfoFile, Path> tblColumnPath_1;
+    public TableColumn<InfoFile, String> tblColumnRef_1;
+    public TableView<InfoFile> tblViewPaths_2;
+    public TableColumn<InfoFile, Path> tblColumnPath_2;
+    public TableColumn<InfoFile, String> tblColumnRef_2;
+
 
     public Button btnSwitchMode;
     public Button btnAnalyze;
@@ -64,28 +67,34 @@ public class RootLayoutController {
         //Установка первоначального режима работы
         mode = Mode.REMOTE_TO_LOCAL;
         setImageOnBtnSwitch(mode.getImageAndSetMode());
+        //Первоначальная инициализация колонок таблицы
+        tblColumnPath_1.setCellValueFactory(new PropertyValueFactory<InfoFile, Path>("path"));
+        tblColumnRef_1.setCellValueFactory(new PropertyValueFactory<InfoFile, String>("fullPath"));
+        tblColumnRef_1.setCellFactory(param -> new OpenTableCell());      //Открытие папки с файлами по клику
+        tblColumnPath_2.setCellValueFactory(new PropertyValueFactory<InfoFile, Path>("path"));
+        tblColumnRef_2.setCellValueFactory(new PropertyValueFactory<InfoFile, String>("fullPath"));
+        tblColumnRef_2.setCellFactory(param -> new OpenTableCell());      //Открытие папки с файлами по клику
     }
 
     @FXML
     public void clickBtnAnalyze(ActionEvent event) {
+        tblViewPaths_1.getItems().clear();
+        tblViewPaths_2.getItems().clear();
         String strField_1 = txtField_1.getCharacters().toString();
         String strField_2 = txtField_2.getCharacters().toString();
         if (!strField_1.isEmpty() && !strField_2.isEmpty()) {
             try {
-                TreeSet<Path> pathSet_1 = AnalyzeSyncPathes.analyzeDir(strField_1);
-                TreeSet<Path> pathSet_2 = AnalyzeSyncPathes.analyzeDir(strField_2);
-                ObservableList<Path> rowsPath = FXCollections.observableArrayList();
+                TreeSet<InfoFile> pathSet_1 = AnalyzeSyncPathes.analyzeDir(strField_1);
+                TreeSet<InfoFile> pathSet_2 = AnalyzeSyncPathes.analyzeDir(strField_2);
+                ObservableList<InfoFile> rowsPath = FXCollections.observableArrayList();
                 if (Mode.REMOTE_TO_LOCAL.equals(mode)) {
                     pathSet_2.removeAll(pathSet_1);
                     rowsPath.addAll(pathSet_2);
                     tblViewPaths_2.setItems(rowsPath);
-
-                    tblColumnPath_2.setCellValueFactory(
-                            cell -> new SimpleObjectProperty<Path>(cell.getValue()));
-//                    tblColumnPath_2.setCellFactory(
-//                            column -> new CellFactory(strField_2));
                 } else if (Mode.LOCAL_TO_REMOTE.equals(mode)) {
-
+                    pathSet_1.removeAll(pathSet_2);
+                    rowsPath.addAll(pathSet_1);
+                    tblViewPaths_1.setItems(rowsPath);
                 } else if (Mode.MUTUAL.equals(mode)) {
 
                 }

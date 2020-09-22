@@ -1,5 +1,7 @@
 package com.work.vladimirs.algorithms;
 
+import com.work.vladimirs.entities.InfoFile;
+
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
@@ -9,12 +11,12 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.TreeSet;
 
 class CustomFileVisitor implements FileVisitor<Path> {
-    private TreeSet<Path> pathSet;
+    private TreeSet<InfoFile> infoFiles;
     private Path startPath;
     private String stringStartPath;
 
-    public CustomFileVisitor(TreeSet<Path> pathSet, Path startPath) {
-        this.pathSet = pathSet;
+    public CustomFileVisitor(TreeSet<InfoFile> infoFiles, Path startPath) {
+        this.infoFiles = infoFiles;
         this.startPath = startPath;
         stringStartPath = startPath.toString().replace("\\", "\\\\");   //Замена для использования в регулярном выражении
     }
@@ -22,14 +24,14 @@ class CustomFileVisitor implements FileVisitor<Path> {
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
         Path newPath = getPathForRegexp(dir);
-        if (!newPath.toString().isEmpty()) pathSet.add(newPath);
+        if (!newPath.toString().isEmpty()) infoFiles.add(new InfoFile(newPath, newPath.toString(), dir.toString(), false));
         return FileVisitResult.CONTINUE;
     }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         Path newPath = getPathForRegexp(file);
-        if (!newPath.toString().isEmpty()) pathSet.add(newPath);
+        if (!newPath.toString().isEmpty()) infoFiles.add(new InfoFile(newPath, newPath.toString(), file.toString(), true));
         return FileVisitResult.CONTINUE;
     }
 
@@ -43,8 +45,8 @@ class CustomFileVisitor implements FileVisitor<Path> {
         return FileVisitResult.CONTINUE;
     }
 
-    public TreeSet<Path> getPathSet() {
-        return pathSet;
+    public TreeSet<InfoFile> getInfoFiles() {
+        return infoFiles;
     }
 
     private Path getPathForRegexp(Path pathWithRoot) {
