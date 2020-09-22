@@ -24,14 +24,29 @@ class CustomFileVisitor implements FileVisitor<Path> {
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
         Path newPath = getPathForRegexp(dir);
-        if (!newPath.toString().isEmpty()) infoFiles.add(new InfoFile(newPath, newPath.toString(), dir.toString(), false));
+        if (!newPath.toString().isEmpty()) {
+            infoFiles.add(
+                    new InfoFile.Builder()
+                    .fullPath(dir.toString())
+                    .isFile(false)
+                    .shortPath(newPath)
+                    .build());
+        }
         return FileVisitResult.CONTINUE;
     }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         Path newPath = getPathForRegexp(file);
-        if (!newPath.toString().isEmpty()) infoFiles.add(new InfoFile(newPath, newPath.toString(), file.toString(), true));
+        if (!newPath.toString().isEmpty()) {
+            infoFiles.add(
+                    new InfoFile.Builder()
+                    .fullPath(file.toString())
+                    .isFile(true)
+                    .shortPath(newPath)
+                    .nameFile(String.valueOf(file.getName(file.getNameCount() -1 )))
+                    .build());
+        }
         return FileVisitResult.CONTINUE;
     }
 

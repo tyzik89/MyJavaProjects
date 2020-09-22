@@ -68,10 +68,10 @@ public class RootLayoutController {
         mode = Mode.REMOTE_TO_LOCAL;
         setImageOnBtnSwitch(mode.getImageAndSetMode());
         //Первоначальная инициализация колонок таблицы
-        tblColumnPath_1.setCellValueFactory(new PropertyValueFactory<InfoFile, Path>("path"));
+        tblColumnPath_1.setCellValueFactory(new PropertyValueFactory<InfoFile, Path>("shortPath"));
         tblColumnRef_1.setCellValueFactory(new PropertyValueFactory<InfoFile, String>("fullPath"));
         tblColumnRef_1.setCellFactory(param -> new OpenTableCell());      //Открытие папки с файлами по клику
-        tblColumnPath_2.setCellValueFactory(new PropertyValueFactory<InfoFile, Path>("path"));
+        tblColumnPath_2.setCellValueFactory(new PropertyValueFactory<InfoFile, Path>("shortPath"));
         tblColumnRef_2.setCellValueFactory(new PropertyValueFactory<InfoFile, String>("fullPath"));
         tblColumnRef_2.setCellFactory(param -> new OpenTableCell());      //Открытие папки с файлами по клику
     }

@@ -3,48 +3,54 @@ package com.work.vladimirs.entities;
 import java.nio.file.Path;
 
 public class InfoFile implements Comparable<InfoFile> {
-    private Path path;
-    private String name;
-    private String fullPath;
-    private boolean isFile;
+    private final Path shortPath;
+    private final String nameFile;
+    private final String fullPath;
+    private final boolean isFile;
 
-    public InfoFile(Path path, String name, String fullPath, boolean isFile) {
-        this.path = path;
-        this.name = name;
-        this.fullPath = fullPath;
-        this.isFile = isFile;
+    public static class Builder {
+        private Path shortPath;
+        private String nameFile;
+        private String fullPath;
+        private boolean isFile;
+
+        public Builder() {}
+
+        public Builder shortPath(Path shortPath) {
+            this.shortPath = shortPath;
+            return this;
+        }
+
+        public Builder nameFile(String nameFile) {
+            this.nameFile = nameFile;
+            return this;
+        }
+
+        public Builder fullPath(String fullPath) {
+            this.fullPath = fullPath;
+            return this;
+        }
+
+        public Builder isFile(boolean file) {
+            isFile = file;
+            return this;
+        }
+
+        public InfoFile build() {
+            return new InfoFile(this);
+        }
     }
 
-    public Path getPath() {
-        return path;
+    public InfoFile(Builder builder) {
+        shortPath = builder.shortPath;
+        nameFile = builder.nameFile;
+        fullPath = builder.fullPath;
+        isFile = builder.isFile;
     }
 
-    public void setPath(Path path) {
-        this.path = path;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getFullPath() {
-        return fullPath;
-    }
-
-    public void setFullPath(String fullPath) {
-        this.fullPath = fullPath;
-    }
-
-    public boolean isFile() {
-        return isFile;
-    }
-
-    public void setFile(boolean file) {
-        isFile = file;
+    @Override
+    public int compareTo(InfoFile o) {
+        return shortPath.compareTo(o.shortPath);
     }
 
     @Override
@@ -55,32 +61,41 @@ public class InfoFile implements Comparable<InfoFile> {
         InfoFile infoFile = (InfoFile) o;
 
         if (isFile != infoFile.isFile) return false;
-        if (!path.equals(infoFile.path)) return false;
-        if (!name.equals(infoFile.name)) return false;
+        if (!shortPath.equals(infoFile.shortPath)) return false;
         return fullPath.equals(infoFile.fullPath);
     }
 
     @Override
     public int hashCode() {
-        int result = path.hashCode();
-        result = 31 * result + name.hashCode();
+        int result = shortPath.hashCode();
         result = 31 * result + fullPath.hashCode();
         result = 31 * result + (isFile ? 1 : 0);
         return result;
     }
 
     @Override
-    public int compareTo(InfoFile o) {
-        return name.compareTo(o.name);
-    }
-
-    @Override
     public String toString() {
         return "InfoFile{" +
-                "path=" + path +
-                ", name='" + name + '\'' +
+                "shortPath=" + shortPath +
+                ", nameFile='" + nameFile + '\'' +
                 ", fullPath='" + fullPath + '\'' +
                 ", isFile=" + isFile +
                 '}';
+    }
+
+    public Path getShortPath() {
+        return shortPath;
+    }
+
+    public String getNameFile() {
+        return nameFile;
+    }
+
+    public String getFullPath() {
+        return fullPath;
+    }
+
+    public boolean isFile() {
+        return isFile;
     }
 }
