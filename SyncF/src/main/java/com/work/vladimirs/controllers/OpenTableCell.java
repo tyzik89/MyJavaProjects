@@ -3,6 +3,7 @@ package com.work.vladimirs.controllers;
 import com.work.vladimirs.entities.InfoFile;
 import javafx.event.EventHandler;
 import javafx.scene.control.TableCell;
+import javafx.scene.control.TableRow;
 import javafx.scene.input.MouseEvent;
 
 import java.awt.*;
@@ -33,9 +34,21 @@ class OpenTableCell extends TableCell<InfoFile, String> {
 
     @Override
     protected void updateItem(String item, boolean empty) {
-        if (!empty) {
-            setText("Открыть");
-        }
         super.updateItem(item, empty);
+
+        if (!empty) {
+            String path = getItem();
+            if (path == null) return;
+            setGraphic(null);
+            TableRow<InfoFile> currentRow = getTableRow();
+            File file = new File(path);
+            if (file.isDirectory()) {
+                setText("Папка");
+                currentRow.setStyle("-fx-background-color:#f1f4b2");
+            } else if (file.isFile()) {
+                setText("Файл");
+                currentRow.setStyle("-fx-background-color:lightcoral");
+            }
+        }
     }
 }
