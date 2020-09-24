@@ -9,12 +9,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicLong;
 
 class CustomFileVisitor implements FileVisitor<Path> {
     private TreeSet<InfoFile> infoFiles;
     private Path startPath;
     private String stringStartPath;
-    private long sizeDir;
+    private AtomicLong sizeDir;
 
     public CustomFileVisitor(TreeSet<InfoFile> infoFiles, Path startPath) {
         this.infoFiles = infoFiles;
@@ -24,7 +25,7 @@ class CustomFileVisitor implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-        sizeDir  = 0L;
+        sizeDir  = new AtomicLong(0);
         return FileVisitResult.CONTINUE;
     }
 
@@ -32,7 +33,7 @@ class CustomFileVisitor implements FileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         Path shortPath = getShortPathForRegexp(file);
         if (!shortPath.toString().isEmpty()) {
-            sizeDir = sizeDir + attrs.size();
+            sizeDir.addAndGet(attrs.size());
             InfoFile infoFile = new InfoFile.Builder()
                     .fullPath(file.toString())
                     .isFile(true)
@@ -57,7 +58,7 @@ class CustomFileVisitor implements FileVisitor<Path> {
                     .fullPath(dir.toString())
                     .isFile(false)
                     .shortPath(shortPath)
-                    .size(sizeDir)
+                    .size(sizeDir.get())
                     .build();
             infoFiles.add(infoFile);
         }

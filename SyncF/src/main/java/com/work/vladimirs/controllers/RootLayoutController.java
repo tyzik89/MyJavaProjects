@@ -1,6 +1,7 @@
 package com.work.vladimirs.controllers;
 
-import com.work.vladimirs.algorithms.AnalyzeSyncPathes;
+import com.work.vladimirs.algorithms.PathsWorker;
+import com.work.vladimirs.algorithms.SetOperations;
 import com.work.vladimirs.entities.InfoFile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,10 +41,13 @@ public class RootLayoutController {
 
         public abstract String getImageAndSetMode();
     }
+    private PathsWorker pathsWorker = new PathsWorker();
 
 
     public TextField txtField_1;
+    String strField_1;
     public TextField txtField_2;
+    String strField_2;
     @FXML
     private Button chooseBtn_1;
     @FXML
@@ -68,8 +72,17 @@ public class RootLayoutController {
     public Button btnSync;
     public Button btnClear;
 
+    private ObservableList<InfoFile> observableRowsPath_1 = FXCollections.observableArrayList();
+    private ObservableList<InfoFile> observableRowsPath_2 = FXCollections.observableArrayList();
+
+    public void setStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
     @FXML
     private void initialize () {
+        //Кнопка синхронизации не активна
+        btnSync.setDisable(true);
         //Установка первоначального режима работы
         mode = Mode.REMOTE_TO_LOCAL;
         setImageOnBtnSwitch(mode.getImageAndSetMode());
@@ -79,55 +92,64 @@ public class RootLayoutController {
         tblColumnSize_1.setCellValueFactory(new PropertyValueFactory<InfoFile, Long>("size"));
         tblColumnRef_1.setCellValueFactory(new PropertyValueFactory<InfoFile, String>("fullPath"));
         tblColumnRef_1.setCellFactory(param -> new OpenTableCell());      //Открытие папки с файлами по клику
+        tblViewPaths_1.setItems(observableRowsPath_1);                    //Привязка к таблице #1 наблюдаемого списка значений
 
         //Первоначальная инициализация колонок таблицы #2
         tblColumnPath_2.setCellValueFactory(new PropertyValueFactory<InfoFile, Path>("shortPath"));
         tblColumnSize_2.setCellValueFactory(new PropertyValueFactory<InfoFile, Long>("size"));
         tblColumnRef_2.setCellValueFactory(new PropertyValueFactory<InfoFile, String>("fullPath"));
         tblColumnRef_2.setCellFactory(param -> new OpenTableCell());      //Открытие папки с файлами по клику
+        tblViewPaths_2.setItems(observableRowsPath_2);                    //Привязка к таблице #2 наблюдаемого списка значений
+
+    }
+
+    @FXML
+    public void clickBtnSync(ActionEvent event) {
+        if (Mode.REMOTE_TO_LOCAL.equals(mode)) {
+            if (!observableRowsPath_2.isEmpty()) {
+                pathsWorker.syncFiles(observableRowsPath_2, strField_1);
+            }
+        } else if (Mode.LOCAL_TO_REMOTE.equals(mode)) {
+            if (!observableRowsPath_1.isEmpty()) {
+                pathsWorker.syncFiles(observableRowsPath_1, strField_2);
+            }
+        } else if (Mode.MUTUAL.equals(mode)) {
+            pathsWorker.syncFiles(observableRowsPath_2, strField_1);
+            pathsWorker.syncFiles(observableRowsPath_1, strField_2);
+        }
+        btnSync.setDisable(true);
     }
 
     @FXML
     public void clickBtnAnalyze(ActionEvent event) {
-        tblViewPaths_1.getItems().clear();
-        tblViewPaths_2.getItems().clear();
-        String strField_1 = txtField_1.getCharacters().toString();
-        String strField_2 = txtField_2.getCharacters().toString();
+        clearTablesData();
+        strField_1 = txtField_1.getCharacters().toString();
+        strField_2 = txtField_2.getCharacters().toString();
         if (!strField_1.isEmpty() && !strField_2.isEmpty()) {
             try {
-                TreeSet<InfoFile> pathSet_1 = AnalyzeSyncPathes.analyzeDir(strField_1);
-                TreeSet<InfoFile> pathSet_2 = AnalyzeSyncPathes.analyzeDir(strField_2);
-                ObservableList<InfoFile> rowsPath = FXCollections.observableArrayList();
-                if (Mode.REMOTE_TO_LOCAL.equals(mode)) {
-                    pathSet_2.removeAll(pathSet_1);
-                    rowsPath.addAll(pathSet_2);
-                    tblViewPaths_2.setItems(rowsPath);
-                } else if (Mode.LOCAL_TO_REMOTE.equals(mode)) {
-                    pathSet_1.removeAll(pathSet_2);
-                    rowsPath.addAll(pathSet_1);
-                    tblViewPaths_1.setItems(rowsPath);
-                } else if (Mode.MUTUAL.equals(mode)) {
+                TreeSet<InfoFile> pathSet_1 = pathsWorker.analyzeDir(strField_1);
+                TreeSet<InfoFile> pathSet_2 = pathsWorker.analyzeDir(strField_2);
 
+                if (Mode.REMOTE_TO_LOCAL.equals(mode)) {
+                    observableRowsPath_2.addAll(SetOperations.difference(pathSet_2, pathSet_1));
+                    tblViewPaths_2.setItems(observableRowsPath_2);
+
+                } else if (Mode.LOCAL_TO_REMOTE.equals(mode)) {
+                    observableRowsPath_1.addAll(SetOperations.difference(pathSet_1, pathSet_2));
+
+                } else if (Mode.MUTUAL.equals(mode)) {
+                    observableRowsPath_1.addAll(SetOperations.difference(pathSet_1, pathSet_2));
+                    tblViewPaths_1.setItems(observableRowsPath_1);
+                    observableRowsPath_2.addAll(SetOperations.difference(pathSet_2, pathSet_1));
+                    tblViewPaths_2.setItems(observableRowsPath_2);
                 }
+
+                if ( !(observableRowsPath_1.isEmpty() && observableRowsPath_2.isEmpty()) )
+                    btnSync.setDisable(false);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void setImageOnBtnSwitch(String mode) {
-        File file = new File(mode);
-        Image imageOk = null;
-        try {
-            imageOk = new Image(file.toURI().toURL().toString(), 50, 50, false, true);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        btnSwitchMode.graphicProperty().setValue(new ImageView(imageOk));
-    }
-
-    public void setStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
     }
 
     @FXML
@@ -135,8 +157,13 @@ public class RootLayoutController {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Выбрать директорию для синхронизации");
         File selectedDirectory = directoryChooser.showDialog(primaryStage.getScene().getWindow());
-        if (selectedDirectory != null)
-            txtField_1.setText(selectedDirectory.getAbsolutePath());
+        if (selectedDirectory != null) {
+            String absPath = selectedDirectory.getAbsolutePath();
+            if (!absPath.isEmpty() && !absPath.equals(txtField_1.getText())) {
+                txtField_1.setText(absPath);
+                btnSync.setDisable(true);
+            }
+        }
     }
 
     @FXML
@@ -144,8 +171,13 @@ public class RootLayoutController {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Выбрать директорию для синхронизации");
         File selectedDirectory = directoryChooser.showDialog(primaryStage.getScene().getWindow());
-        if (selectedDirectory != null)
-            txtField_2.setText(selectedDirectory.getAbsolutePath());
+        if (selectedDirectory != null) {
+            String absPath = selectedDirectory.getAbsolutePath();
+            if (!absPath.isEmpty() && !absPath.equals(txtField_2.getText())) {
+                txtField_2.setText(absPath);
+                btnSync.setDisable(true);
+            }
+        }
     }
 
     @FXML
@@ -160,12 +192,15 @@ public class RootLayoutController {
 
     @FXML
     public void clickBtnClear(ActionEvent event) {
-        tblViewPaths_1.getItems().clear();
-        tblViewPaths_2.getItems().clear();
+        clearTablesData();
+        btnSync.setDisable(true);
     }
 
-    @FXML
-    public void clickBtnSync(ActionEvent event) {
+    private void clearTablesData() {
+        tblViewPaths_1.getItems().clear();
+        tblViewPaths_2.getItems().clear();
+        tblViewPaths_1.refresh();
+        tblViewPaths_2.refresh();
     }
 
     @FXML
@@ -182,5 +217,17 @@ public class RootLayoutController {
                 break;
         }
         setImageOnBtnSwitch(mode.getImageAndSetMode());
+        btnSync.setDisable(true);
+    }
+
+    private void setImageOnBtnSwitch(String mode) {
+        File file = new File(mode);
+        Image imageOk = null;
+        try {
+            imageOk = new Image(file.toURI().toURL().toString(), 50, 50, false, true);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        btnSwitchMode.graphicProperty().setValue(new ImageView(imageOk));
     }
 }
