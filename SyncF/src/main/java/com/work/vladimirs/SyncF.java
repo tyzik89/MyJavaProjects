@@ -9,13 +9,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLClassLoader;
 
 public class SyncF extends Application {
-    private static final String ICO_TRAY_ICON = "src/main/resources/ico/tray-icon.png";
+    private static final String ICO_TRAY_ICON = "ico/tray-icon.png";
     private Stage stage;
 
     public static void main(String[] args) {
@@ -31,7 +34,7 @@ public class SyncF extends Application {
         // Настройка в трее (испльзуем awt в swing потоке).
         javax.swing.SwingUtilities.invokeLater(this::addAppToTray);
 
-        primaryStage.setTitle("SyncF");
+        primaryStage.setTitle("com.work.vladimirs.SyncF");
         primaryStage.centerOnScreen();
         primaryStage.setResizable(false);
         primaryStage.setWidth(1024);
@@ -80,7 +83,14 @@ public class SyncF extends Application {
             /*URL imageLoc = new URL(
                     ICO_TRAY_ICON
             );*/
-            java.awt.Image image = ImageIO.read(new File(ICO_TRAY_ICON));
+
+            //Загружаем иконку
+            ClassLoader cl = this.getClass().getClassLoader();
+           // URLClassLoader urlLoader=(URLClassLoader)this.getClass().getClassLoader();
+            InputStream is =  cl.getResourceAsStream(ICO_TRAY_ICON);
+            java.awt.Image image = ImageIO.read(is);
+            // isn't working in JAR
+            //java.awt.Image image = ImageIO.read(new File(cl.getResource(ICO_TRAY_ICON).getFile()));
             java.awt.TrayIcon trayIcon = new java.awt.TrayIcon(image);
 
             // При двойным клике на иконку в трее разворачивается наше приложение

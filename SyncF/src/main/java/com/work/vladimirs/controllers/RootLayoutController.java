@@ -28,15 +28,15 @@ public class RootLayoutController {
     private Mode mode;
     private enum Mode{
         REMOTE_TO_LOCAL {
-            public String getImageAndSetMode() {return "src/main/resources/ico/2.png";}
+            public String getImageAndSetMode() {return "ico/2.png";}
         },
 
         LOCAL_TO_REMOTE {
-            public String getImageAndSetMode() {return "src/main/resources/ico/3.png";}
+            public String getImageAndSetMode() {return "ico/3.png";}
         },
 
         MUTUAL {
-            public String getImageAndSetMode() {return "src/main/resources/ico/1.png";}
+            public String getImageAndSetMode() {return "ico/1.png";}
         };
 
         public abstract String getImageAndSetMode();
@@ -221,13 +221,8 @@ public class RootLayoutController {
     }
 
     private void setImageOnBtnSwitch(String mode) {
-        File file = new File(mode);
-        Image imageOk = null;
-        try {
-            imageOk = new Image(file.toURI().toURL().toString(), 50, 50, false, true);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        ClassLoader cl = this.getClass().getClassLoader();
+        Image imageOk = new Image(cl.getResourceAsStream(mode), 50, 50, false, true);
         btnSwitchMode.graphicProperty().setValue(new ImageView(imageOk));
     }
 }
