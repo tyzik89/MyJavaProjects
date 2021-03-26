@@ -1,4 +1,4 @@
-package com.work.vladimirs.patterns.builder.class_hierarchies;
+package builder.class_hierarchies;
 
 import java.util.EnumSet;
 import java.util.Objects;

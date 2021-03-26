@@ -1,4 +1,4 @@
-package com.work.vladimirs.int_stream_generation;
+
 
 import java.util.stream.IntStream;
 

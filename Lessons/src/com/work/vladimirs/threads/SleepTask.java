@@ -1,5 +1,3 @@
-package com.work.vladimirs.threads;
-
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;

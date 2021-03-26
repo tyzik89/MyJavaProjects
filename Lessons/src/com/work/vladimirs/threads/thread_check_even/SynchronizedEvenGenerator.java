@@ -1,4 +1,4 @@
-package com.work.vladimirs.threads.thread_check_even;
+package thread_check_even;
 
 public class SynchronizedEvenGenerator extends IntGenerator {
 

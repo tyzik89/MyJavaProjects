@@ -1,4 +1,4 @@
-package com.work.vladimirs.patterns.builder;
+package builder;
 
 /**
  * Builder pattern

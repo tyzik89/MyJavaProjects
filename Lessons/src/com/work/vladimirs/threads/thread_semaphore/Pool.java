@@ -1,4 +1,4 @@
-package com.work.vladimirs.threads.thread_semaphore;
+package thread_semaphore;
 
 import java.util.ArrayList;
 import java.util.List;

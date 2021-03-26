@@ -1,4 +1,4 @@
-package com.work.vladimirs.threads.thread_check_even;
+package thread_check_even;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

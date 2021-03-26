@@ -1,5 +1,3 @@
-package com.work.vladimirs.frequency_words_in_stream;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.work.vladimirs.threads.thread_blocking_queue;
+package thread_blocking_queue;
 
 class Toast {
     public enum Status{DRY, BUTTERED, JAMMED};

@@ -1,4 +1,4 @@
-package com.work.vladimirs.min_max_elem_in_stream;
+
 
 import java.util.Comparator;
 import java.util.function.BiConsumer;

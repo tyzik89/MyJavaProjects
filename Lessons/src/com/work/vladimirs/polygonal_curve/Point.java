@@ -1,4 +1,4 @@
-package com.work.vladimirs.polygonal_curve;
+
 
 public class Point implements Comparable<Point>{
 

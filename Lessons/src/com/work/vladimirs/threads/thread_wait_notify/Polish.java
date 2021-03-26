@@ -1,4 +1,4 @@
-package com.work.vladimirs.threads.thread_wait_notify;
+package thread_wait_notify;
 
 import java.util.concurrent.TimeUnit;
 

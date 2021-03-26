@@ -1,5 +1,3 @@
-package com.work.vladimirs.functional_interfaces;
-
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -8,7 +6,6 @@ public class FuncInterfaces {
 
     public static void main(String[] args) {
         Predicate<Object> condition = o -> Objects.isNull(o);
-
         Function<Object, Integer> ifTrue = obj -> 0;
         Function<CharSequence, Integer> ifFalse = cs -> cs.length();
 

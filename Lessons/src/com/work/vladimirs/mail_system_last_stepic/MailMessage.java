@@ -1,4 +1,4 @@
-package com.work.vladimirs.mail_system_last_stepic;
+
 
 public class MailMessage extends AbstractMessage<String>  {
 

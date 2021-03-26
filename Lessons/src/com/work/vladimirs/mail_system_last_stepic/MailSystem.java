@@ -1,4 +1,4 @@
-package com.work.vladimirs.mail_system_last_stepic;
+
 
 import java.util.Arrays;
 import java.util.Collections;

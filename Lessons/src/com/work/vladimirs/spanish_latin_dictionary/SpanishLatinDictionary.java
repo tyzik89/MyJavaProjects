@@ -1,5 +1,3 @@
-package com.work.vladimirs;
-
 import java.util.*;
 
 public class SpanishLatinDictionary {
