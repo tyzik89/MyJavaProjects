@@ -25,6 +25,7 @@ www-test/
 /android/libs/x86_64/
 /android/gen/
 .idea/*
+*/.idea/*
 *.ipr
 *.iws
 *.iml
@@ -138,3 +139,5 @@ buildNumber.properties
 
 # idea #
 .idea
+*/.idea/*
+.idea/*
