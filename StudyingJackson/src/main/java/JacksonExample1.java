@@ -1,6 +1,3 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -10,34 +7,17 @@ import java.util.Map;
 public class JacksonExample1 {
 
     public static void main(String[] args) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
         Staff staff = createStaff();
-
+        JacksonConverterToJSON converter = new JacksonConverterToJSON();
         try {
-
-            // Java objects to JSON file
-            objectMapper.writeValue(new File("D:\\staff.json"), staff);
-
-            // Java objects to JSON string - compact-print
-            String jsonString = objectMapper.writeValueAsString(staff);
-
-            System.out.println(jsonString);
-
-            System.out.println();
-            // Java objects to JSON string - pretty-print
-            String jsonInString2 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(staff);
-
-            System.out.println(jsonInString2);
+            converter.convertToJSON("D:\\staff.json", staff);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private static Staff createStaff() {
-
         Staff staff = new Staff();
-
         staff.setName("mkyong");
         staff.setAge(38);
         staff.setPosition(new String[]{"Founder", "CTO", "Writer"});
@@ -48,8 +28,6 @@ public class JacksonExample1 {
         }};
         staff.setSalary(salary);
         staff.setSkills(Arrays.asList("java", "python", "node", "kotlin"));
-
         return staff;
-
     }
 }
