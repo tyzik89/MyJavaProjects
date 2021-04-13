@@ -1,12 +1,11 @@
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+@JsonIgnoreProperties("secretOtherInfo")
 public class Staff {
 
     @JsonProperty("custom_name")
@@ -25,6 +24,11 @@ public class Staff {
 
     @JsonView(CompanyViews.Manager.class)
     private Map<String, BigDecimal> salary;
+
+    @JsonIgnore
+    private String secretInfo;
+
+    private String secretOtherInfo;
 
     public Staff() {
     }
@@ -77,6 +81,22 @@ public class Staff {
         this.salary = salary;
     }
 
+    public String getSecretInfo() {
+        return secretInfo;
+    }
+
+    public void setSecretInfo(String secretInfo) {
+        this.secretInfo = secretInfo;
+    }
+
+    public String getSecretOtherInfo() {
+        return secretOtherInfo;
+    }
+
+    public void setSecretOtherInfo(String secretOtherInfo) {
+        this.secretOtherInfo = secretOtherInfo;
+    }
+
     @Override
     public String toString() {
         return "Staff{" +
@@ -85,6 +105,8 @@ public class Staff {
                 ", position=" + Arrays.toString(position) +
                 ", skills=" + skills +
                 ", salary=" + salary +
+                ", secretInfo='" + secretInfo + '\'' +
+                ", secretOtherInfo='" + secretOtherInfo + '\'' +
                 '}';
     }
 }

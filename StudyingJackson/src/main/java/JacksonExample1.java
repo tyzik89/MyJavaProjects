@@ -29,6 +29,8 @@ public class JacksonExample1 {
         }};
         staff.setSalary(salary);
         staff.setSkills(Arrays.asList("java", "python", "node", "kotlin"));
+        staff.setSecretInfo("It's secret info!");
+        staff.setSecretOtherInfo("It's secret other info!");
         return staff;
     }
 }
