@@ -11,6 +11,7 @@ public class JacksonExample1 {
         JacksonConverterToJSON converter = new JacksonConverterToJSON();
         try {
             converter.convertToJSON("D:\\staff.json", staff);
+            converter.convertToJSONWithView(staff);
         } catch (IOException e) {
             e.printStackTrace();
         }

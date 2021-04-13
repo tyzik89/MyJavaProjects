@@ -1,3 +1,7 @@
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -5,10 +9,21 @@ import java.util.Map;
 
 public class Staff {
 
+    @JsonProperty("custom_name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonView(CompanyViews.Normal.class)
     private String name;
+
+    @JsonView(CompanyViews.Normal.class)
     private int age;
+
+    @JsonView(CompanyViews.Manager.class)
     private String[] position;
+
+    @JsonView(CompanyViews.Manager.class)
     private List<String> skills;
+
+    @JsonView(CompanyViews.Manager.class)
     private Map<String, BigDecimal> salary;
 
     public Staff() {
