@@ -1,4 +1,4 @@
-
+package com.work.vladimirs.int_stream_generation;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

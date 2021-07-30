@@ -1,4 +1,4 @@
-
+package com.work.vladimirs.multiplication_table;
 
 import java.util.Scanner;
 

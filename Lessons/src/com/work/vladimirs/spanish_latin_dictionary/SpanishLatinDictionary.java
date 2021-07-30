@@ -1,3 +1,5 @@
+package com.work.vladimirs.spanish_latin_dictionary;
+
 import java.util.*;
 
 public class SpanishLatinDictionary {

@@ -1,4 +1,4 @@
-package thread_error_handler;
+package com.work.vladimirs.threads.thread_error_handler;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

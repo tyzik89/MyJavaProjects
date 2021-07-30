@@ -1,4 +1,4 @@
-package thread_semaphore;
+package com.work.vladimirs.threads.thread_semaphore;
 
 /**
  * Тяжеловесный объект

@@ -1,4 +1,4 @@
-package thread_error_handler;
+package com.work.vladimirs.threads.thread_error_handler;
 
 /**
  * Задача, печатающая информацию о потоке в которм выполняется

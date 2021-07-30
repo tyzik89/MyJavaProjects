@@ -1,4 +1,4 @@
-
+package com.work.vladimirs.mkad;
 
 import java.util.Scanner;
 import java.util.stream.IntStream;

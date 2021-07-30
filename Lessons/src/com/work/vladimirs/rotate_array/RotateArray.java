@@ -1,4 +1,4 @@
-
+package com.work.vladimirs.rotate_array;
 
 import java.util.Scanner;
 

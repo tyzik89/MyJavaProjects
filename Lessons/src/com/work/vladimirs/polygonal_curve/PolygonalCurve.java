@@ -1,4 +1,4 @@
-
+package com.work.vladimirs.polygonal_curve;
 
 import java.util.ArrayList;
 import java.util.Collections;

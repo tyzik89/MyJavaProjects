@@ -1,4 +1,4 @@
-package builder.class_hierarchies;
+package com.work.vladimirs.patterns.builder.class_hierarchies;
 
 class Calzone extends Pizza {
     private final boolean sauceInside;
