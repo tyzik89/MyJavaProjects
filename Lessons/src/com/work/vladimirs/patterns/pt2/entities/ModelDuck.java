@@ -1,7 +1,7 @@
 package com.work.vladimirs.patterns.pt2.entities;
 
-import com.work.vladimirs.patterns.pt2.behavior.FlyNoWay;
-import com.work.vladimirs.patterns.pt2.behavior.Quack;
+import com.work.vladimirs.patterns.pt2.behaviors.fly.FlyNoWay;
+import com.work.vladimirs.patterns.pt2.behaviors.quack.Quack;
 
 /**
  * Утка-приманка.

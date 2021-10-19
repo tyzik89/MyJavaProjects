@@ -1,4 +1,4 @@
-package com.work.vladimirs.patterns.pt2.behavior;
+package com.work.vladimirs.patterns.pt2.behaviors.fly;
 
 /**
  * Интерфейс поведения полёта

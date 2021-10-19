@@ -1,9 +1,9 @@
 package com.work.vladimirs.patterns.pt2.entities;
 
-import com.work.vladimirs.patterns.pt2.behavior.FlyBehavior;
-import com.work.vladimirs.patterns.pt2.behavior.FlyWithWings;
-import com.work.vladimirs.patterns.pt2.behavior.Quack;
-import com.work.vladimirs.patterns.pt2.behavior.QuackBehavior;
+import com.work.vladimirs.patterns.pt2.behaviors.fly.FlyBehavior;
+import com.work.vladimirs.patterns.pt2.behaviors.fly.FlyWithWings;
+import com.work.vladimirs.patterns.pt2.behaviors.quack.Quack;
+import com.work.vladimirs.patterns.pt2.behaviors.quack.QuackBehavior;
 
 /**
  * Дикая утка.
