@@ -3,9 +3,20 @@ package com.work.vladimirs.patterns.pt2.entities;
 import com.work.vladimirs.patterns.pt2.behavior.FlyBehavior;
 import com.work.vladimirs.patterns.pt2.behavior.QuackBehavior;
 
+/**
+ * Абстрактный класс утки
+ */
 public abstract class Duck {
 
+
+    /**
+     * Делегирование поведения крякания
+     */
     private QuackBehavior quackBehavior;
+
+    /**
+     * Делегирование поведения полёта
+     */
     private FlyBehavior flyBehavior;
 
     public Duck(QuackBehavior quackBehavior, FlyBehavior flyBehavior) {

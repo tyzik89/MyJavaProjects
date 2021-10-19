@@ -1,6 +1,5 @@
 package com.work.vladimirs.patterns.pt2;
 
-import com.work.vladimirs.patterns.pt2.behavior.FlyNoWay;
 import com.work.vladimirs.patterns.pt2.entities.Duck;
 import com.work.vladimirs.patterns.pt2.entities.MallardDuck;
 
