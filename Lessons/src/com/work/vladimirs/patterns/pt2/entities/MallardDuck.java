@@ -5,6 +5,10 @@ import com.work.vladimirs.patterns.pt2.behavior.FlyWithWings;
 import com.work.vladimirs.patterns.pt2.behavior.Quack;
 import com.work.vladimirs.patterns.pt2.behavior.QuackBehavior;
 
+/**
+ * Дикая утка.
+ * Имеет возможность летать и крякать
+ */
 public class MallardDuck extends Duck{
 
     public MallardDuck() {

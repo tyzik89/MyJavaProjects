@@ -1,5 +1,9 @@
 package com.work.vladimirs.patterns.pt2.behavior;
 
+/**
+ * Реализация интерфейса полёта
+ * Своеобразная заглушка поведения полёта, т.е. полёт отсутсвует
+ */
 public class FlyNoWay implements FlyBehavior{
 
     @Override
