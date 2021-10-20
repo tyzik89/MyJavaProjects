@@ -1,4 +1,4 @@
-package com.work.vladimirs.patterns.pt2.behaviors.quack;
+package com.work.vladimirs.patterns.strategy.behaviors.quack;
 
 /**
  * Интерфейс поведения крякания

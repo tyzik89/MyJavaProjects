@@ -1,9 +1,9 @@
-package com.work.vladimirs.patterns.pt2;
+package com.work.vladimirs.patterns.strategy;
 
-import com.work.vladimirs.patterns.pt2.behaviors.fly.FlyRocketBehavior;
-import com.work.vladimirs.patterns.pt2.entities.Duck;
-import com.work.vladimirs.patterns.pt2.entities.MallardDuck;
-import com.work.vladimirs.patterns.pt2.entities.ModelDuck;
+import com.work.vladimirs.patterns.strategy.behaviors.fly.FlyRocketBehavior;
+import com.work.vladimirs.patterns.strategy.entities.Duck;
+import com.work.vladimirs.patterns.strategy.entities.MallardDuck;
+import com.work.vladimirs.patterns.strategy.entities.ModelDuck;
 
 class Main {
 

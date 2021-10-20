@@ -1,13 +1,12 @@
-package com.work.vladimirs.patterns.pt2.entities;
+package com.work.vladimirs.patterns.strategy.entities;
 
-import com.work.vladimirs.patterns.pt2.behaviors.fly.FlyBehavior;
-import com.work.vladimirs.patterns.pt2.behaviors.quack.QuackBehavior;
+import com.work.vladimirs.patterns.strategy.behaviors.fly.FlyBehavior;
+import com.work.vladimirs.patterns.strategy.behaviors.quack.QuackBehavior;
 
 /**
  * Абстрактный класс утки
  */
 public abstract class Duck {
-
 
     /**
      * Делегирование поведения крякания
