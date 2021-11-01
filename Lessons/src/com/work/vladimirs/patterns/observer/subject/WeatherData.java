@@ -1,6 +1,23 @@
-package com.work.vladimirs.patterns.observer;
+package com.work.vladimirs.patterns.observer.subject;
 
-public class WeatherData {
+import com.work.vladimirs.patterns.observer.observers.Observer;
+
+public class WeatherData implements Subject {
+
+    @Override
+    public void registerObserver(Observer o) {
+
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+
+    }
+
+    @Override
+    public void notifyObserver() {
+
+    }
 
     /**
      * Получение температуры с метеоприбора
