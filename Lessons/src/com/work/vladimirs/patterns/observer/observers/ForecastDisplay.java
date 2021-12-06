@@ -7,11 +7,11 @@ public class ForecastDisplay implements Observer, DisplayElement {
 
     @Override
     public void display() {
-
+        // some code
     }
 
     @Override
-    public void update(float temp, float humidity, float pressure) {
-
+    public void update() {
+        // some code
     }
 }

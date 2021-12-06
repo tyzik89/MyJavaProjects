@@ -10,4 +10,9 @@ public interface Subject {
 
     void notifyObserver();
 
+    float getTemperature();
+
+    float getHumidity();
+
+    float getPressure();
 }
