@@ -35,17 +35,23 @@ public class WeatherData implements Subject {
     /**
      * Получение температуры с метеоприбора
      */
-    public void getTemperature() {}
+    public float getTemperature() {
+        return temperature;
+    }
 
     /**
      * Получение влажности с метеоприбора
      */
-    public void getHumidity() {}
+    public float getHumidity() {
+        return humidity;
+    }
 
     /**
      * Получение давления с метеоприбора
      */
-    public void getPressure() {}
+    public float getPressure() {
+        return pressure;
+    }
 
     /**
      * Оповещение наблюдаталей о появлении новых данных:
