@@ -1,7 +1,7 @@
-package com.work.vladimirs.patterns.decorator;
+package com.work.vladimirs.patterns.decorator.beverages;
 
 public abstract class Beverage {
-    public String description = "Unknown beverage";
+    String description = "Unknown beverage";
 
     public String getDescription() {
         return description;

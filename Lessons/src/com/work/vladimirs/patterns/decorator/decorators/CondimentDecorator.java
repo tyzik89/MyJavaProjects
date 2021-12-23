@@ -1,4 +1,6 @@
-package com.work.vladimirs.patterns.decorator;
+package com.work.vladimirs.patterns.decorator.decorators;
+
+import com.work.vladimirs.patterns.decorator.beverages.Beverage;
 
 public abstract class CondimentDecorator extends Beverage {
 

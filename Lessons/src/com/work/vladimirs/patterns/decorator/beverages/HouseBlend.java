@@ -1,7 +1,5 @@
 package com.work.vladimirs.patterns.decorator.beverages;
 
-import com.work.vladimirs.patterns.decorator.Beverage;
-
 public class HouseBlend  extends Beverage {
 
     public HouseBlend() {
