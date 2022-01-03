@@ -1,6 +1,6 @@
-package com.work.vladimirs.patterns.decorator.decorators;
+package com.work.vladimirs.patterns.decorator.example_1.decorators;
 
-import com.work.vladimirs.patterns.decorator.beverages.Beverage;
+import com.work.vladimirs.patterns.decorator.example_1.beverages.Beverage;
 
 public class Mocha extends CondimentDecorator {
 

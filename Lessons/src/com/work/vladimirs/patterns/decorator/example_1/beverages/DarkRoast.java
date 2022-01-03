@@ -1,4 +1,4 @@
-package com.work.vladimirs.patterns.decorator.beverages;
+package com.work.vladimirs.patterns.decorator.example_1.beverages;
 
 public class DarkRoast extends Beverage {
 

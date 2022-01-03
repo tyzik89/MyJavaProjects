@@ -1,12 +1,12 @@
-package com.work.vladimirs.patterns.decorator;
+package com.work.vladimirs.patterns.decorator.example_1;
 
-import com.work.vladimirs.patterns.decorator.beverages.Beverage;
-import com.work.vladimirs.patterns.decorator.beverages.DarkRoast;
-import com.work.vladimirs.patterns.decorator.beverages.Espresso;
-import com.work.vladimirs.patterns.decorator.beverages.HouseBlend;
-import com.work.vladimirs.patterns.decorator.decorators.Mocha;
-import com.work.vladimirs.patterns.decorator.decorators.Soy;
-import com.work.vladimirs.patterns.decorator.decorators.Whip;
+import com.work.vladimirs.patterns.decorator.example_1.beverages.Beverage;
+import com.work.vladimirs.patterns.decorator.example_1.beverages.DarkRoast;
+import com.work.vladimirs.patterns.decorator.example_1.beverages.Espresso;
+import com.work.vladimirs.patterns.decorator.example_1.beverages.HouseBlend;
+import com.work.vladimirs.patterns.decorator.example_1.decorators.Mocha;
+import com.work.vladimirs.patterns.decorator.example_1.decorators.Soy;
+import com.work.vladimirs.patterns.decorator.example_1.decorators.Whip;
 
 public class Main {
 
