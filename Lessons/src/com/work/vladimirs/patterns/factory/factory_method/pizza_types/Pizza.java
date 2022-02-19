@@ -1,4 +1,4 @@
-package com.work.vladimirs.patterns.factory.factory.pizza_types;
+package com.work.vladimirs.patterns.factory.factory_method.pizza_types;
 
 public interface Pizza {
 

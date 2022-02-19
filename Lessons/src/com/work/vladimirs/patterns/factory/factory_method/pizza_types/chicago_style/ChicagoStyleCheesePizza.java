@@ -1,6 +1,6 @@
-package com.work.vladimirs.patterns.factory.factory.pizza_types.chicago_style;
+package com.work.vladimirs.patterns.factory.factory_method.pizza_types.chicago_style;
 
-import com.work.vladimirs.patterns.factory.factory.pizza_types.Pizza;
+import com.work.vladimirs.patterns.factory.factory_method.pizza_types.Pizza;
 
 public class ChicagoStyleCheesePizza implements Pizza {
     @Override

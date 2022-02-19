@@ -1,6 +1,6 @@
-package com.work.vladimirs.patterns.factory.factory;
+package com.work.vladimirs.patterns.factory.factory_method;
 
-import com.work.vladimirs.patterns.factory.factory.pizza_types.Pizza;
+import com.work.vladimirs.patterns.factory.factory_method.pizza_types.Pizza;
 
 public class PizzaTestDrive {
 
