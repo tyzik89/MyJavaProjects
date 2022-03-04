@@ -1,4 +1,4 @@
-package thread_blocking_queue;
+package com.work.vladimirs.threads.thread_blocking_queue;
 
 public class Eater implements Runnable {
     private ToastQueue finishedQueue;

@@ -1,4 +1,4 @@
-package thread_blocking_queue;
+package com.work.vladimirs.threads.thread_blocking_queue;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
