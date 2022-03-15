@@ -33,7 +33,7 @@ public class SimpleRemoteControl {
         SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl();
 
         // Получатель запроса
-        Light light = new Light();
+        Light light = new Light("Living room");
         GarageDoor garageDoor = new GarageDoor();
 
         // Команда, с указанием получателя

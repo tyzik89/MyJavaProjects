@@ -15,10 +15,10 @@ public class GarageDoor {
     }
 
     public void lightOn() {
-        System.out.println("Light in garage on");
+        System.out.println("Light at garage on");
     }
 
     public void lightOff() {
-        System.out.println("Light in garage off");
+        System.out.println("Light at garage off");
     }
 }

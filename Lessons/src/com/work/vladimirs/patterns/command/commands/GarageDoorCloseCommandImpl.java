@@ -2,17 +2,17 @@ package com.work.vladimirs.patterns.command.commands;
 
 import com.work.vladimirs.patterns.command.devices_control.GarageDoor;
 
-public class GarageDoorOpenCommandImpl implements Command {
+public class GarageDoorCloseCommandImpl implements Command {
 
     private GarageDoor garageDoor;
 
-    public GarageDoorOpenCommandImpl(GarageDoor garageDoor) {
+    public GarageDoorCloseCommandImpl(GarageDoor garageDoor) {
         this.garageDoor = garageDoor;
     }
 
     @Override
     public void execute() {
-        garageDoor.up();
-        garageDoor.lightOn();
+        garageDoor.down();
+        garageDoor.lightOff();
     }
 }

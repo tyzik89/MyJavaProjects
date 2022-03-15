@@ -5,11 +5,25 @@ package com.work.vladimirs.patterns.command.devices_control;
  */
 public class Light {
 
+    private String placeName;
+
+    public Light(String placeName) {
+        this.placeName = placeName;
+    }
+
     public void lightOn() {
-        System.out.println("Light on");
+        System.out.println(placeName + ". Light on");
     }
 
     public void lightOff() {
-        System.out.println("Light off");
+        System.out.println(placeName + ". Light off");
+    }
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
     }
 }
