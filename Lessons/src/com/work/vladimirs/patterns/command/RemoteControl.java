@@ -1,6 +1,7 @@
 package com.work.vladimirs.patterns.command;
 
 import com.work.vladimirs.patterns.command.commands.*;
+import com.work.vladimirs.patterns.command.devices_control.CeilingFan;
 import com.work.vladimirs.patterns.command.devices_control.GarageDoor;
 import com.work.vladimirs.patterns.command.devices_control.Light;
 import com.work.vladimirs.patterns.command.devices_control.Radio;
@@ -81,7 +82,6 @@ public class RemoteControl {
         GarageDoorCloseCommandImpl garageDoorDown =
                 new GarageDoorCloseCommandImpl(garageDoor);
 
-
         // Binding commands to buttons remote control's
         RemoteControl remoteControl = new RemoteControl();
         remoteControl.setCommand(0, livingRoomLightOn, livingRoomLightOff);
@@ -103,5 +103,6 @@ public class RemoteControl {
         remoteControl.onButtonWasPushed(4);
         remoteControl.offButtonWasPushed(4);
     }
+
 
 }
