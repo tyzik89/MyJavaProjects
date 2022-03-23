@@ -3,6 +3,7 @@ package com.work.vladimirs.patterns.command;
 import com.work.vladimirs.patterns.command.commands.*;
 import com.work.vladimirs.patterns.command.devices_control.GarageDoor;
 import com.work.vladimirs.patterns.command.devices_control.Light;
+import com.work.vladimirs.patterns.command.devices_control.Radio;
 
 /**
  * Система управления устройствами дома с семью слотами управления.
@@ -61,6 +62,7 @@ public class RemoteControl {
         Light livingRoomLight = new Light("Living Room");
         Light kitchenLight = new Light("Kitchen");
         GarageDoor garageDoor = new GarageDoor();
+        Radio radio = new Radio();
 
         // Create commands for manage light system
         LightOnCommandImpl livingRoomLightOn =
@@ -79,11 +81,14 @@ public class RemoteControl {
         GarageDoorCloseCommandImpl garageDoorDown =
                 new GarageDoorCloseCommandImpl(garageDoor);
 
+
         // Binding commands to buttons remote control's
         RemoteControl remoteControl = new RemoteControl();
         remoteControl.setCommand(0, livingRoomLightOn, livingRoomLightOff);
         remoteControl.setCommand(1, kitchenLightOn, kitchenLightOff);
         remoteControl.setCommand(2, garageDoorUp, garageDoorDown);
+        // Create and binding lambda commands for radio (without concrete command)
+        remoteControl.setCommand(3, () -> radio.radioOn(), radio::radioOff);
 
         System.out.println(remoteControl);
 
@@ -95,6 +100,8 @@ public class RemoteControl {
         remoteControl.offButtonWasPushed(2);
         remoteControl.onButtonWasPushed(3);
         remoteControl.offButtonWasPushed(3);
+        remoteControl.onButtonWasPushed(4);
+        remoteControl.offButtonWasPushed(4);
     }
 
 }
