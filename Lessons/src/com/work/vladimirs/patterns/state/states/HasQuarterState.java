@@ -2,11 +2,14 @@ package com.work.vladimirs.patterns.state.states;
 
 import com.work.vladimirs.patterns.state.GumballMachine;
 
+import java.util.Random;
+
 /**
  * Состояние, когда в аппарат бросили монетку
  */
 public class HasQuarterState implements State {
 
+    private Random randomWinner = new Random(System.currentTimeMillis());
     private GumballMachine gumballMachine;
 
     public HasQuarterState(GumballMachine gumballMachine) {
@@ -27,7 +30,12 @@ public class HasQuarterState implements State {
     @Override
     public void turnCrank() {
         System.out.println("You turned...");
-        gumballMachine.setState(gumballMachine.getSoldState());
+        int winner = randomWinner.nextInt(10);
+        if ((winner == 0) && (gumballMachine.getNumberGumballs() > 1)) {
+            gumballMachine.setState(gumballMachine.getWinnerState());
+        } else {
+            gumballMachine.setState(gumballMachine.getSoldState());
+        }
     }
 
     @Override

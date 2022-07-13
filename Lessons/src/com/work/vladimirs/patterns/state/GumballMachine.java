@@ -94,4 +94,12 @@ public class GumballMachine {
     public int getNumberGumballs() {
         return numberGumballs;
     }
+
+    @Override
+    public String toString() {
+        return "GumballMachine{" +
+                "state=" + state.getClass().getSimpleName() +
+                ", numberGumballs=" + numberGumballs +
+                '}';
+    }
 }
