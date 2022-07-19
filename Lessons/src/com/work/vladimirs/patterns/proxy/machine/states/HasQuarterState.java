@@ -9,8 +9,14 @@ import java.util.Random;
  */
 public class HasQuarterState implements State {
 
+    private static final long serialVersionUID = 2L;
+
+    /**
+     * В каждой реализации State переменная экземпляра GumballMachine помечается ключевым словом
+     * transient. Оно сообщает JVM, что это поле не сериализуется.
+     */
+    private transient GumballMachine gumballMachine;
     private Random randomWinner = new Random(System.currentTimeMillis());
-    private GumballMachine gumballMachine;
 
     public HasQuarterState(GumballMachine gumballMachine) {
         this.gumballMachine = gumballMachine;

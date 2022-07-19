@@ -2,10 +2,15 @@ package com.work.vladimirs.patterns.proxy.machine;
 
 import com.work.vladimirs.patterns.proxy.machine.states.*;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 /**
  * Торговый автомат, продающий жвательную резинку. (Сервер)
  */
-public class GumballMachine {
+public class GumballMachine extends UnicastRemoteObject implements GumballMachineRemote {
+
+    private static final long serialVersionUID = 2L;
 
     private String location;
 
@@ -18,7 +23,7 @@ public class GumballMachine {
     State state;
     int numberGumballs;
 
-    public GumballMachine(String location, int numberGumballs) {
+    public GumballMachine(String location, int numberGumballs) throws RemoteException {
         this.location = location;
 
         soldOutState = new SoldOutState(this);
@@ -95,6 +100,7 @@ public class GumballMachine {
         return winnerState;
     }
 
+    @Override
     public int getNumberGumballs() {
         return numberGumballs;
     }
@@ -105,6 +111,11 @@ public class GumballMachine {
 
     public String getLocation() {
         return location;
+    }
+
+    @Override
+    public State getState() throws RemoteException {
+        return null;
     }
 
     public void setLocation(String location) {

@@ -7,7 +7,13 @@ import com.work.vladimirs.patterns.proxy.machine.GumballMachine;
  */
 public class SoldOutState implements State {
 
-    private GumballMachine gumballMachine;
+    private static final long serialVersionUID = 2L;
+    
+    /**
+     * В каждой реализации State переменная экземпляра GumballMachine помечается ключевым словом
+     * transient. Оно сообщает JVM, что это поле не сериализуется.
+     */
+    private transient GumballMachine gumballMachine;
 
     public SoldOutState(GumballMachine gumballMachine) {
         this.gumballMachine = gumballMachine;
