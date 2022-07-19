@@ -1,9 +1,9 @@
-package com.work.vladimirs.patterns.proxy;
+package com.work.vladimirs.patterns.proxy.machine;
 
-import com.work.vladimirs.patterns.proxy.states.*;
+import com.work.vladimirs.patterns.proxy.machine.states.*;
 
 /**
- * Торговый автомат, продающий жвательную резинку.
+ * Торговый автомат, продающий жвательную резинку. (Сервер)
  */
 public class GumballMachine {
 

@@ -1,5 +1,10 @@
 package com.work.vladimirs.patterns.proxy;
 
+import com.work.vladimirs.patterns.proxy.machine.GumballMachine;
+
+/**
+ * Система мониторинга машин с жвачками (клиент)
+ */
 public class GumballMonitor {
 
     private GumballMachine gumballMachine;

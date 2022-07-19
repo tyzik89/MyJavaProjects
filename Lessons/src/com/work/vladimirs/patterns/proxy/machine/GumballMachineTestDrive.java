@@ -1,4 +1,6 @@
-package com.work.vladimirs.patterns.proxy;
+package com.work.vladimirs.patterns.proxy.machine;
+
+import com.work.vladimirs.patterns.proxy.GumballMonitor;
 
 public class GumballMachineTestDrive {
 

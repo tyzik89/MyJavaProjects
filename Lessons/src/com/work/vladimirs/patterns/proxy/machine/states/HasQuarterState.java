@@ -1,6 +1,6 @@
-package com.work.vladimirs.patterns.proxy.states;
+package com.work.vladimirs.patterns.proxy.machine.states;
 
-import com.work.vladimirs.patterns.proxy.GumballMachine;
+import com.work.vladimirs.patterns.proxy.machine.GumballMachine;
 
 import java.util.Random;
 

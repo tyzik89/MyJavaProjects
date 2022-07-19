@@ -1,4 +1,4 @@
-package com.work.vladimirs.patterns.proxy.states;
+package com.work.vladimirs.patterns.proxy.machine.states;
 
 /**
  * Интерфейс состояния с методами возможных действий. Т.е. для каждого состояния создаётся свой класс.
