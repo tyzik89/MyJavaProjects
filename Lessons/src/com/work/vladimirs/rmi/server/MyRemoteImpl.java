@@ -1,4 +1,6 @@
-package com.work.vladimirs.rmi;
+package com.work.vladimirs.rmi.server;
+
+import com.work.vladimirs.rmi.MyRemote;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
