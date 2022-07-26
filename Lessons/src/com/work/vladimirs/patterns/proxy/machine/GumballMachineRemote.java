@@ -1,7 +1,5 @@
 package com.work.vladimirs.patterns.proxy.machine;
 
-import com.work.vladimirs.patterns.proxy.machine.states.State;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -11,5 +9,5 @@ public interface GumballMachineRemote extends Remote {
 
     String getLocation() throws RemoteException;
 
-    State getState() throws RemoteException;
+    String getStateName() throws RemoteException;
 }

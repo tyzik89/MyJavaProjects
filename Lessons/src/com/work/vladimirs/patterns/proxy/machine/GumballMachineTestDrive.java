@@ -1,32 +1,22 @@
 package com.work.vladimirs.patterns.proxy.machine;
 
-import com.work.vladimirs.patterns.proxy.GumballMonitor;
+import java.rmi.Naming;
 
 public class GumballMachineTestDrive {
 
     public static void main(String[] args) {
-        GumballMachine gumballMachine = new GumballMachine("Voronezh",5);
-        GumballMonitor monitor = new GumballMonitor(gumballMachine);
-
-        System.out.println(gumballMachine);
-        monitor.report();
-
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-
-        System.out.println(gumballMachine);
-        monitor.report();
-
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-        gumballMachine.insertQuarter();
-
-        System.out.println(gumballMachine);
-        monitor.report();
-
-        gumballMachine.turnCrank();
-
-        System.out.println(gumballMachine);
-        monitor.report();
+        GumballMachineRemote gumballMachine = null;
+        int count;
+        if (args.length < 2) {
+            System.out.println("GumballMachine <name> <inventory>");
+            System.exit(1);
+        }
+        try {
+            count = Integer.parseInt(args[1]);
+            gumballMachine = new GumballMachine(args[0], count);
+            Naming.rebind("//" + args[0] + "/gumballmachine", gumballMachine);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

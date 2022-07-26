@@ -105,6 +105,7 @@ public class GumballMachine extends UnicastRemoteObject implements GumballMachin
         return numberGumballs;
     }
 
+    @Override
     public String getStateName() {
         return state.getClass().getSimpleName();
     }
@@ -113,9 +114,9 @@ public class GumballMachine extends UnicastRemoteObject implements GumballMachin
         return location;
     }
 
-    @Override
+
     public State getState() throws RemoteException {
-        return null;
+        return state;
     }
 
     public void setLocation(String location) {
