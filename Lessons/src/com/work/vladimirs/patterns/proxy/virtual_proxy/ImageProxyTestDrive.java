@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class ImageProxyTestDrive {
 
-    ImageComponent imageComponent;
+    //ImageComponent imageComponent;
 
     public static void main (String[] args) throws Exception {
         ImageProxyTestDrive testDrive = new ImageProxyTestDrive();
@@ -16,10 +16,10 @@ public class ImageProxyTestDrive {
 
         // Создаем заместитель и связываем его с исходным URL-адресом. Каждый раз, когда вы выбираете
         // один из пунктов меню Album, вы получаете новый объект ImageProxy.
-        Icon icon = new ImageProxy(initialURL);
+        //Icon icon = new ImageProxy(initialURL);
         // Затем заместитель упаковывается в компонент для добавления к объектам панели.
-        imageComponent = new ImageComponent(icon);
+        //imageComponent = new ImageComponent(icon);
         // Добавляем заместитель к объ ектам панели, на которой должно выводиться изображение.
-        frame.getContentPane().add(imageComponent);
+        //frame.getContentPane().add(imageComponent);
     }
 }
