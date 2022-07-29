@@ -1,6 +1,6 @@
-package com.work.vladimirs.patterns.proxy.machine.states;
+package com.work.vladimirs.patterns.proxy.remote_proxy.machine.states;
 
-import com.work.vladimirs.patterns.proxy.machine.GumballMachine;
+import com.work.vladimirs.patterns.proxy.remote_proxy.machine.GumballMachine;
 
 /**
  * Состояние, когда выпал 10%-й шанс, и надо выдать две жвачки.

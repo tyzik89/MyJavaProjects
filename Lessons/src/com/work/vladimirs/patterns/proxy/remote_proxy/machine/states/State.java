@@ -1,4 +1,4 @@
-package com.work.vladimirs.patterns.proxy.machine.states;
+package com.work.vladimirs.patterns.proxy.remote_proxy.machine.states;
 
 import java.io.Serializable;
 

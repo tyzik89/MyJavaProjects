@@ -1,6 +1,6 @@
-package com.work.vladimirs.patterns.proxy.machine;
+package com.work.vladimirs.patterns.proxy.remote_proxy.machine;
 
-import com.work.vladimirs.patterns.proxy.machine.states.*;
+import com.work.vladimirs.patterns.proxy.remote_proxy.machine.states.*;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

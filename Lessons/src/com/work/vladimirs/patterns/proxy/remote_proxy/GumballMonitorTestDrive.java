@@ -1,6 +1,6 @@
-package com.work.vladimirs.patterns.proxy;
+package com.work.vladimirs.patterns.proxy.remote_proxy;
 
-import com.work.vladimirs.patterns.proxy.machine.GumballMachineRemote;
+import com.work.vladimirs.patterns.proxy.remote_proxy.machine.GumballMachineRemote;
 
 import java.rmi.Naming;
 

@@ -1,4 +1,4 @@
-package com.work.vladimirs.patterns.proxy.machine;
+package com.work.vladimirs.patterns.proxy.remote_proxy.machine;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
