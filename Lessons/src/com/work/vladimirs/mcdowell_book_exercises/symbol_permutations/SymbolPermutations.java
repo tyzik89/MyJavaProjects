@@ -1,4 +1,4 @@
-package com.work.vladimirs.symbol_permutations;
+package com.work.vladimirs.mcdowell_book_exercises.symbol_permutations;
 
 import java.util.ArrayList;
 import java.util.List;
