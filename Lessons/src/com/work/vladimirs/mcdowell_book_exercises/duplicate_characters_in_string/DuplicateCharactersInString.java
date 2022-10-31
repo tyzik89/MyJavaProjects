@@ -29,13 +29,14 @@ public class DuplicateCharactersInString {
         int checker = 0;
         for (char c : source.toCharArray()) {
             int val = c - 'a';   // Вычисляем индекс бита, соответствующего текущей букве
-            System.out.printf("%d it's bit index corresponding to the character %s\n", val, c);
+            System.out.printf("val = %d it's bit index corresponding to the character %s\n", val, c);
             // Смещаемся на кол-во битов символа делая сдвиг влево 1 << val (т.е. умножая на степень 2, т.е. включаем один бит)
             // 1 << 0 = 1 * 1 = 2 (1 в двоичном виде);
             // 1 << 1 = 1 * 2 = 2 (10);
             // 1 << 2 = 1 * 4 = 4 (100);
             // 1 << 3 = 1 * 8 = 8 (1000)
             // вычислив & (побитовое И) определяем, включен ли выбранный бит, т.е. 1 И 0 = 0, а 1 И 1 = 1
+            System.out.println("(1 << val) = " + (1 << val));
             if((checker & (1 << val)) > 0) {
                 return true;
             } else {
@@ -48,7 +49,7 @@ public class DuplicateCharactersInString {
     }
 
     public static void main(String[] args) {
-        String source = "aabcdfghj";
+        String source = "abcdzfghj";
         DuplicateCharactersInString checker = new DuplicateCharactersInString();
         System.out.println(checker.checkStringWithHasMap(source));
         System.out.println(checker.checkStringWithBitsVector(source));
