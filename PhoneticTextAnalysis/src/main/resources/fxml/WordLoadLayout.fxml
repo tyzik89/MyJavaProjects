@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.WordLoadController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <center>
+        <TextField fx:id="itmWordInput"></TextField>
+    </center>
+    <bottom>
+        <Button fx:id="btnLoad" mnemonicParsing="false" onAction="#handleAnalyze"
+                text="Анализ">
+            <tooltip>
+                <Tooltip text="Выполнить анализ" />
+            </tooltip>
+        </Button>
+        <Button fx:id="itmExit" mnemonicParsing="false" onAction="#handleExit"
+                text="Выход">
+            <tooltip>
+                <Tooltip text="Выход" />
+            </tooltip>
+        </Button>
+    </bottom>
+</BorderPane>
