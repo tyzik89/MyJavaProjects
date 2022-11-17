@@ -1,13 +1,12 @@
-package app;
+package com.vladimirs.work.app;
 
+import com.vladimirs.work.controllers.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class MainApp extends Application {
 
@@ -35,6 +34,10 @@ public class MainApp extends Application {
             loader.setLocation(getClass().getResource("/fxml/RootLayout.fxml"));
             // Загружаем интерфейс из файл
             Parent rootLayout = loader.load();
+
+            RootLayoutController rootLayoutController = loader.getController();
+            rootLayoutController.setPrimaryStage(primaryStage);
+
             // Отображаем сцену, содержащую корневой макет.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);

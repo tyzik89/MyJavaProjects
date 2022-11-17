@@ -8,7 +8,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="800.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RootLayoutController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vladimirs.work.controllers.RootLayoutController">
 
     <top>
         <MenuBar BorderPane.alignment="CENTER">

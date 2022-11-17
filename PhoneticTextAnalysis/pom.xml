@@ -24,7 +24,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>app.MainApp</mainClass>
+                            <mainClass>com.vladimirs.work.app.MainApp</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

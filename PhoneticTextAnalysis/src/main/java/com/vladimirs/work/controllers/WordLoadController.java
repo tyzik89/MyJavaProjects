@@ -1,5 +1,6 @@
-package controllers;
+package com.vladimirs.work.controllers;
 
+import com.vladimirs.work.models.TextHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +13,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.annotation.PostConstruct;
 
 public class WordLoadController {
 
@@ -32,7 +31,7 @@ public class WordLoadController {
     @FXML
     public Label errorLabel;
 
-    public void init() {
+    public void init(RootLayoutController rootLayoutController) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/WordLoadLayout.fxml"));
             Parent parent = loader.load();
@@ -42,8 +41,8 @@ public class WordLoadController {
             wordLoadStage.setResizable(false);
             wordLoadStage.setMaximized(false);
             wordLoadStage.setAlwaysOnTop(true);
-            wordLoadStage.initModality(Modality.APPLICATION_MODAL);
-            wordLoadStage.show();
+            wordLoadStage.initOwner(rootLayoutController.getPrimaryStage());
+            wordLoadStage.initModality(Modality.WINDOW_MODAL);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,7 +55,9 @@ public class WordLoadController {
             LOGGER.debug(charSequence.toString());
             errorLabel.setText("");
             this.charSequence = charSequence;
-            wordLoadStage.hide();
+            TextHandler textHandler = new TextHandler();
+            textHandler.handle(charSequence);
+            hideStage();
         } else {
             errorLabel.setText("Пожалуйста, введите слово:");
         }
@@ -64,7 +65,7 @@ public class WordLoadController {
 
     @FXML
     public void handleExit(ActionEvent actionEvent) {
-        wordLoadStage.hide();
+        hideStage();
     }
 
     public CharSequence getCharSequence() {
@@ -73,5 +74,13 @@ public class WordLoadController {
 
     public void setCharSequence(CharSequence charSequence) {
         this.charSequence = charSequence;
+    }
+
+    public void showStage() {
+        wordLoadStage.show();
+    }
+
+    public void hideStage() {
+        wordLoadStage.hide();
     }
 }
