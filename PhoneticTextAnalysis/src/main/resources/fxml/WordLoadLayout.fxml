@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="196.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vladimirs.work.controllers.WordLoadController">
+<VBox prefHeight="196.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.vladimirs.work.controllers.WordLoadController">
     
    <HBox alignment="TOP_CENTER" prefHeight="50.0">
       <children>
@@ -23,13 +24,13 @@
    <HBox prefHeight="20.0" prefWidth="200.0" />
    <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="200.0">
       <children>
-              <Button fx:id="btnLoad" mnemonicParsing="false" onAction="#handleAnalyze" text="Анализ">
+              <Button fx:id="btnAddWord" mnemonicParsing="false" onAction="#handleAddWord" text="Добавить слово">
                   <tooltip>
-                      <Tooltip text="Выполнить анализ" />
+                      <Tooltip text="Добавить" />
                   </tooltip>
               </Button>
          <Pane prefHeight="25.0" prefWidth="50.0" />
-              <Button fx:id="itmExit" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleExit" text="Выход">
+              <Button fx:id="btnDoExit" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleExit" text="Выход">
                   <tooltip>
                       <Tooltip text="Выход" />
                   </tooltip>

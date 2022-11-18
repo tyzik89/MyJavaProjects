@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="800.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vladimirs.work.controllers.RootLayoutController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vladimirs.work.controllers.RootLayoutController">
 
     <top>
-        <MenuBar BorderPane.alignment="CENTER">
-            <Menu mnemonicParsing="false" text="Файл">
-                <MenuItem fx:id="itmLoad" mnemonicParsing="false" onAction="#handleWordLoad" text="Анализ слова" />
-                <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem fx:id="itmExit" mnemonicParsing="false" onAction="#handleItmExit" text="Выход" />
-            </Menu>
-        </MenuBar>
-    </top>
+      <MenuBar BorderPane.alignment="CENTER">
+         <Menu mnemonicParsing="false" text="Файл">
+             <MenuItem fx:id="itmAddWord" mnemonicParsing="false" onAction="#handleAddWord" text="Загрузить слово" />
+            <MenuItem fx:id="itmAnalyze" mnemonicParsing="false" onAction="#handleItmAnalyze" text="Анализ" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+             <MenuItem fx:id="itmExit" mnemonicParsing="false" onAction="#handleItmExit" text="Выход" />
+         </Menu>
+      </MenuBar>
+   </top>
+   <center>
+      <LineChart fx:id="itmLineChart" legendSide="RIGHT" title="Результат анализа" BorderPane.alignment="CENTER">
+        <xAxis>
+          <CategoryAxis endMargin="2.0" label="Символы" side="BOTTOM" startMargin="1.0" tickLabelGap="3.0">
+               <tickLabelFont>
+                  <Font size="12.0" />
+               </tickLabelFont></CategoryAxis>
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Уровень звучности" lowerBound="1.0" minorTickCount="1" side="LEFT" tickLabelGap="5.0" tickLength="5.0" upperBound="10.0">
+               <tickLabelFont>
+                  <Font size="20.0" />
+               </tickLabelFont>
+            </NumberAxis>
+        </yAxis>
+      </LineChart>
+   </center>
+
 </BorderPane>

@@ -1,9 +1,9 @@
 package com.vladimirs.work.controllers;
 
-import com.vladimirs.work.models.TextHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,52 +11,36 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Getter
+@Setter
 public class WordLoadController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(WordLoadController.class);
 
-    private static Stage wordLoadStage;
-
-    private CharSequence charSequence;
-
     @FXML
-    public Button btnLoad;
+    public Button btnAddWord;
     @FXML
-    public Button itmExit;
+    public Button btnDoExit;
     @FXML
     public TextField itmWordInput;
     @FXML
     public Label errorLabel;
 
-    public void init(RootLayoutController rootLayoutController) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/WordLoadLayout.fxml"));
-            Parent parent = loader.load();
-            wordLoadStage = new Stage();
-            wordLoadStage.setTitle("Анализ слова");
-            wordLoadStage.setScene(new Scene(parent));
-            wordLoadStage.setResizable(false);
-            wordLoadStage.setMaximized(false);
-            wordLoadStage.setAlwaysOnTop(true);
-            wordLoadStage.initOwner(rootLayoutController.getPrimaryStage());
-            wordLoadStage.initModality(Modality.WINDOW_MODAL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    private Stage addWordStage;
+    private StringBuilder stringBuilder;
 
     @FXML
-    public void handleAnalyze(ActionEvent actionEvent) {
+    public void handleAddWord(ActionEvent actionEvent) {
         CharSequence charSequence = itmWordInput.getCharacters();
         if (charSequence.length() > 0) {
             LOGGER.debug(charSequence.toString());
             errorLabel.setText("");
-            this.charSequence = charSequence;
-            TextHandler textHandler = new TextHandler();
-            textHandler.handle(charSequence);
+            this.stringBuilder.append(charSequence);
             hideStage();
         } else {
             errorLabel.setText("Пожалуйста, введите слово:");
@@ -68,19 +52,11 @@ public class WordLoadController {
         hideStage();
     }
 
-    public CharSequence getCharSequence() {
-        return charSequence;
-    }
-
-    public void setCharSequence(CharSequence charSequence) {
-        this.charSequence = charSequence;
-    }
-
     public void showStage() {
-        wordLoadStage.show();
+        addWordStage.showAndWait();
     }
 
     public void hideStage() {
-        wordLoadStage.hide();
+        addWordStage.hide();
     }
 }

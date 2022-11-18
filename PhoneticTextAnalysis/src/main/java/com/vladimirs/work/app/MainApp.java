@@ -34,13 +34,13 @@ public class MainApp extends Application {
             loader.setLocation(getClass().getResource("/fxml/RootLayout.fxml"));
             // Загружаем интерфейс из файл
             Parent rootLayout = loader.load();
+            // Отображаем сцену, содержащую корневой макет.
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
 
             RootLayoutController rootLayoutController = loader.getController();
             rootLayoutController.setPrimaryStage(primaryStage);
 
-            // Отображаем сцену, содержащую корневой макет.
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
             primaryStage.setMaximized(true);
             primaryStage.setResizable(true);
             primaryStage.show();

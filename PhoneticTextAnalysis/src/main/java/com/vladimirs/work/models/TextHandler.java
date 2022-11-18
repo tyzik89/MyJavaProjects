@@ -1,6 +1,5 @@
 package com.vladimirs.work.models;
 
-import com.vladimirs.work.controllers.RootLayoutController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

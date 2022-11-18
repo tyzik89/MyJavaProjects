@@ -41,6 +41,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>com.vladimirs.work.app.MainApp</mainClass>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -70,6 +78,47 @@
             <version>2.12.1</version>
         </dependency>
         <!--====================================/LOGGING=========================================-->
+
+        <!--====================================/JAVAFX=========================================-->
+        <!-- https://openjfx.io/javadoc/19/
+            javafx.base
+            Defines the base APIs for the JavaFX UI toolkit, including APIs for bindings, properties, collections, and events.
+            javafx.controls
+            Defines the UI controls, charts, and skins that are available for the JavaFX UI toolkit.
+            javafx.fxml
+            Defines the FXML APIs for the JavaFX UI toolkit.
+            javafx.graphics
+            Defines the core scenegraph APIs for the JavaFX UI toolkit (such as layout containers, application lifecycle, shapes, transformations, canvas, input, painting, image handling, and effects), as well as APIs for animation, css, concurrency, geometry, printing, and windowing.
+            javafx.media
+            Defines APIs for playback of media and audio content, as part of the JavaFX UI toolkit, including MediaView and MediaPlayer.
+            javafx.swing
+            Defines APIs for the JavaFX / Swing interop support included with the JavaFX UI toolkit, including SwingNode (for embedding Swing inside a JavaFX application) and JFXPanel (for embedding JavaFX inside a Swing application).
+            javafx.web
+            Defines APIs for the WebView functionality contained within the the JavaFX UI toolkit.
+         -->
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>19</version>
+            <type>pom</type>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>19</version>
+        </dependency>
+
+        <!--====================================/JAVAFX=========================================-->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
 </project>
