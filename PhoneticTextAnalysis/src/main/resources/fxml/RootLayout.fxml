@@ -17,6 +17,7 @@
          <Menu mnemonicParsing="false" text="Файл">
              <MenuItem fx:id="itmAddWord" mnemonicParsing="false" onAction="#handleAddWord" text="Загрузить слово" />
             <MenuItem fx:id="itmAnalyze" mnemonicParsing="false" onAction="#handleItmAnalyze" text="Анализ" />
+            <MenuItem fx:id="itmClear" mnemonicParsing="false" onAction="#handleItmClear" text="Очистка" />
             <SeparatorMenuItem mnemonicParsing="false" />
              <MenuItem fx:id="itmExit" mnemonicParsing="false" onAction="#handleItmExit" text="Выход" />
          </Menu>

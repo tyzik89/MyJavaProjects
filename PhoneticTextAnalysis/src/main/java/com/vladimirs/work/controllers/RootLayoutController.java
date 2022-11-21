@@ -1,7 +1,8 @@
 package com.vladimirs.work.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.vladimirs.work.models.CharacterLevel;
+import com.vladimirs.work.models.TextHandler;
+import com.vladimirs.work.models.TextStorage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,7 @@ import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Random;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,12 +31,20 @@ public class RootLayoutController {
     @FXML
     public MenuItem itmAnalyze;
     @FXML
+    public MenuItem itmClear;
+    @FXML
     private MenuItem itmAddWord;
     @FXML
     private MenuItem itmExit;
 
+    private final TextStorage textStorage;
+    private final TextHandler textHandler;
     private Stage primaryStage;
-    private ObservableList<CharSequence> charSequenceObservableList = FXCollections.observableArrayList();
+
+    public RootLayoutController() {
+        this.textStorage = new TextStorage();
+        this.textHandler = new TextHandler();
+    }
 
     @FXML
     private void handleItmExit(ActionEvent event) {
@@ -44,12 +53,10 @@ public class RootLayoutController {
 
     @FXML
     public void handleAddWord(ActionEvent actionEvent) {
-        StringBuilder stringBuilder = new StringBuilder();
-        showAddWordWindow(stringBuilder);
-        charSequenceObservableList.add(stringBuilder);
+        showAddWordWindow(textStorage);
     }
 
-    private void showAddWordWindow(StringBuilder stringBuilder) {
+    private void showAddWordWindow(TextStorage textStorage) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/WordLoadLayout.fxml"));
@@ -61,8 +68,8 @@ public class RootLayoutController {
             addWordStage.setScene(new Scene(parent));
             WordLoadController controller = loader.getController();
             controller.setAddWordStage(addWordStage);
-            controller.setStringBuilder(stringBuilder);
-            addWordStage.showAndWait();
+            controller.setTextStorage(textStorage);
+            controller.showStage();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,37 +77,24 @@ public class RootLayoutController {
 
     @FXML
     public void handleItmAnalyze(ActionEvent actionEvent) {
-        int j = 0;
-        LOGGER.debug(charSequenceObservableList.toString());
+        int serialNum = 0;
         itmLineChart.getData().clear();
-        Random random = new Random();
-        for (CharSequence charSequence : charSequenceObservableList) {
+
+        for (CharSequence charSequence : textStorage.getCharSequenceObservableList()) {
             XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
             series.setName(charSequence.toString());
-            for (int i = 0; i < charSequence.length(); i++) {
-                j++;
-                char ch = charSequence.charAt(i);
-                series.getData().add(new XYChart.Data<String, Number>(j+"-"+ch, random.nextInt(6) + 1));
+            List<CharacterLevel> characterLevels = textHandler.handleCharSequence(charSequence);
+            for (CharacterLevel chLevel : characterLevels) {
+                serialNum++;
+                series.getData().add(new XYChart.Data<String, Number>(serialNum+"-"+chLevel.getCharacter(), chLevel.getPhoneticLevel()));
             }
             itmLineChart.getData().add(series);
         }
+    }
 
-//                XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
-//        series.setName("мама");
-//        series.getData().add(new XYChart.Data<String, Number>("1-м", 6));
-//        series.getData().add(new XYChart.Data<String, Number>("2-а", 10));
-//        series.getData().add(new XYChart.Data<String, Number>("3-м", 6));
-//        series.getData().add(new XYChart.Data<String, Number>("4-а", 10));
-//        itmLineChart.getData().add(series);
-//
-//        XYChart.Series<String, Number> series1 = new XYChart.Series<String, Number>();
-//        series1.setName("правда");
-//        series1.getData().add(new XYChart.Data<String, Number>("1-п", 2));
-//        series1.getData().add(new XYChart.Data<String, Number>("2-р", 7));
-//        series1.getData().add(new XYChart.Data<String, Number>("3-а", 10));
-//        series1.getData().add(new XYChart.Data<String, Number>("4-в", 3));
-//        series1.getData().add(new XYChart.Data<String, Number>("5-д", 5));
-//        series1.getData().add(new XYChart.Data<String, Number>("6-а", 10));
-//        itmLineChart.getData().add(series1);
+    @FXML
+    public void handleItmClear(ActionEvent actionEvent) {
+        itmLineChart.getData().clear();
+        textStorage.clearStorage();
     }
 }

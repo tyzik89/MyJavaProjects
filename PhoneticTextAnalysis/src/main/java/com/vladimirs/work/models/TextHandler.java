@@ -3,7 +3,9 @@ package com.vladimirs.work.models;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class TextHandler {
 
@@ -23,11 +25,26 @@ public class TextHandler {
         put('ш', 1);  put('с', 1);  put('ф', 1);  put('щ', 1);  put('х', 1);
     }};
 
-    public void handle(CharSequence charSequence) {
+    public List<CharacterLevel> handleCharSequence(CharSequence charSequence) {
+        List<CharacterLevel> characterLevels = new ArrayList<>();
+        handleSequence(characterLevels, charSequence);
+        return characterLevels;
+    }
+
+    public List<CharacterLevel> handleCharSequencesList(List<CharSequence> charSequences) {
+        List<CharacterLevel> characterLevels = new ArrayList<>();
+        for (CharSequence charSequence : charSequences) {
+            handleSequence(characterLevels, charSequence);
+        }
+        return characterLevels;
+    }
+
+    private void handleSequence(List<CharacterLevel> characterLevels, CharSequence charSequence) {
         for (int i = 0; i < charSequence.length(); i++) {
             char ch = charSequence.charAt(i);
             Integer level = phoneticLevelDictionary.get(ch);
             LOGGER.debug("character: {}, level: {}", ch, level);
+            characterLevels.add(new CharacterLevel(ch, level == null ? 0 : level));
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.vladimirs.work.controllers;
 
+import com.vladimirs.work.models.TextStorage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,15 +33,15 @@ public class WordLoadController {
     public Label errorLabel;
 
     private Stage addWordStage;
-    private StringBuilder stringBuilder;
+    private TextStorage textStorage;
 
     @FXML
     public void handleAddWord(ActionEvent actionEvent) {
         CharSequence charSequence = itmWordInput.getCharacters();
         if (charSequence.length() > 0) {
             LOGGER.debug(charSequence.toString());
+            textStorage.addWord(charSequence);
             errorLabel.setText("");
-            this.stringBuilder.append(charSequence);
             hideStage();
         } else {
             errorLabel.setText("Пожалуйста, введите слово:");
