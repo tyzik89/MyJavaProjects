@@ -4,9 +4,9 @@ import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class BinarySearch<T> {
+public class BinarySearch {
 
-    public int binarySearch(List<T> sortedList, T searchElement, Comparator<T> comparator) {
+    public <T> int binarySearch(List<T> sortedList, T searchElement, Comparator<T> comparator) {
         int position = -1;
         int lowBound = 0;
         int highBound = sortedList.size() - 1;
