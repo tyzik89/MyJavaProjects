@@ -29,4 +29,29 @@ public class QuickSort {
         sortedList.addAll(quickSortASC(unsortedListGreater, comparator));
         return sortedList;
     }
+
+    public static void main(String[] args) {
+        List<String> stringList = new ArrayList<String>() {{
+            add("C");
+            add("D");
+            add("E");
+            add("A");
+            add("B");
+        }};
+        List<Integer> integerList = new ArrayList<Integer>() {{
+            add(4);
+            add(3);
+            add(2);
+            add(1);
+            add(5);
+        }};
+
+        QuickSort quickSort = new QuickSort();
+
+        List<String> strings = quickSort.<String>quickSortASC(stringList, Comparator.comparing(o -> ((String) o)));
+        System.out.println(strings);
+
+        List<Integer> integers = quickSort.<Integer>quickSortASC(integerList, Comparator.comparing(o -> ((Integer) o)));
+        System.out.println(integers);
+    }
 }
