@@ -4,6 +4,9 @@ import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+/**
+ * Бинарный поиск (O(log(n)))
+ */
 public class BinarySearch {
 
     public <T> int binarySearch(List<T> sortedList, T searchElement, Comparator<T> comparator) {

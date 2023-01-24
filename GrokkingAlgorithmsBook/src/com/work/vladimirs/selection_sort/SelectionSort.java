@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Сортировка выбором (O(log(n^2))
+ */
 public class SelectionSort {
 
     public <T> List<T> selectionSortASC(List<T> unsortedList, Comparator<T> comparator) {

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Быстрая сортирвка (O(log(n^2)) в худщем случае, O(n log(n)) в лучшем случае)
+ */
 public class QuickSort {
 
     public <T> List<T> quickSortASC(List<T> unsortedList, Comparator<T> comparator) {
