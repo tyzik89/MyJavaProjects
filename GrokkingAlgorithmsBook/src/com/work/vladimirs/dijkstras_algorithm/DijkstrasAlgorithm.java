@@ -75,6 +75,23 @@ public class DijkstrasAlgorithm {
             // Найти следующий узел для обработки и повторить цикл
             node = findLowestCostNode(costsMap, checkedNode);
         }
+
+        // Вывод результата. Собираем цепочку с конца
+        List<String> nodeChain = new ArrayList<>();
+        String nextNode = "End";
+        for (int i = 0; i < parentsMap.size(); i++) {
+            nodeChain.add(nextNode);
+            nextNode = parentsMap.get(nextNode);
+        }
+        System.out.print("Start--");
+        for (int i = nodeChain.size() - 1; i >= 0; i--) {
+            String n = nodeChain.get(i);
+            System.out.print(costsMap.get(n) + "-->");
+            System.out.print(n);
+            if (!n.equals("End")) {
+                System.out.print("--");
+            }
+        }
     }
 
     private static String findLowestCostNode(Map<String, Integer> costsMap, List<String> checkedNode) {
