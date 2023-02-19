@@ -44,11 +44,55 @@ public class DijkstrasAlgorithm {
         Map<String, String> parentsMap = new HashMap<>();
         parentsMap.put("A", "Start");
         parentsMap.put("B", "Start");
-        parentsMap.put("End", "");
+        parentsMap.put("End", null);
 
         // Отслеживание уже обработанных узлов
         List<String> checkedNode = new ArrayList<>();
 
+        // найти узел с наименьшей стоимостью, среди необработанных
+        String node = findLowestCostNode(costsMap, checkedNode);
+        // Пока обработаны не все узлы
+        while (node != null) {
+            Integer cost = costsMap.get(node);
+            Map<String, Integer> neighbors = graph.get(node);
+            // Перебираем всех соседей текущего узла
+            for (String neighborNode : neighbors.keySet()) {
+                Integer newCost = cost + neighbors.get(neighborNode);
+                // Если предыдущая стоимость была не вычесленной, обновляем его новым значением
+                costsMap.putIfAbsent(neighborNode, newCost);
+                // тоже самое с родителем
+                parentsMap.putIfAbsent(neighborNode, node);
+                // Если к соседу можно быстрее добраться через текущий узел
+                if (costsMap.get(neighborNode) > newCost) {
+                    // обновить стоимость этого узла
+                    costsMap.put(neighborNode, newCost);
+                    // узел становится новым родителем для соседа
+                    parentsMap.put(neighborNode, node);
+                }
+            }
+            // Узел помечается как обработанный
+            checkedNode.add(node);
+            // Найти следующий узел для обработки и повторить цикл
+            node = findLowestCostNode(costsMap, checkedNode);
+        }
+    }
 
+    private static String findLowestCostNode(Map<String, Integer> costsMap, List<String> checkedNode) {
+        Integer lowestCost = null;
+        String lowestCostNode = null;
+        for (String node : costsMap.keySet()) {
+            Integer cost = costsMap.get(node);
+            // При встрече обработанного узла или узла с непосчитанной стоимостью, пропускаем
+            if (checkedNode.contains(node) || cost == null) {
+                continue;
+            }
+            // Если этот узел с наименьшей стоимостью из уже увиденных
+            if (lowestCost == null || cost < lowestCost) {
+                // он назначается новым узлом с наименьшей стоимостью
+                lowestCost = cost;
+                lowestCostNode = node;
+            }
+        }
+        return lowestCostNode;
     }
 }
