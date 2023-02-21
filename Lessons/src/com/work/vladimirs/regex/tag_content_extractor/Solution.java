@@ -1,4 +1,4 @@
-package com.work.vladimirs.tag_content_extractor;
+package com.work.vladimirs.regex.tag_content_extractor;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

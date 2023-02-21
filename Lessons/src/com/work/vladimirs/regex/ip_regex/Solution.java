@@ -1,4 +1,4 @@
-package com.work.vladimirs.ip_regex;
+package com.work.vladimirs.regex.ip_regex;
 
 
 import java.util.Scanner;
