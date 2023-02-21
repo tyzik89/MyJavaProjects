@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 public class Solution {
 
     public static void main(String[] args) {
-        String regex = "(\\b\\w+\\b).*(\\1)";
-        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        String regex = "(?i)(\\b\\w+\\b).*(\\1)"; // Modifier (?i) = Pattern.CASE_INSENSITIVE
+        Pattern p = Pattern.compile(regex);
 
         List<String> strings = new ArrayList<String>(){{
             add("Goodbye bye bye world world world");
