@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class Solution {
 
     public static void main(String[] args) {
-        String regex = "(?i)(\\b\\w+?\\b)(\\s+(\\1))*"; // Modifier (?i) = Pattern.CASE_INSENSITIVE
+        String regex = "(?i)\\b(\\w+)\\b(\\s+(\\b\\1\\b))*"; // Modifier (?i) = Pattern.CASE_INSENSITIVE
         Pattern p = Pattern.compile(regex);
 
         List<String> strings = new ArrayList<String>(){{
@@ -25,7 +25,7 @@ public class Solution {
             Matcher m = p.matcher(input);
             // Check for subsequences of input that match the compiled pattern
             while (m.find()) {
-                System.out.println("m.group(): " + m.group() + ";m.group(1): " + m.group(1) + "; m.group(2):" + m.group(2));
+                System.out.println("m.group(): " + m.group() + ";   m.group(1): " + m.group(1) + ";   m.group(2):" + m.group(2));
                 input = input.replaceAll(m.group(), m.group(1));
             }
             // Prints the modified sentence.
