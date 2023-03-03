@@ -92,6 +92,7 @@ public class DynamicProgramming {
             return currentItem;
         }
         // Если вес текущего предмета входит в рюкзак + осталось место
+        // Берём на свободное место вычесленный ранее предмет
         Item itemForFreeSpace = backpacks[i - 1][j - currentItem.weight];
         if (itemForFreeSpace != null) {
             // Объединяем предменты и запихиваем в рюкзак
