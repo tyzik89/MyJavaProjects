@@ -12,14 +12,14 @@ The first line contains 2 space-separated integers, **N** (the length of both Bi
 and **M** (the number of operations to perform), respectively.
 The **M** subsequent lines each contain an operation in one of the following forms:
 
-* AND <set> <set>
-* OR <set> <set>
-* XOR <set> <set>
-* FLIP <set> <index>
-* SET <set> <index>
+* AND `<set>` `<set>`
+* OR `<set>` `<set>`
+* XOR `<set>` `<set>`
+* FLIP `<set>` `<index>`
+* SET `<set>` `<index>`
 
-In the list above, <set> is the integer 1 or 2, where 1 denotes **B1** and 2 denotes **B2**.
-<index> is an integer denoting a bit's index in the BitSet corresponding to <set>.
+In the list above, `<set>` is the integer 1 or 2, where 1 denotes **B1** and 2 denotes **B2**.
+`<index>` is an integer denoting a bit's index in the BitSet corresponding to `<set>`.
 
 For the binary operations AND, OR, and XOR, operands are read from left to right and the BitSet resulting from
 the operation replaces the contents of the first operand. For example:
@@ -36,36 +36,43 @@ as 2 space-separated integers on a new line.
 _**Sample Input:**_
 
 5 4
+
 AND 1 2
+
 SET 1 4
+
 FLIP 2 2
+
 OR 2 1
 
 _**Sample Output:**_
 
 0 0
+
 1 0
+
 1 1
+
 1 2
 
 _**Explanation:**_
 
 Initially: N=5, M=4, B1={0,0,0,0,0}, and B2={0,0,0,0,0}. 
 At each step, we print the respective number of set bits in B1 and B2 as a pair of space-separated integers on a new line.
-M0 = AND 1 2
-B1 = B1 ^ B2 = {0,0,0,0,0}
+M0 = AND 1 2;
+B1 = B1 ^ B2 = {0,0,0,0,0};
 The number of set bits in B1 and B2 is 0.
 
-M1 = SET 1 4
-Set B1[4] to true(1)
-B1 = {0,0,0,0,1} , B2={0,0,0,0,0}
+M1 = SET 1 4;
+Set B1[4] to true(1);
+B1 = {0,0,0,0,1} , B2={0,0,0,0,0};
 The number of set bits in B1 is 1 and B2 is 0.
 
-M2 = FLIP 2 2
-Flip B2[2] from false(0) to true(1).
-B1 = {0,0,0,0,1} , B2={0,0,1,0,0}
+M2 = FLIP 2 2;
+Flip B2[2] from false(0) to true(1);
+B1 = {0,0,0,0,1} , B2={0,0,1,0,0};
 The number of set bits in B1 is 1 and B2 is 1.
 
-M3 = OR 2 1
-B2 = B2 or B1 = {0,0,1,0,0} or {0,0,0,0,1} = {0,0,1,0,1}
+M3 = OR 2 1;
+B2 = B2 or B1 = {0,0,1,0,0} or {0,0,0,0,1} = {0,0,1,0,1};
 The number of set bits in B1 is 1 and B2 is 2.
