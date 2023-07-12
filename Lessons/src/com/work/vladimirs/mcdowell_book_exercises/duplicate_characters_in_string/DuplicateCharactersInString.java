@@ -28,6 +28,7 @@ public class DuplicateCharactersInString {
     public boolean checkStringWithBitsVector(String source) {
         int checker = 0;
         for (char c : source.toCharArray()) {
+            System.out.println("'Checker=" + checker + "' in binary: " + Integer.toBinaryString(checker));
             int val = c - 'a';   // Вычисляем индекс бита, соответствующего текущей букве
             System.out.printf("val = %d it's bit index corresponding to the character %s\n", val, c);
             // Смещаемся на кол-во битов символа делая сдвиг влево 1 << val (т.е. умножая на степень 2, т.е. включаем один бит)
