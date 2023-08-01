@@ -36,23 +36,16 @@ as 2 space-separated integers on a new line.
 _**Sample Input:**_
 
 5 4
-
 AND 1 2
-
 SET 1 4
-
 FLIP 2 2
-
 OR 2 1
 
 _**Sample Output:**_
 
 0 0
-
 1 0
-
 1 1
-
 1 2
 
 _**Explanation:**_
