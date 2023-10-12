@@ -1,7 +1,8 @@
 package protobuf;
 
-option java_package = "com.work.vladimirs";
+option java_package = "com.work.vladimirs.proto";
 option java_outer_classname = "AddressBookProtos";
+option java_multiple_files = true;
 
 message Person {
     required string name = 1;
