@@ -1,7 +1,9 @@
 package com.work.vladimirs;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.work.vladimirs.proto.Person;
 
+import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -20,5 +22,27 @@ public class Main {
                         .build();
 
         System.out.println(person);
+
+        final byte[] binaryPerson = person.toByteArray();
+        
+        Person personFromBinary = instantiatePersonFromBinary(binaryPerson);
+        System.out.println(personFromBinary);
+    }
+
+    private static Person instantiatePersonFromBinary(final byte[] binaryPerson) {
+        Person person = null;
+        try {
+            final Person copiedPersonProtos = Person.parseFrom(binaryPerson);;
+            person = Person.newBuilder()
+                    .setId(copiedPersonProtos.getId())
+                    .setName(copiedPersonProtos.getName())
+                    .setEmail(copiedPersonProtos.getEmail())
+                    .addNumbers(copiedPersonProtos.getNumbers(0))
+                    .build();
+        } catch (InvalidProtocolBufferException ipbe) {
+            System.out.println("ERROR: Unable to instantiate Person instance from provided binary data - " +
+                    ipbe);
+        }
+        return person;
     }
 }
