@@ -1,8 +1,5 @@
 package com.work.vladimirs.threads.count_down_latch;
 
-import com.work.vladimirs.annotations.simple_test_annotation.Test;
-
-import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
 
