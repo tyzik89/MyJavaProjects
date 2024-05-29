@@ -13,6 +13,7 @@
 
     <modules>
         <module>grpc-server</module>
+        <module>grpc-client</module>
     </modules>
 
     <properties>
@@ -22,46 +23,7 @@
         <third-party.xolstice-plugin.version>0.6.1</third-party.xolstice-plugin.version>
         <third-party.protobuf.version>3.24.4</third-party.protobuf.version>
         <third-party.grpc.version>1.59.1</third-party.grpc.version>
-        <third-party.jetbrains.annotations.version>16.0.3</third-party.jetbrains.annotations.version>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>${third-party.protobuf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-protobuf</artifactId>
-            <version>${third-party.grpc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-stub</artifactId>
-            <version>${third-party.grpc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.32</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>${third-party.jetbrains.annotations.version}</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <extensions>
