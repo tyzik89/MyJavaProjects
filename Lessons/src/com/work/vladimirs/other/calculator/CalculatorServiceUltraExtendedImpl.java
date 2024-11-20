@@ -1,10 +1,16 @@
 package com.work.vladimirs.other.calculator;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class CalculatorServiceBasicImpl implements CalculatorService {
+public class CalculatorServiceUltraExtendedImpl implements CalculatorService {
 
-    private static final List<String> AVAILABLE_OPERATIONS = Arrays.asList("+", "-");
+    private static final List<String> AVAILABLE_OPERATIONS = Arrays.asList("+", "-", "*", "/", "(", ")");
+    private static final List<String> FIRST_PRIORITY_OPERATIONS = Arrays.asList("(", ")");
+    private static final List<String> SECOND_PRIORITY_OPERATIONS = Arrays.asList("*", "/");
+    private static final List<String> THIRD_PRIORITY_OPERATIONS = Arrays.asList("+", "-");
 
     @Override
     public double calculate(String expression) {
@@ -33,6 +39,14 @@ public class CalculatorServiceBasicImpl implements CalculatorService {
                         operationQueue.offerFirst(String.valueOf(operand1 - operand2));
                         break;
                     }
+                    case "*": {
+                        operationQueue.offerFirst(String.valueOf(operand1 * operand2));
+                        break;
+                    }
+                    case "/": {
+                        operationQueue.offerFirst(String.valueOf(operand1 / operand2));
+                        break;
+                    }
                 }
             }
         }
@@ -47,7 +61,8 @@ public class CalculatorServiceBasicImpl implements CalculatorService {
                 result.add(elem);
             } else if (isOperation(elem)) {
                 if (!operationQueue.isEmpty()) {
-                    result.add(operationQueue.pollFirst());
+                    String prevOperation = operationQueue.pollFirst();
+                    //todo
                 }
                 operationQueue.offerFirst(elem);
             } else {
