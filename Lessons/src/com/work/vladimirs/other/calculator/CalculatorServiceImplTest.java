@@ -11,13 +11,13 @@ class CalculatorServiceImplTest {
     void calculateUltraExtended() {
         calculatorService = new CalculatorServiceUltraExtendedImpl();
 
-        double actual = calculatorService.calculate("5 * (5 - 1)"); // 5  5  1-*
+        double actual = calculatorService.calculate("5 * (5 - 1)"); // 5  5  1 - *
         Assertions.assertEquals(20, actual);
 
-        actual = calculatorService.calculate("2 - (8 + 6) + 1 * 6 * (2 / 2) - 1"); // 2  8  6+ - 1  6 * 2  2/ *+ 1-
+        actual = calculatorService.calculate("2 - (8 + 6) + 1 * 6 * (2 / 2) - 1"); // 2  8  6 + - 1  6 * 2  2 / * + 1 -
         Assertions.assertEquals(-7, actual);
 
-        actual = calculatorService.calculate("2 - (8 + 6) + 1 * 6 * (((2 / 2) - 1) + 1)"); // 2  8  6+ - 1  6 * 2  2/  1-  1+*+
+        actual = calculatorService.calculate("2 - (8 + 6) + 1 * 6 * (((2 / 2) - 1) + 1)"); // 2  8  6 + - 1  6 * 2  2 /  1 -  1 + * +
         Assertions.assertEquals(-6, actual);
     }
 
