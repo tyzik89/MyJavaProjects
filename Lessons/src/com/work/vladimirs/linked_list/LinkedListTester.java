@@ -54,6 +54,9 @@ public class LinkedListTester {
 //        prettyPrintListNode(head);
     }
 
+    /**
+     * Циклы в связаном списке методом Флойда
+     */
     private static boolean hasCycle(ListNode head) {
         if (head == null || head.next == null) return false;
         ListNode slow = head, fast = head;
