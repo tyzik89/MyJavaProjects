@@ -1,5 +1,6 @@
 package com.work.vladimirs.linked_list;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class LinkedListTester {
@@ -10,12 +11,12 @@ public class LinkedListTester {
         nodes = new StringBuilder(nodes).reverse().toString();
         String[] splitNodes = nodes.split("");
 
-        ListNode testListNodeHead = new ListNode(Integer.parseInt(splitNodes[0]), null);
-        for (int i = 1; i < splitNodes.length; i++) {
-            testListNodeHead = new ListNode(Integer.parseInt(splitNodes[i]), testListNodeHead);
-        }
-        System.out.print("Initial: ");
-        prettyPrintListNode(testListNodeHead);
+//        ListNode testListNodeHead = new ListNode(Integer.parseInt(splitNodes[0]), null);
+//        for (int i = 1; i < splitNodes.length; i++) {
+//            testListNodeHead = new ListNode(Integer.parseInt(splitNodes[i]), testListNodeHead);
+//        }
+//        System.out.print("Initial: ");
+//        prettyPrintListNode(testListNodeHead);
 
 //        ListNode head = removeNthFromEnd(testListNodeHead, 3);
 //        ListNode head = reverseListIteratively(testListNodeHead);
@@ -28,11 +29,44 @@ public class LinkedListTester {
 //                        )
 //                )
 //        );
-        boolean isPalindrome = isPalindrome(testListNodeHead);
-        System.out.print("Result: " + (isPalindrome ? "Yes, it's palindrome" : "No"));
+
+//        boolean isPalindrome = isPalindrome(testListNodeHead);
+//        System.out.print("Result: " + (isPalindrome ? "Yes, it's palindrome" : "No"));
+
+
+        ListNode cyclicNode = null;
+        ListNode testListNodeHead = new ListNode(Integer.parseInt(splitNodes[0]), null);
+        ListNode tail = testListNodeHead;
+        int random = new Random().nextInt(splitNodes.length == 1 ? 1 : splitNodes.length - 1) + 1;
+        for (int i = 1; i < splitNodes.length; i++) {
+            testListNodeHead = new ListNode(Integer.parseInt(splitNodes[i]), testListNodeHead);
+            if (i == random) {
+                cyclicNode = testListNodeHead;
+            }
+        }
+        tail.next = cyclicNode;
+        System.out.println("Pos: " + random);
+
+        boolean hasCycle = hasCycle(testListNodeHead);
+        System.out.print("Result: " + (hasCycle ? "Yes, it's has cycle" : "No cycles"));
 
 //        System.out.print("Result: ");
 //        prettyPrintListNode(head);
+    }
+
+    private static boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) return false;
+        ListNode slow = head, fast = head;
+        while (true) {
+            if (fast.next != null) {
+                fast = fast.next.next;
+            } else {
+                return false;
+            }
+            slow = slow.next;
+            if (fast == null) return false;
+            if (slow == fast) return true;
+        }
     }
 
     private static boolean isPalindrome(ListNode head) {
